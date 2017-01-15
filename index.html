@@ -1,10 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>nRF Blinky Web App</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="nrf_led_button_service.js"></script>
@@ -12,8 +14,18 @@
   <body>
     <div align="center">
       <div style="width:300px; align:center">
-        <h1>nRF52 Blinky</h1>
-        <hr>
+        <h1>Earthquake</h1>
+		<hr>
+		<a href="https://github.com/Andreln/andreln.github.io" target=_blank class="w3-text-dark-grey w3-hover-text-blue w3-show-inline-block"> 
+			<i class="fa fa-github fa-3x"> </i>
+		</a>
+		<a href="https://www.google.com" target=_blank class="w3-text-dark-grey w3-hover-text-blue w3-show-inline-block"> 
+			<i class="fa fa-cog fa-3x"></i>
+        </a>
+		<a href="#" target=_blank class="w3-text-dark-grey w3-hover-text-blue w3-show-inline-block"> 
+			<i class="fa fa-info fa-3x"></i>
+        </a>
+		<hr>
         <button id="connect" type="button" class="btn btn-default">CONNECT</button>
         <button id="disconnect" type="button" class="btn btn-default">DISCONNECT</button>
         <hr>
@@ -23,7 +35,7 @@
         <hr>
         <img src="ThePhysicalWeb.png" width="50px">
         <hr>
-        <pre id="log"></pre>
+		<pre id="log"></pre>
       </div>
     </div>
   </body>
