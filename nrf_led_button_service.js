@@ -1,6 +1,6 @@
 'use strict'
 
-const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
+const serviceUUID = '35';
 const txCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
 const rxCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
 
