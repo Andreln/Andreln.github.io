@@ -1,8 +1,8 @@
 'use strict'
 
-const serviceUUID = '0x0001';
-const txCharacteristicUUID = '0x0002';
-const rxCharacteristicUUID = '0x0003';
+const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
+const txCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
+const rxCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
 
 var bleDevice;
 var bleServer;
