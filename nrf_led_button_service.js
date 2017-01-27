@@ -55,14 +55,14 @@ function connect() {
   })
   .then(() => {
     log('Notifications enabled... ');
-    COMMAND_1.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    ledChar.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
     return bleService.getCharacteristic(buttonCharacteristicUUID);
   })
   .then( characteristic => {
     button1char = characteristic;
-    log('Got buttonChar');
+    log('Got buttonChar...');
   })
   .catch(error => {
     log('> connect ' + error);
