@@ -19,48 +19,55 @@ window.onload = function(){
 };
 
 function connect() {
-  if (!navigator.bluetooth) {
-      log('Web Bluetooth API is not available.\n' +
-          'Please make sure the Web Bluetooth flag is enabled.');
-      return;
-  }
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
-  .then(device => {
-    bleDevice = device;
-    return device.gatt.connect();
-  })
-  
-  .then(server => {
-    bleServer = server;
-    log('Got bleServer');
-    return server.getPrimaryService(serviceUUID);
-  })
-  .then(service => {
-    log('Got bleService');
-    bleService = service;
-  })
-  .then(() => bleService.getCharacteristic(buttonCharacteristicUUID))
-  .then( characteristic => {
-    log('Got button1characteristic');
-    button1char = characteristic;
-    return characteristic.startNotifications();
-  })
-  .then(() => {
-    log('Notifications enabled');
-    button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
-  })
-  .then(() => {
+	if (!navigator.bluetooth) {														//	Checks if bluetooth api is enabled in browser
+	  log('Web Bluetooth API is not available.\n' +									//	
+		  'Please make sure the Web Bluetooth flag is enabled.');					//
+	  return;																		//
+	}
+
+	log('Requesting Bluetooth Device...');											//	When connect is triggered log('text') 
+	navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})		//	Find devices filtered by UUIDs
+	.then(device => {																//	When last function is complete, do the following
+	bleDevice = device;																//	Store information from device in bleDevice
+	log('Connecting to GATT Server...')												//	log('text')
+	return device.gatt.connect();												
+	})
+
+	.then(server => {
+	bleServer = server;
+	log('Getting service...');
+	return server.getPrimaryService(serviceUUID);
+	})
+	
+	.then(service => {
+	log('Got service...');
+	bleService = service;
+	log('Getting Characteristic...');
+	return service.getCharacteristic(buttonCharacteristicUUID);
+	})
+	
+	.then(characteristic => {
+	button1char = characteristic;
+	log('Got characteristics');
+    return button1char.startNotifications();
+	
+	.then(_ => {
+	log('> Notifications started');
+	myCharacteristic.addEventListener('characteristicvaluechanged', handleNotifications);
+		});
+	})
+
+	.then(() => {
 	log('Getting ledCharacteristicsUUID');
-    return bleService.getCharacteristic(ledCharacteristicUUID);
-  })
-  .then( characteristic => {
-    ledChar = characteristic;
-    log('Got ledChar');
-  })
-  .catch(error => {
-    log('> connect ' + error);
-  });
+	return bleService.getCharacteristic(ledCharacteristicUUID);
+	})
+	.then( characteristic => {
+	ledChar = characteristic;
+	log('Got ledChar');
+	})
+	.catch(error => {
+	log('> connect ' + error);
+	});
 }
 
 function disconnect() {
