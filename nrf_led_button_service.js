@@ -1,20 +1,21 @@
 'use strict'
 
 const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
-const txCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
-const rxCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
+const buttonCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
+const ledCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
 
 var bleDevice;
 var bleServer;
 var bleService;
-var txchar;
-var rxchar;
+var button1char;
+var ledChar;
+var button1count = 0;
+var toggleFlag = false;
 
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
-  document.querySelector('#COMMAND_1').addEventListener('click', COMMAND_1);
-  document.querySelector('#COMMAND_2').addEventListener('click', COMMAND_2);
+  document.querySelector('#led2').addEventListener('click', toggleLED);
 };
 
 function connect() {
@@ -27,7 +28,7 @@ function connect() {
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
   .then(device => {
     bleDevice = device;
-    return device.gatt.connect();
+    return device.connectGATT();
   })
   .then(server => {
     bleServer = server;
@@ -38,22 +39,22 @@ function connect() {
     log('Got bleService');
     bleService = service;
   })
-  .then(() => bleService.getCharacteristic(txCharacteristicUUID))
+  .then(() => bleService.getCharacteristic(buttonCharacteristicUUID))
   .then( characteristic => {
-    log('Got txcharacteristic');
-    txchar = characteristic;
-    return txchar.startNotifications();
+    log('Got button1characteristic');
+    button1char = characteristic;
+    return button1char.startNotifications();
   })
   .then(() => {
     log('Notifications enabled');
-    txchar.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(rxCharacteristicUUID);
+    return bleService.getCharacteristic(ledCharacteristicUUID);
   })
   .then( characteristic => {
-    rxchar = characteristic;
-    log('Got rxChar');
+    ledChar = characteristic;
+    log('Got ledChar');
   })
   .catch(error => {
     log('> connect ' + error);
@@ -74,12 +75,23 @@ function disconnect() {
   }
 }
 
-function COMMAND_1(){
-
+function handleNotifyButton1(event) {
+  button1count += 1;
+  log('Notification triggered by Button 1 ' + button1count);
+  document.getElementById("btn1").innerHTML = button1count;
 }
 
-function COMMAND_2(){
-
+function toggleLED(){
+    let toggle;
+    if(toggleFlag === true){
+      toggle = new Uint8Array([0]);
+      toggleFlag = false;
+    }
+    else{
+      toggle = new Uint8Array([1]);
+      toggleFlag = true;
+    }
+    return ledChar.writeValue(toggle);
 }
 
 
