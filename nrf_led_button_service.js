@@ -33,12 +33,12 @@ function connect() {
   })
   .then(server => {
     bleServer = server;
-	log('Got server... ');
+	log('Got GATT server... ');
     log('Getting service... ');
     return server.getPrimaryService(serviceUUID);
   })
   .then(service => {
-    log('Got service');
+    log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
 	return bleService.getCharacteristic(buttonCharacteristicUUID);
@@ -46,7 +46,7 @@ function connect() {
   .then( characteristic => {
     log('Got characteristic... ');
     button1char = characteristic;
-    return button1char.startNotifications();
+    return button1char.startNotifications()();
   })
   .then(() => {
     log('Notifications enabled');
