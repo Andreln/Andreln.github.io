@@ -44,8 +44,7 @@ function connect() {
   .then( characteristic => {
     log('Got button1characteristic');
     button1char = characteristic;
-	log('Got x');
-    return button1char.startNotifications();
+    return characteristic.startNotifications();
   })
   .then(() => {
     log('Notifications enabled');
