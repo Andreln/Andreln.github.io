@@ -28,8 +28,9 @@ function connect() {
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
   .then(device => {
     bleDevice = device;
-    return device.connectGATT();
+    return device.gatt.connect();
   })
+  
   .then(server => {
     bleServer = server;
     log('Got bleServer');
