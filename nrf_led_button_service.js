@@ -1,5 +1,10 @@
 'use strict'
 
+// LED = RX   -> LED notifications
+// BUTTON = TX
+
+
+
 const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
 const buttonCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
 const ledCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
@@ -49,8 +54,8 @@ function connect() {
     return ledChar.startNotifications();
   })
   .then(() => {
-    log('Notifications enabled');
-    button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    log('Notifications enabled... ');
+    COMMAND_1.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
     return bleService.getCharacteristic(buttonCharacteristicUUID);
@@ -79,22 +84,13 @@ function disconnect() {
 }
 
 function handleNotifyButton1(event) {
-  button1count += 1;
-  log('Notification triggered by Button 1 ' + button1count);
-  document.getElementById("btn1").innerHTML = button1count;
+  log('Notification: COMMAND_1 Button pressed');
+  document.getElementById("COMMAND_1").innerHTML = button1count;
 }
 
-function toggleLED(){
-    let toggle;
-    if(toggleFlag === true){
-      toggle = new Uint8Array([0]);
-      toggleFlag = false;
-    }
-    else{
-      toggle = new Uint8Array([1]);
-      toggleFlag = true;
-    }
-    return ledChar.writeValue(toggle);
+function handleNotifyButton2(event) {
+  log('Notification: COMMAND_2 Button pressed');
+  document.getElementById("COMMAND_2").innerHTML = button1count;
 }
 
 
