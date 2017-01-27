@@ -28,20 +28,23 @@ function connect() {
   navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
   .then(device => {
     bleDevice = device;
+	log('Gonnecting to GATT server... ');
     return device.gatt.connect();
   })
   .then(server => {
     bleServer = server;
-    log('Got bleServer');
+	log('Got server... ');
+    log('Getting service... ');
     return server.getPrimaryService(serviceUUID);
   })
   .then(service => {
-    log('Got bleService');
+    log('Got service');
     bleService = service;
+	log('Getting characteristic... ');
+	return bleService.getCharacteristic(buttonCharacteristicUUID));
   })
-  .then(() => bleService.getCharacteristic(buttonCharacteristicUUID))
   .then( characteristic => {
-    log('Got button1characteristic');
+    log('Got characteristic... ');
     button1char = characteristic;
     return button1char.startNotifications();
   })
