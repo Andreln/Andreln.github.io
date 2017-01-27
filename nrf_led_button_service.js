@@ -49,7 +49,7 @@ function connect() {
     txchar.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(txCharacteristicUUID);
+    return bleService.getCharacteristic(rxCharacteristicUUID);
   })
   .then( characteristic => {
     rxchar = characteristic;
