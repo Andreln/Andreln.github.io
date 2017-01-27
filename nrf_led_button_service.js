@@ -41,7 +41,7 @@ function connect() {
     log('Got service');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(buttonCharacteristicUUID));
+	return bleService.getCharacteristic(buttonCharacteristicUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
