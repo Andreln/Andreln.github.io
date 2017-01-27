@@ -41,23 +41,23 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(buttonCharacteristicUUID);
+	return bleService.getCharacteristic(ledCharacteristicUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    button1char = characteristic;
-    return button1char.startNotifications();
+    ledChar = characteristic;
+    return ledChar.startNotifications();
   })
   .then(() => {
     log('Notifications enabled');
     button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(ledCharacteristicUUID);
+    return bleService.getCharacteristic(buttonCharacteristicUUID);
   })
   .then( characteristic => {
-    ledChar = characteristic;
-    log('Got ledChar');
+    button1char = characteristic;
+    log('Got buttonChar');
   })
   .catch(error => {
     log('> connect ' + error);
