@@ -50,19 +50,19 @@ function connect() {
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    ledChar = characteristic;
-    return ledChar.startNotifications();
+    buttonChar = characteristic;
+    return button1Char.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
     button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(buttonCharacteristicUUID);
+    return bleService.getCharacteristic(ledCharacteristicUUID);
   })
   .then( characteristic => {
-    button1char = characteristic;
-    log('Got buttonChar...');
+    ledChar = characteristic;
+    log('Got ledChar...');
   })
   .catch(error => {
     log('> connect ' + error);
@@ -73,7 +73,7 @@ function disconnect() {
   if (!bleDevice) {
     log('No Bluetooth Device connected...');
     return;
-  }
+  } 
   log('Disconnecting from Bluetooth Device...');
   if (bleDevice.gatt.connected) {
     bleDevice.gatt.disconnect();
