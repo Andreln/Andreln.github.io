@@ -84,10 +84,11 @@ function disconnect() {
 
 function COMMAND_1(){
 	var newData = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
-	log('COMMAND_1 button pressed. Data written: ' + newData);
-	// return txCharacteristics.writeValue(newData).then(function() {
-		// log('COMMAND_1 Button pressed Successfully. Data sent!');
-	// });
+	log('COMMAND_1 button pressed...');
+	log('Data written: ' + newData);
+	return txCharacteristics.writeValue(newData).then(function() {
+		log('COMMAND_1 Button pressed Successfully. Data sent!');
+	});
 }
 
 
