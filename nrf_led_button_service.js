@@ -6,16 +6,14 @@
 
 
 const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
-const buttonCharacteristicUUID = '00001524-1212-efde-1523-785feabcd123';
-const ledCharacteristicUUID = '00001525-1212-efde-1523-785feabcd123';
+const rxUUID = '00001524-1212-efde-1523-785feabcd123';  // BUTTON
+const txUUID = '00001525-1212-efde-1523-785feabcd123';	// LED
 
 var bleDevice;
 var bleServer;
 var bleService;
-var button1char;
-var ledChar;
-var button1count = 0;
-var toggleFlag = false;
+var rxCharacteristics;	// BUTTON
+var txCharacteristics;  // LED
 
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
@@ -46,23 +44,23 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(ledCharacteristicUUID);
+	return bleService.getCharacteristic(txUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    buttonChar = characteristic;
-    return button1Char.startNotifications();
+    rxCharacteristics = characteristic;
+    return rxCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
-    button1char.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(ledCharacteristicUUID);
+    return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
-    ledChar = characteristic;
-    log('Got ledChar...');
+    rxCharacteristics = characteristic;
+    log('Got rxCharacteristics...');
   })
   .catch(error => {
     log('> connect ' + error);
