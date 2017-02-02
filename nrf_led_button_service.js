@@ -56,7 +56,7 @@ function connect() {
     rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
   })
   .then(() => {
-    return bleService.getCharacteristic(reUUID);
+    return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
     txCharacteristics = characteristic;
