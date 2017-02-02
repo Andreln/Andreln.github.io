@@ -61,6 +61,7 @@ function connect() {
   .then( characteristic => {
     txCharacteristics = characteristic;
     log('Got rxCharacteristics...');
+	log('Connected');
   })
   .catch(error => {
     log('> connect ' + error);
