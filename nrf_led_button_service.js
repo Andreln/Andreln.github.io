@@ -88,10 +88,19 @@ function COMMAND_1(){
 	log('COMMAND_1 button pressed...');
 	log('Data written: ' + newData);
 	return txCharacteristics.writeValue(newData).then(function() {
-		log('COMMAND_1 Button pressed Successfully. Data sent!');
+		log('Data sent!');
 	});
 }
 
+function getValue(){
+	var x = document.getElementById("INPUT1").value;
+	log('Value from input: ' + x);
+	var newData = new Uint8Array([x]);
+	log('Converted Uint8Array: ' + newData);
+	return txCharacteristics.writeValue(newData).then(function() {
+		log('Data sent!');
+	});
+}
 
 function log(text) {
     console.log(text);
