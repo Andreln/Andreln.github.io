@@ -86,8 +86,9 @@ function disconnect() {
 
 function COMMAND_1(event) {
   var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0]);
+  log('COMMAND_1 button pressed');
   return txCharacteristics.write(newData).then(function() {
-	log('Notification: COMMAND_1 Button pressed');
+	log('COMMAND_1 Button pressed Successfully');
   });
 }
 
