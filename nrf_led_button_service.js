@@ -53,13 +53,13 @@ function connect() {
   })
   .then(() => {
     log('Notifications enabled... ');
-    // rxCharacteristics.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',handleNotifyButton1);
   })
   .then(() => {
-    return bleService.getCharacteristic(rxUUID);
+    return bleService.getCharacteristic(txUUID);
   })
   .then( characteristic => {
-    rxCharacteristics = characteristic;
+    txCharacteristics = characteristic;
     log('Got rxCharacteristics...');
   })
   .catch(error => {
