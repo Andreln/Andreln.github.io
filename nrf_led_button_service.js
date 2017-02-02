@@ -93,8 +93,10 @@ function COMMAND_1(){
 }
 
 function getValue(){
-	var x = document.getElementById("INPUT1").value;
-	log('Value from input: ' + x);
+	var dec = document.getElementById("INPUT1").value;
+	log('Dec value from input: ' + dec);
+	var hex = dec.toString(16);
+	log('Hex value from input: ' + hex);
 	var newData = new Uint8Array([x]);
 	log('Converted Uint8Array: ' + newData);
 	return txCharacteristics.writeValue(newData).then(function() {
