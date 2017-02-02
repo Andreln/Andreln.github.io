@@ -15,6 +15,8 @@ var bleService;
 var rxCharacteristics;	// BUTTON
 var txCharacteristics;  // LED
 
+var COMMAND_1 = document.querySelector("#COMMAND_1");
+
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
@@ -53,7 +55,7 @@ function connect() {
   })
   .then(() => {
     log('Notifications enabled... ');
-    rxCharacteristics.addEventListener('characteristicvaluechanged',handleNotifyButton1);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
   })
   .then(() => {
     return bleService.getCharacteristic(txUUID);
@@ -61,7 +63,7 @@ function connect() {
   .then( characteristic => {
     txCharacteristics = characteristic;
     log('Got rxCharacteristics...');
-	log('Connected');
+	log('Connected...');
   })
   .catch(error => {
     log('> connect ' + error);
@@ -82,9 +84,14 @@ function disconnect() {
   }
 }
 
-function handleNotifyButton1(event) {
-  log('Notification: COMMAND_1 Button pressed');
-  document.getElementById("COMMAND_1").innerHTML = button1count;
+function COMMAND_1.addEventListener('click',function() {
+  var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0])
+  return txCharacteristics.write(newData).then(function() {
+	log('Notification: COMMAND_1 Button pressed');
+  });
+});
+  
+  
 }
 
 function handleNotifyButton2(event) {
