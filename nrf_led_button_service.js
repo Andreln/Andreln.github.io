@@ -49,7 +49,7 @@ function connect() {
   .then( characteristic => {
     log('Got characteristic... ');
     rxCharacteristics = characteristic;
-    return rxCharacteristics.startNotifications();
+    return txCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
