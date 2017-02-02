@@ -5,9 +5,9 @@
 
 
 
-const serviceUUID = '00001523-1212-efde-1523-785feabcd123';
-const rxUUID = '00001524-1212-efde-1523-785feabcd123';  // BUTTON
-const txUUID = '00001525-1212-efde-1523-785feabcd123';	// LED
+const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';  // BUTTON
+const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// LED
 
 var bleDevice;
 var bleServer;
@@ -44,23 +44,23 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(rxUUID);
+	return bleService.getCharacteristic(txUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    rxCharacteristics = characteristic;
-    return rxCharacteristics.startNotifications();
+    txCharacteristics = characteristic;
+    return txCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
-    rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
+    txCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
   })
   .then(() => {
-    return bleService.getCharacteristic(txUUID);
+    return bleService.getCharacteristic(reUUID);
   })
   .then( characteristic => {
-    txCharacteristics = characteristic;
-    log('Got rxCharacteristics...');
+    rxCharacteristics = characteristic;
+    log('Got txCharacteristics...');
 	log('Connected...');
   })
   .catch(error => {
