@@ -90,9 +90,6 @@ COMMAND_1.addEventListener('click',function() {
 	log('Notification: COMMAND_1 Button pressed');
   });
 });
-  
-  
-}
 
 function handleNotifyButton2(event) {
   log('Notification: COMMAND_2 Button pressed');
