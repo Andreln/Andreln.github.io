@@ -20,7 +20,7 @@ var COMMAND_1 = document.querySelector("#COMMAND_1");
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
-  document.querySelector('#led2').addEventListener('click', toggleLED);
+  document.querySelector('#COMMAND_1').addEventListener('click', COMMAND_1);
 };
 
 function connect() {
@@ -84,12 +84,12 @@ function disconnect() {
   }
 }
 
-COMMAND_1.addEventListener('click',function() {
+function COMMAND_1(event) {
   var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0]);
   return txCharacteristics.write(newData).then(function() {
 	log('Notification: COMMAND_1 Button pressed');
   });
-});
+}
 
 function handleNotifyButton2(event) {
   log('Notification: COMMAND_2 Button pressed');
