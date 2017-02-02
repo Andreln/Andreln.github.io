@@ -84,8 +84,8 @@ function disconnect() {
   }
 }
 
-function COMMAND_1.addEventListener('click',function() {
-  var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0])
+COMMAND_1.addEventListener('click',function() {
+  var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0]);
   return txCharacteristics.write(newData).then(function() {
 	log('Notification: COMMAND_1 Button pressed');
   });
