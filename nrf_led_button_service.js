@@ -18,6 +18,7 @@ var txCharacteristics;  // LED
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
+  document.querySelector('#refresh').addEventListener('click', disconnect);
   document.querySelector('#COMMAND1').addEventListener('click', COMMAND_1);
 };
 
@@ -56,7 +57,7 @@ function connect() {
     rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
   })
   .then(() => {
-    return bleService.getCharacteristic(rxUUID);
+    return bleService.getCharacteristic(txUUID);
   })
   .then( characteristic => {
     txCharacteristics = characteristic;
