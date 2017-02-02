@@ -44,22 +44,22 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(txUUID);
+	return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    txCharacteristics = characteristic;
-    return txCharacteristics.startNotifications();
+    rxCharacteristics = characteristic;
+    return rxCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
-    txCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
   })
   .then(() => {
     return bleService.getCharacteristic(reUUID);
   })
   .then( characteristic => {
-    rxCharacteristics = characteristic;
+    txCharacteristics = characteristic;
     log('Got txCharacteristics...');
 	log('Connected...');
   })
