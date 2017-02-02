@@ -44,12 +44,12 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(txUUID);
+	return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
     rxCharacteristics = characteristic;
-    return txCharacteristics.startNotifications();
+    return rxCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
