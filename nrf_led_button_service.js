@@ -15,12 +15,10 @@ var bleService;
 var rxCharacteristics;	// BUTTON
 var txCharacteristics;  // LED
 
-var COMMAND_1 = document.querySelector("#COMMAND_1");
-
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
-  document.querySelector('#COMMAND_1').addEventListener('click', COMMAND_1);
+  document.querySelector('#COMMAND1').addEventListener('click', COMMAND_1);
 };
 
 function connect() {
@@ -84,17 +82,12 @@ function disconnect() {
   }
 }
 
-function COMMAND_1(event) {
-  var newData = new Uint8array([0, 0, 0, 0, 0, 0, 0, 0]);
-  log('COMMAND_1 button pressed');
-  return txCharacteristics.write(newData).then(function() {
-	log('COMMAND_1 Button pressed Successfully');
-  });
-}
-
-function handleNotifyButton2(event) {
-  log('Notification: COMMAND_2 Button pressed');
-  document.getElementById("COMMAND_2").innerHTML = button1count;
+function COMMAND_1(){
+	var newData = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
+	log('COMMAND_1 button pressed. Data written: ' + newData[]);
+	// return txCharacteristics.writeValue(newData).then(function() {
+		// log('COMMAND_1 Button pressed Successfully. Data sent!');
+	// });
 }
 
 
