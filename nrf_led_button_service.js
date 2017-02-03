@@ -105,10 +105,8 @@ function getValue(){
 }
 
 function DATARECEIVED(event){
-	log('Receiving data ... ')
-	return rxCharacteristics.readValue().then(function() {
-		log('Data received: '+ Value);
-	});
+	let value = event.target.value;
+	log('Data received: ' + value);
 }
 
 function log(text) {
