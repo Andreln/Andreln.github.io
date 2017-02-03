@@ -19,7 +19,7 @@ window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
-  document.querySelector('#COMMAND1').addEventListener('click', COMMAND_1);
+  document.querySelector('#COMMAND1').addEventListener('click', DATARECEIVED);
 };
 
 function connect() {
@@ -105,9 +105,9 @@ function getValue(){
 }
 
 function DATARECEIVED(event){
-	var x = 0;
-	return rxCharacteristics.readValue(x).then(function() {
-		log('Data received: '+ x);
+	log('Receiving data ... ')
+	return rxCharacteristics.readValue().then(function() {
+		log('Data received: '+ Value);
 	});
 }
 
