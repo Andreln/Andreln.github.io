@@ -19,7 +19,7 @@ window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
-  document.querySelector('#COMMAND1').addEventListener('click', DATARECEIVED);
+  document.querySelector('#COMMAND1').addEventListener('click', COMMAND_1);
 };
 
 function connect() {
@@ -99,7 +99,7 @@ function getValue(){
 	// log('Hex value from input: ' + hex);
 	var newData = new Uint8Array([dec]);
 	log('Converted Uint8Array: ' + newData);
-	return txCharacteristics.writeValue(newData).then(function() {
+	return txCharacteristics.writeValue('test').then(function() {
 		log('Data sent!');
 	});
 }
@@ -107,16 +107,18 @@ function getValue(){
 function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
-	let data0 = value.getUint8(0);
-	let data1 = value.getUint8(1); 
-	let data2 = value.getUint8(2); 
-	let data3 = value.getUint8(3); 
-	let data4 = value.getUint8(4); 
-	let data5 = value.getUint8(5);
-	let data5 = value.getUint8(6);
-	let data5 = value.getUint8(7);
+	log(value)
+	log(value.getUint8());
+	//let data0 = value.getUint8(0);
+	//let data1 = value.getUint8(1); 
+	//let data2 = value.getUint8(2); 
+	//let data3 = value.getUint8(3); 
+	//let data4 = value.getUint8(4); 
+	//let data5 = value.getUint8(5);
+	//let data5 = value.getUint8(6);
+	//let data5 = value.getUint8(7);
 	
-	log(data0 + data1 + data3 + data4 + data5 + data6 + data7);
+	//log(data0 + data1 + data3); // + data4 + data5 + data6 + data7);
 }
 
 function log(text) {
