@@ -116,7 +116,7 @@ function DATARECEIVED(event){
 	let data5 = value.getUint8(6);
 	let data5 = value.getUint8(7);
 	
-	log('['data0']''['data1']''['data2']''['data3']''['data4']''['data5']''['data6']''['data7']');
+	log(data0 + data1 + data3 + data4 + data5 + data6 + data7);
 }
 
 function log(text) {
