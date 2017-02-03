@@ -108,6 +108,7 @@ function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
 	log(value);
+	log('fuck object DataView');
 }
 
 function log(text) {
