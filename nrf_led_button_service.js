@@ -105,11 +105,17 @@ function getValue(){
 }
 
 function DATARECEIVED(event){
-	log('Data received ???' );
+
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
-	let dec = value.getUint8();
-	log('Data received: ' + dec);
+	let x = value.getUint8(1);
+	let y = value.getUint8(2);
+	let z = value.getUint8(3);
+	let w = value.getUint8(4);
+	log('Data received 1: ' + x);
+	log('Data received 2: ' + y);
+	log('Data received 3: ' + z);
+	log('Data received 4: ' + w);
 }
 
 function log(text) {
