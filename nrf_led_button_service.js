@@ -84,7 +84,7 @@ function disconnect() {
 }
 
 function COMMAND_1(){
-	var newData = new Uint8Array([1, 1, 1, 1, 1, 1, 1, 1]);
+	var newData = new Uint8Array([15, 15, 15, 15, 15, 15, 15, 15]);
 	log('COMMAND_1 button pressed...');
 	log('Data written: ' + newData);
 	return txCharacteristics.writeValue(newData).then(function() {
