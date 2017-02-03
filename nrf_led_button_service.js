@@ -106,7 +106,7 @@ function getValue(){
 
 function DATARECEIVED(event){
 	var x = 0;
-	rxCharacteristics.readValue(x).then(function() {
+	return rxCharacteristics.readValue(x).then(function() {
 		log('Data received: '+ x);
 	});
 }
