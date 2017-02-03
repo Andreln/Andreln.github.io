@@ -87,7 +87,7 @@ function COMMAND_1(){
 	var newData = new Uint8Array([1, 1, 1, 1, 1, 1, 1, 1]);
 	log('COMMAND_1 button pressed...');
 	log('Data written: ' + newData);
-	return txCharacteristics.writeValue('test').then(function() {
+	return txCharacteristics.writeValue(newData).then(function() {
 		log('Data sent!');
 	});
 }
