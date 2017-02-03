@@ -106,7 +106,7 @@ function getValue(){
 
 function DATARECEIVED(event){
 	let value = event.target.value;
-	//value = value.buffer ? value : new DataView(value);
+	value = value.buffer ? value : new DataView(value);
 	//let receivedData0 = value.getUint8(0);
 	log(value);
 
