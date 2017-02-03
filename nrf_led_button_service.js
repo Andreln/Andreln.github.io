@@ -107,9 +107,16 @@ function getValue(){
 function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
-	//let receivedData0 = value.getUint8(0);
-	log(value.length);
-
+	let data0 = value.getUint8(0);
+	let data1 = value.getUint8(1); 
+	let data2 = value.getUint8(2); 
+	let data3 = value.getUint8(3); 
+	let data4 = value.getUint8(4); 
+	let data5 = value.getUint8(5);
+	let data5 = value.getUint8(6);
+	let data5 = value.getUint8(7);
+	
+	log('['data0']''['data1']''['data2']''['data3']''['data4']''['data5']''['data6']''['data7']')
 }
 
 function log(text) {
