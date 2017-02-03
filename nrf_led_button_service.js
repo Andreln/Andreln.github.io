@@ -54,7 +54,7 @@ function connect() {
   })
   .then(() => {
     log('Notifications enabled... ');
-    rxCharacteristics.addEventListener('characteristicvaluechanged',COMMAND_1);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
   })
   .then(() => {
     return bleService.getCharacteristic(txUUID);
@@ -95,12 +95,19 @@ function COMMAND_1(){
 function getValue(){
 	var dec = document.getElementById("INPUT1").value;
 	log('Dec value from input: ' + dec);
-	var hex = dec.toString(16);
-	log('Hex value from input: ' + hex);
-	var newData = new Uint8Array([x]);
+	// var hex = (dec).toString(16);
+	// log('Hex value from input: ' + hex);
+	var newData = new Uint8Array([dec]);
 	log('Converted Uint8Array: ' + newData);
 	return txCharacteristics.writeValue(newData).then(function() {
 		log('Data sent!');
+	});
+}
+
+function DATARECEIVED(event){
+	var x = 0;
+	rxCharacteristics.readValue(x).then(function() {
+		log('Data received: '+ x);
 	});
 }
 
