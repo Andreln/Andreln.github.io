@@ -108,12 +108,11 @@ function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
 	let data = new Uint8Array();
-		
+	log ('Data received!');
 	for (let i = 0; i <= 8; i++) {
 		data = value.getUint8(i);
 		log(i + ': ' + data);
 	}
-	log('Break ... ');
 }
 
 function log(text) {
