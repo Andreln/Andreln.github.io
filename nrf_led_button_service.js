@@ -99,7 +99,7 @@ function getValue(){
 	// log('Hex value from input: ' + hex);
 	var newData = new Uint8Array([dec]);
 	log('Converted Uint8Array: ' + newData);
-	return txCharacteristics.writeValue('newData').then(function() {s
+	return txCharacteristics.writeValue('newData').then(function() {
 		log('Data sent!');
 	});
 }
@@ -108,9 +108,9 @@ function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
 	
-	for(i = 0; i < 8; i++){
-		let data[i] = value.getUint8(i);
-		log('I: ' + data[i]);
+	for (i = 0; i < 8; i++) {
+		let data = value.getUint8(i);
+		log(i + ': ' + data);
 	}
 }
 
