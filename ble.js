@@ -87,19 +87,6 @@ function disconnect() {
   isConnected = false;
 }
 
-
-function getValue(){
-	var dec = document.getElementById("slider").value;
-	log('Dec value from input: ' + dec);
-	// var hex = (dec).toString(16);
-	// log('Hex value from input: ' + hex);
-	var newData = new Uint8Array([dec]);
-	log('Converted Uint8Array: ' + newData);
-	return txCharacteristics.writeValue(newData).then(function() {
-		log('Data sent!');
-	});
-}
-
 function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
@@ -113,9 +100,10 @@ function DATARECEIVED(event){
 
 function sliderChange(value){
 	log(value);
-	// return txCharacteristics.writeValue(value).then(function() {
-		// log('Data sent!');
-	// });
+	let newData = new Uint8Array([value]);
+	return txCharacteristics.writeValue(newData).then(function() {
+		log('Data sent!');
+	});
 }
 
 
