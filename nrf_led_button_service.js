@@ -112,9 +112,9 @@ function DATARECEIVED(event){
 	let data = value.getUint8(x);
 	log(x + ': ' + data);
 	
-	let y = 1;
-	let data = value.getUint8(y);
-	log(y + ': ' + data);
+	// let y = 1;
+	// let data = value.getUint8(y);
+	// log(y + ': ' + data);
 	
 	// let z = 2;
 	// let data = value.getUint8(z);
