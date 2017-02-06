@@ -108,7 +108,7 @@ function DATARECEIVED(event){
 	let value = event.target.value;
 	value = value.buffer ? value : new DataView(value);
 	
-	let x = 0;
+	let x = 1;
 	let data = value.getUint8(x);
 	log(x + ': ' + data);
 	
