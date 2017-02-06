@@ -1,19 +1,14 @@
 'use strict'
 
-// LED = RX   -> LED notifications
-// BUTTON = TX
-
-
-
 const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';  // BUTTON
-const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// LED
+const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'; 
+const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 
 var bleDevice;
 var bleServer;
 var bleService;
-var rxCharacteristics;	// BUTTON
-var txCharacteristics;  // LED
+var rxCharacteristics;
+var txCharacteristics;
 
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
@@ -99,7 +94,7 @@ function getValue(){
 	// log('Hex value from input: ' + hex);
 	var newData = new Uint8Array([dec]);
 	log('Converted Uint8Array: ' + newData);
-	return txCharacteristics.writeValue('newData').then(function() {
+	return txCharacteristics.writeValue(newData).then(function() {
 		log('Data sent!');
 	});
 }
