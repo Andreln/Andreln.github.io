@@ -106,11 +106,10 @@ function getValue(){
 
 function DATARECEIVED(event){
 	let value = event.target.value;
-	value = value.buffer ? value : new DataView(value);
+	let data = value.getUint8(0);
+	//value = value.buffer ? value : new DataView(value);
 	// let data = value.getUint8(0);
-	log(value.prototype.buffer);
-	//log(value.prototype.byteLength);
-	//log(value.prototype.byteOffset);
+	log(data);
 }
 
 function log(text) {
