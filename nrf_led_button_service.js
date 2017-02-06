@@ -113,7 +113,7 @@ function DATARECEIVED(event){
 		data = value.getUint8(i);
 		log(i + ': ' + data);
 	}
-	log('-----------------------');
+	log('____________________');
 }
 
 function log(text) {
