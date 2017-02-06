@@ -113,9 +113,9 @@ function DATARECEIVED(event){
 
 function sliderChange(value){
 	log(value);
-	return txCharacteristics.writeValue(value).then(function() {
-		log('Data sent!');
-	});
+	// return txCharacteristics.writeValue(value).then(function() {
+		// log('Data sent!');
+	// });
 }
 
 
