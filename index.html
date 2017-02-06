@@ -9,6 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="nrf_led_button_service.js"></script>
+<script src="main.js"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -41,9 +42,10 @@
 		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
 		<button id="disconnect" type="button" class="btn btn-default">DISCONNECT</button>
 		<hr>
-		<button id="COMMAND1" type="button" class="btn btn-default">COMMAND_1</button>
+		<button id="ON" type="button" class="btn btn-default">ON</button>
+		<button id="OFF" type="button" class="btn btn-default">OFF</button>
 		<hr>
-		<input id="INPUT1" onblur="getValue()" type="number">INPUT1</input>
+		<input id="slide" type="range" min="10" max="100" step="10" value="10" oninput="sliderchange(this.value)">
 		<hr>
 		<pre id="log"></pre>
 	</div>

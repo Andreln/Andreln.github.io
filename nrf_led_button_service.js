@@ -10,11 +10,20 @@ var bleService;
 var rxCharacteristics;
 var txCharacteristics;
 
+var isConnected = false;
+
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
+  
+  document.querySelector('#ON').addEventListener('click', disconnect);				// CHANGE!
+  document.querySelector('#OFF').addEventListener('click', disconnect);				// CHANGE!
+  
   document.querySelector('#COMMAND1').addEventListener('click', COMMAND_1);
+  
+  document.querySelector('#refresh').addEventListener('click', disconnect);			// CHANGE!
+  
 };
 
 function connect() {
@@ -57,6 +66,7 @@ function connect() {
   .then( characteristic => {
     txCharacteristics = characteristic;
     log('Got txCharacteristics...');
+	isConnected = true;
 	log('Connected...');
   })
   .catch(error => {
@@ -76,6 +86,7 @@ function disconnect() {
   } else {
     log('> Bluetooth Device is already disconnected');
   }
+  isConnected = false;
 }
 
 function COMMAND_1(){
@@ -88,7 +99,7 @@ function COMMAND_1(){
 }
 
 function getValue(){
-	var dec = document.getElementById("INPUT1").value;
+	var dec = document.getElementById("slider").value;
 	log('Dec value from input: ' + dec);
 	// var hex = (dec).toString(16);
 	// log('Hex value from input: ' + hex);
@@ -114,3 +125,5 @@ function log(text) {
     console.log(text);
     document.querySelector('#log').textContent += text + '\n';
 }
+
+
