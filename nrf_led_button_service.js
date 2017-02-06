@@ -6,8 +6,8 @@
 
 
 const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const txUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';  // BUTTON
-const rxUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// LED
+const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';  // BUTTON
+const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// LED
 
 var bleDevice;
 var bleServer;
@@ -45,28 +45,74 @@ function connect() {
     log('Got service... ');
     bleService = service;
 	log('Getting characteristic... ');
-	return bleService.getCharacteristic(txUUID);
+	return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
     log('Got characteristic... ');
-    txCharacteristics = characteristic;
-    return txCharacteristics.startNotifications();
+    rxCharacteristics = characteristic;
+    return rxCharacteristics.startNotifications();
   })
   .then(() => {
     log('Notifications enabled... ');
-    txCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
+    rxCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
   })
   .then(() => {
-    return bleService.getCharacteristic(rxUUID);
+    return bleService.getCharacteristic(txUUID);
   })
   .then( characteristic => {
-    rxCharacteristics = characteristic;
+    txCharacteristics = characteristic;
     log('Got txCharacteristics...');
 	log('Connected...');
   })
   .catch(error => {
     log('> connect ' + error);
   });
+}
+
+function disconnect() {
+  if (!bleDevice) {
+    log('No Bluetooth Device connected...');
+    return;
+  } 
+  log('Disconnecting from Bluetooth Device...');
+  if (bleDevice.gatt.connected) {
+    bleDevice.gatt.disconnect();
+    log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
+  } else {
+    log('> Bluetooth Device is already disconnected');
+  }
+}
+
+function COMMAND_1(){
+	var newData = new Uint8Array([15, 15, 15, 15, 15, 15, 15, 15]);
+	log('COMMAND_1 button pressed...');
+	log('Data written: ' + newData);
+	return txCharacteristics.writeValue(newData).then(function() {
+		log('Data sent!');
+	});
+}
+
+function getValue(){
+	var dec = document.getElementById("INPUT1").value;
+	log('Dec value from input: ' + dec);
+	// var hex = (dec).toString(16);
+	// log('Hex value from input: ' + hex);
+	var newData = new Uint8Array([dec]);
+	log('Converted Uint8Array: ' + newData);
+	return txCharacteristics.writeValue('newData').then(function() {
+		log('Data sent!');
+	});
+}
+
+function DATARECEIVED(event){
+	let value = event.target.value;
+	// value = value.buffer ? value : new DataView(value);
+	log(value);
+}
+
+function log(text) {
+    console.log(text);
+    document.querySelector('#log').textContent += text + '\n';
 }
 
 function disconnect() {
