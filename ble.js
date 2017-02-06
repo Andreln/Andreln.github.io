@@ -100,7 +100,7 @@ function DATARECEIVED(event){
 
 function sliderChange(value){
 	log(value);
-	let newData = new Uint8Array([value]);
+	let newData = new Uint8Array(value);
 	return txCharacteristics.writeValue(newData).then(function() {
 		log('Data sent!');
 	});
