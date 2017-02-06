@@ -1,11 +1,9 @@
 'use strict'
 
-isConnected.onchange = toggle_visibility(connect);
-
 function toggle_visibility(id) {
-   var e = document.getElementById(id);
-   if(e.style.display == 'block')
-	  e.style.display = 'none';
-   else
-	  e.style.display = 'block';
+	var div = document.getElementById(id);
+	if(div.style.display == 'block')
+		div.style.display = 'none';
+	else
+		div.style.display = 'block';
 }
