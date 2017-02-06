@@ -111,6 +111,15 @@ function DATARECEIVED(event){
 	}
 }
 
+function sliderChange(value){
+	log(value);
+	return txCharacteristics.writeValue(value).then(function() {
+		log('Data sent!');
+	});
+}
+
+
+
 function log(text) {
     console.log(text);
     document.querySelector('#log').textContent += text + '\n';
