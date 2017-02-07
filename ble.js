@@ -10,8 +10,6 @@ var bleService;
 var rxCharacteristics;
 var txCharacteristics;
 
-var isConnected = false;
-
 window.onload = function(){
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
@@ -25,53 +23,61 @@ window.onload = function(){
 };
 
 function connect() {
-  
-  if (!navigator.bluetooth) {
-      log('Web Bluetooth API is not available.\n' +
-          'Please make sure the Web Bluetooth flag is enabled.');
-      return;
-  }
-  log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
-  .then(device => {
-    bleDevice = device;
+
+	if (!navigator.bluetooth) {
+	  log('Web Bluetooth API is not available.\n' +
+		  'Please make sure the Web Bluetooth flag is enabled.');
+	  return;
+	}
+	
+	log('Requesting Bluetooth Device...');
+	navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
+	.then(device => {
+	bleDevice = device;
 	log('Gonnecting to GATT server... ');
-    return device.gatt.connect();
-  })
-  .then(server => {
-    bleServer = server;
+	return device.gatt.connect();
+	})
+	
+	.then(server => {
+	bleServer = server;
 	log('Got GATT server... ');
-    log('Getting service... ');
-    return server.getPrimaryService(serviceUUID);
-  })
-  .then(service => {
-    log('Got service... ');
-    bleService = service;
+	log('Getting service... ');
+	return server.getPrimaryService(serviceUUID);
+	})
+	
+	.then(service => {
+	log('Got service... ');
+	bleService = service;
 	log('Getting characteristic... ');
 	return bleService.getCharacteristic(rxUUID);
-  })
-  .then( characteristic => {
-    log('Got rxCharacteristic... ');
-    rxCharacteristics = characteristic;
-    return rxCharacteristics.startNotifications();
-  })
-  .then(() => {
-    log('Notifications enabled... ');
-    rxCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
-  })
-  .then(() => {
-    return bleService.getCharacteristic(txUUID);
-  })
-  .then( characteristic => {
-    txCharacteristics = characteristic;
-    log('Got txCharacteristics...');
+	})
+	
+	.then( characteristic => {
+	log('Got rxCharacteristic... ');
+	rxCharacteristics = characteristic;
+	return rxCharacteristics.startNotifications();
+	})
+	
+	.then(() => {
+	log('Notifications enabled... ');
+	rxCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
+	})
+	
+	.then(() => {
+	return bleService.getCharacteristic(txUUID);
+	})
+	
+	.then( characteristic => {
+	txCharacteristics = characteristic;
+	log('Got txCharacteristics...');
 	toggle_visibility('Connect');
 	toggle_visibility('Disconnect');
 	log('Connected...');
-  })
-  .catch(error => {
-    log('> connect ' + error);
-  });
+	})
+	
+	.catch(error => {
+	log('> connect ' + error);
+	});
 }
 
 function disconnect() {
