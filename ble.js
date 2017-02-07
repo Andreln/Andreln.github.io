@@ -25,6 +25,7 @@ window.onload = function(){
 };
 
 function connect() {
+  
   if (!navigator.bluetooth) {
       log('Web Bluetooth API is not available.\n' +
           'Please make sure the Web Bluetooth flag is enabled.');
@@ -50,7 +51,7 @@ function connect() {
 	return bleService.getCharacteristic(rxUUID);
   })
   .then( characteristic => {
-    log('Got characteristic... ');
+    log('Got rxCharacteristic... ');
     rxCharacteristics = characteristic;
     return rxCharacteristics.startNotifications();
   })
@@ -64,7 +65,8 @@ function connect() {
   .then( characteristic => {
     txCharacteristics = characteristic;
     log('Got txCharacteristics...');
-	isConnected = true;
+	toggle_visibility('Connect');
+	toggle_visibility('Disconnect');
 	log('Connected...');
   })
   .catch(error => {
@@ -73,18 +75,21 @@ function connect() {
 }
 
 function disconnect() {
-  if (!bleDevice) {
-    log('No Bluetooth Device connected...');
-    return;
-  } 
-  log('Disconnecting from Bluetooth Device...');
-  if (bleDevice.gatt.connected) {
-    bleDevice.gatt.disconnect();
-    log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
-  } else {
-    log('> Bluetooth Device is already disconnected');
-  }
-  isConnected = false;
+	
+	toggle_visibility('Connect');
+	
+	if (!bleDevice) {
+	log('No Bluetooth Device connected...');
+	return;
+	} 
+	log('Disconnecting from Bluetooth Device...');
+	if (bleDevice.gatt.connected) {
+	bleDevice.gatt.disconnect();
+	log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
+	} else {
+	log('> Bluetooth Device is already disconnected');
+	}
+	isConnected = false;
 }
 
 function DATARECEIVED(event){
