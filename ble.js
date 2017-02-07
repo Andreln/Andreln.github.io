@@ -77,6 +77,7 @@ function connect() {
 function disconnect() {
 	
 	toggle_visibility('Connect');
+	toggle_visibility('Disconnect');
 	
 	if (!bleDevice) {
 	log('No Bluetooth Device connected...');
