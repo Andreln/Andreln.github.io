@@ -11,10 +11,10 @@ for (let x = 0; x < N; x++)
     zero_array.push(0);
 
 var data = {
-	labels: [1, 2, 3, 4, 5, 6, 7],
+	labels: [0, 1, 2, 3, 4, 5, 6, 7],
 	datasets: [{
 		label: "Frequency",
-		data: zero_array,
+		data: [0, 1, 2, 3, 4, 5, 6, 7],
 		fill: false,
 		lineTension: 0.1,
 		backgroundColor: "rgba(75,192,192,0.4)",
@@ -44,7 +44,7 @@ window.onload = function(){
     type: 'line',
     data: data,
     options: {
-        responsive: false
+        responsive: true
     }
 });
 	
@@ -56,7 +56,7 @@ window.onload = function(){
 
 	if (window.DeviceMotionEvent) {
 		window.addEventListener('devicemotion', function(ev) {
-			var acc = ev.accelerationIncludingGravity;
+			var acc = ev.acceleration;
 			dmHdlr(acc.z);
 		}, false);
 	}
@@ -69,16 +69,17 @@ window.onload = function(){
 	function dmHdlr(aZ) {
 		var currDM = new Date().getTime();
 		lastDM = currDM;
-		
+	
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
-	
-	myLineChart.data.datasets[0].data[(i+7)] = aZ;
+	let array = myLineChart.data.datasets[0].data;
+	array.shift();
+	array.push(aZ);
+	myLineChart.data.datasets[0].data[(i+7)] = array;
 	myLineChart.data.labels = [(0+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
 	myLineChart.update();
 	
-
 	}
 	
 	
