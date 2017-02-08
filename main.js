@@ -70,8 +70,10 @@ window.onload = function(){
 		lastDM = currDM;
 		
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-		
-	myLineChart.data.datasets[0].data[7] = aZ;
+	
+	let i = 7;
+	myLineChart.data.datasets[0].data[i] = aZ;
+	myLineChart.data.labels = [i];
 	myLineChart.update();
 
 	}
