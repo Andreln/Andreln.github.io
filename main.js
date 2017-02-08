@@ -73,8 +73,10 @@ window.onload = function(){
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
 	let array = myLineChart.data.datasets[0].data;
-	array.shift();
-	array.push(aZ);
+	log(array);
+	let x = array.shift();
+	x.push(aZ);
+	log(array);
 	myLineChart.data.datasets[0].data[(i+7)] = array;
 	myLineChart.data.labels = [(i+0), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
