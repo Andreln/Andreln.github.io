@@ -11,10 +11,11 @@ for (let x = 0; x < N; x++)
     zero_array.push(0);
 
 var data = {
-	labels: [0, 1, 2, 3, 4, 5, 6, 7],
+	labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 	datasets: [{
+		title: "Z-data",
 		label: "Frequency",
-		data: [1, 1, 2, 3, 4, 5, 6, 7],
+		data: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 		fill: false,
 		lineTension: 0.1,
 		backgroundColor: "rgba(75,192,192,0.4)",
@@ -32,6 +33,7 @@ var data = {
 		pointHoverBorderWidth: 2,
 		pointRadius: 1,
 		pointHitRadius: 10,
+		duration: 10,
 		
 		spanGaps: false,
 	}]
@@ -41,10 +43,11 @@ window.onload = function(){
 	var ctx = document.getElementById("chart").getContext("2d");
 		
 	var myLineChart = new Chart(ctx, {
-    type: 'line',
+	type: 'line',
     data: data,
     options: {
-        responsive: true
+        responsive: true,
+		animation: false
     }
 });
 	
@@ -73,8 +76,8 @@ window.onload = function(){
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
 	myLineChart.data.datasets[0].data.shift();
-	myLineChart.data.datasets[0].data.push(aZ);
-	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
+	myLineChart.data.datasets[0].data.push(10);
+	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8), (i+9)];
 	i++;
 	myLineChart.update();
 	}
