@@ -72,9 +72,11 @@ window.onload = function(){
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
 	let i = 0;
-	myLineChart.data.datasets[0].data[i+7] = aZ;
-	myLineChart.data.labels = [0+1, i+2, i+3, i+4, i+5, i+6, i+7];
+	myLineChart.data.datasets[0].data[(i+7)] = aZ;
+	myLineChart.data.labels = [(0+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
+	i++;
 	myLineChart.update();
+	
 
 	}
 	
