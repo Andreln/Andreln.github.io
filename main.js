@@ -3,7 +3,12 @@
 var ctx;
 var data;
 var myLineChart;
+var N = 10;
+var zero_array = [];
 var i = 0;
+
+for (let x = 0; x < N; x++)
+    zero_array.push(0);
 
 var data = {
 	labels: [1, 2, 3, 4, 5, 6, 7],
