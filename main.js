@@ -77,7 +77,6 @@ window.onload = function(){
 	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
 	myLineChart.update();
-	log(i);
 	}
 }
 
