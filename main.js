@@ -76,7 +76,7 @@ window.onload = function(){
 	array.shift();
 	array.push(aZ);
 	myLineChart.data.datasets[0].data[(i+7)] = array;
-	myLineChart.data.labels = [(0+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
+	myLineChart.data.labels = [(i+0), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
 	myLineChart.update();
 	

@@ -101,8 +101,9 @@ function disconnect() {
 
 function DATARECEIVED(event){
 	let value = event.target.value;
+	// let data = getUint8(value[0]);
 	value = value.buffer ? value : new DataView(value);
-	let data = new Uint8Array();
+	let data = new Uint8Array(value);
 	log ('Data received!');
 	for (let i = 0; i <= 8; i++) {
 		data = value.getUint8(i);
@@ -119,10 +120,7 @@ function sliderChange(value){
 }
 
 
-
 function log(text) {
     console.log(text);
     document.querySelector('#log').textContent += text + '\n';
 }
-
-
