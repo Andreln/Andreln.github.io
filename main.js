@@ -52,8 +52,11 @@ function toggle_visibility(id) {
 		div.style.display = 'block';
 }
 
+
+//------------- Accessing and showing sensordata from phone ------------- // 
+var s$ = function(e) {return document.getElementById(e);};
+
 if (window.DeviceMotionEvent) {
-    alert('Devicemotion supported');
     window.addEventListener('devicemotion', function(ev) {
         var acc = ev.accelerationIncludingGravity;
         dmHdlr(acc.x, acc.y, acc.z);
