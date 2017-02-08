@@ -14,7 +14,7 @@ var data = {
 	labels: [0, 1, 2, 3, 4, 5, 6, 7],
 	datasets: [{
 		label: "Frequency",
-		data: [0, 1, 2, 3, 4, 5, 6, 7],
+		data: [1, 1, 2, 3, 4, 5, 6, 7],
 		fill: false,
 		lineTension: 0.1,
 		backgroundColor: "rgba(75,192,192,0.4)",
@@ -72,20 +72,13 @@ window.onload = function(){
 	
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
-	let array = myLineChart.data.datasets[0].data;
-	log(array);
-	let x = array.shift();
-	x.push(aZ);
-	log(array);
-	myLineChart.data.datasets[0].data[(i+7)] = array;
-	myLineChart.data.labels = [(i+0), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
+	myLineChart.data.datasets[0].data.shift();
+	myLineChart.data.datasets[0].data.push(aZ);
+	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
 	myLineChart.update();
-	
+	log(i);
 	}
-	
-	
-	
 }
 
 
