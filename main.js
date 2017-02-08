@@ -47,8 +47,17 @@ window.onload = function(){
     data: data,
     options: {
         responsive: true,
-		animation: false
-    }
+		animation: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 20,
+                    min: -20,
+                    stepSize: 4
+                }
+            }]
+		}
+	}
 });
 	
 	var index = 1;
@@ -83,7 +92,6 @@ window.onload = function(){
 	myLineChart.update();
 	}
 }
-
 
 
 //------------- TOGGLE VISIBILITY ------------- // 
