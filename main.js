@@ -69,9 +69,7 @@ function dmHdlr(aX, aY, aZ) {
     var currDM = new Date().getTime();
     lastDM = currDM;
     
-    let viewX = aX ? aX.toFixed(3) : '?';
-    let viewY = aY ? aY.toFixed(3) : '?';
-    let viewZ = aZ ? aZ.toFixed(3) : '?';
-	
-	log (viewX + viewY + viewZ)
+    s$('aX').innerHTML = aX ? aX.toFixed(3) : '?';
+    s$('aY').innerHTML = aY ? aY.toFixed(3) : '?';
+    s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 }
