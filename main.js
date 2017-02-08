@@ -3,11 +3,7 @@
 var ctx;
 var data;
 var myLineChart;
-var N = 10;
-var zero_array = [];
-
-for (let i = 0; i < N; i++)
-    zero_array.push(0);
+var i = 0;
 
 var data = {
 	labels: [1, 2, 3, 4, 5, 6, 7],
@@ -71,7 +67,7 @@ window.onload = function(){
 		
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
-	let i = 0;
+	
 	myLineChart.data.datasets[0].data[(i+7)] = aZ;
 	myLineChart.data.labels = [(0+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7)];
 	i++;
