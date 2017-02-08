@@ -51,3 +51,27 @@ function toggle_visibility(id) {
 	else
 		div.style.display = 'block';
 }
+
+if (window.DeviceMotionEvent) {
+    alert('Devicemotion supported');
+    window.addEventListener('devicemotion', function(ev) {
+        var acc = ev.accelerationIncludingGravity;
+        dmHdlr(acc.x, acc.y, acc.z);
+    }, false);
+}
+else {
+    log("devicemotion not supported on your device");
+}
+
+var lastDM = new Date().getTime();
+
+function dmHdlr(aX, aY, aZ) {
+    var currDM = new Date().getTime();
+    lastDM = currDM;
+    
+    let viewX = aX ? aX.toFixed(3) : '?';
+    let viewY = aY ? aY.toFixed(3) : '?';
+    let viewZ = aZ ? aZ.toFixed(3) : '?';
+	
+	log (viewX + viewY + viewZ)
+}
