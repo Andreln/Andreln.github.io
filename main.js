@@ -55,6 +55,7 @@ window.onload = function(){
 	
 	
 	//------------- Accessing and showing sensordata from phone ------------- // 
+	
 	var s$ = function(e) {return document.getElementById(e);};
 
 	if (window.DeviceMotionEvent) {
@@ -76,7 +77,7 @@ window.onload = function(){
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
 	
 	myLineChart.data.datasets[0].data.shift();
-	myLineChart.data.datasets[0].data.push(10);
+	myLineChart.data.datasets[0].data.push(az);
 	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8), (i+9)];
 	i++;
 	myLineChart.update();
