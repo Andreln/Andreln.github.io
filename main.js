@@ -1,5 +1,7 @@
 'use strict'
 
+var startAcc = false;
+
 var ctx;
 var data;
 var myLineChart;
@@ -62,37 +64,46 @@ window.onload = function(){
 	
 	var index = 1;
 	
+	document.querySelector('#ON-acc').addEventListener('click', accOn);
+	document.querySelector('#OFF-acc').addEventListener('click', accOff);
+	
+	function accOn(){
+		var startAcc = true;
+	}
+	function accOff(){
+		var startAcc = false;
+	}
 	
 	//------------- Accessing and showing sensordata from phone ------------- // 
-	
-	var s$ = function(e) {return document.getElementById(e);};
+	while(startAcc){
+		var s$ = function(e) {return document.getElementById(e);};
 
-	if (window.DeviceMotionEvent) {
-		window.addEventListener('devicemotion', function(ev) {
-			var acc = ev.acceleration;
-			dmHdlr(acc.z);
-		}, false);
-	}
-	else {
-		log("devicemotion not supported on your device");
-	}
+		if (window.DeviceMotionEvent) {
+			window.addEventListener('devicemotion', function(ev) {
+				var acc = ev.acceleration;
+				dmHdlr(acc.z);
+			}, false);
+		}
+		else {
+			log("devicemotion not supported on your device");
+		}
 
-	var lastDM = new Date().getTime();
+		var lastDM = new Date().getTime();
 
-	function dmHdlr(aZ) {
-		var currDM = new Date().getTime();
-		lastDM = currDM;
-	
-		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-	
-	myLineChart.data.datasets[0].data.shift();
-	myLineChart.data.datasets[0].data.push(aZ);
-	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8), (i+9)];
-	i++;
-	myLineChart.update();
+		function dmHdlr(aZ) {
+			var currDM = new Date().getTime();
+			lastDM = currDM;
+		
+			s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
+		
+		myLineChart.data.datasets[0].data.shift();
+		myLineChart.data.datasets[0].data.push(aZ);
+		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8), (i+9)];
+		i++;
+		myLineChart.update();
+		}
 	}
 }
-
 
 //------------- TOGGLE VISIBILITY ------------- // 
 function toggle_visibility(id) {
