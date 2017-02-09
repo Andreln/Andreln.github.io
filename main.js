@@ -36,33 +36,38 @@ var data = {
 		pointRadius: 1,
 		pointHitRadius: 10,
 		duration: 10,
-		
+
 		spanGaps: false,
 	}]
 };
 
 window.onload = function(){
-	var ctx = document.getElementById("chart").getContext("2d");
-		
+
+  //------------- Init chart------------- //
+
+  var ctx = document.getElementById("chart").getContext("2d");
+
 	var myLineChart = new Chart(ctx, {
 	type: 'line',
     data: data,
     options: {
-        responsive: true,
-		animation: false,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    max: 20,
-                    min: -20,
-                    stepSize: 4
-                }
-            }]
-		}
-	}
-});
-	
-	//------------- Accessing and showing sensordata from phone ------------- // 
+      responsive: true,
+		  animation: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            max: 20,
+            min: -20,
+            stepSize: 4
+          }
+        }]
+		  }
+    }
+  });
+
+  //------------- Init chart ------------- //
+
+  //------------- Accessing and showing sensordata from phone ------------- //
 
 	var s$ = function(e) {return document.getElementById(e);};
 
@@ -81,27 +86,24 @@ window.onload = function(){
 	function dmHdlr(aZ) {
 		var currDM = new Date().getTime();
 		lastDM = currDM;
-	
+
 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-	
-		myLineChart.data.datasets[0].data.shift();
-		myLineChart.data.datasets[0].data.push(aZ);
-		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8), (i+9)];
+
+		myLineChart.data.datasets[0].data.shift();      // Shift array one step to the left
+		myLineChart.data.datasets[0].data.push(aZ);     // Insert accelerometer value to the right in array
+		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
 		i++;
 		myLineChart.update();
 	}
 
 }
 
-//------------- TOGGLE VISIBILITY ------------- // 
-function toggle_visibility(id) {
-	var div = document.getElementById(id);
-	if(div.style.display == 'block')
-		div.style.display = 'none';
-	else
-		div.style.display = 'block';
-}
-
-
-
-
+  //------------- TOGGLE VISIBILITY ------------- //
+  function toggle_visibility(id) {
+  	var div = document.getElementById(id);
+  	if(div.style.display == 'block')
+  		div.style.display = 'none';
+  	else
+  		div.style.display = 'block';
+  }
+  //------------- TOGGLE VISIBILITY ------------- //
