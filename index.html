@@ -20,7 +20,7 @@
   		<a href="#app"> <b>EarthQ</b></a>
   	</li>
   	<li class="w3-right w3-margin-right w3-dropdown-hover">
-      <a href="#"> <i class="fa fa-bars"></i></a>
+      <a> <i class="fa fa-bars"></i></a>
       <div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
         <a href="#">Resonator</a>
         <a href="#">Measure Freq</a>
@@ -36,83 +36,90 @@
 
 <!-- Page content -->
 <body>
-<div class="w3-content" style="max-width:1564px">
+  <div class="w3-content" style="max-width:1564px">
 
-	<!-- App -->
-	<div class="w3-container w3-center" id="App">
-		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">App v.0.6</h4>
-	</div>
+  	<!-- App -->
+  	<div class="w3-container w3-center" id="App">
+  		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
+  	</div>
 
-	<div class="w3-container w3-content w3-center" style="max-width:800px">
-		<div id="Connect" style="display: block;">
-		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
-		</div>
-		<div id="Disconnect" style="display: none;">
-		<button id="disconnect" type="button" class="btn btn-default">DISCONNECT</button>
-		</div>
-		<hr>
-		<button id="ON-acc" type="button" class="btn btn-default">ON</button>
-		<button id="OFF-acc" type="button" class="btn btn-default">OFF</button>
-		<hr>
-		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
-		<hr>
-		<div class="w3-center">
-			<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
-		</div>
-		<div class="w3-center">
-			<p id="aZ"</p>
-		</div>
-		<canvas id="chart" width="400" height="200"></canvas>
-		<hr>
-		<pre id="log"></pre>
-	</div>
+  	<div class="w3-container w3-content w3-center" style="max-width:800px">
+  		<div id="Connect" style="display: block;">
+  		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
+  		</div>
+  		<div id="Disconnect" style="display: none;">
+  		<button id="disconnect" type="button" class="btn btn-default">DISCONNECT</button>
+  		</div>
+  		<hr>
+  		<button id="ON-acc" type="button" class="btn btn-default">ON</button>
+  		<button id="OFF-acc" type="button" class="btn btn-default">OFF</button>
+  		<hr>
+  		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
+  		<hr>
+    </div>
 
-	<!-- About Section -->
-	<div id="aboutSection" style="display: none;">
-		<div class="w3-container w3-padding-16 w3-center">
-			<h3 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h3>
-			<p>	This is a physical web application for a bachelorthesis by students at NTNU.
-				This thesis is written for Nordic Semiconductor. BLE4LYF.
-			</p>
-		</div>
+    <div class="w3-container w3-center" id="Measure">
+      <h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure</h4>
+    </div>
+    <div class="w3-container w3-content w3-center" style="max-width:800px">
+      <div class="w3-center">
+  			<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
+  		</div>
+  		<div class="w3-center">
+  			<p id="aZ"</p>
+  		</div>
+  		<canvas id="chart" width="400" height="200"></canvas>
+  		<hr>
+  		<pre id="log"></pre>
+  	</div>
 
-		<div class="w3-row-padding w3-center">
-			<div class="w3-third">
-				<img src="" alt="André L. Nicolaysen" style="width:100%">
-				<h4>André L. Nicolaysen</h4>
-				<p>BIO.</p>
-			</div>
-			<div class="w3-third">
-				<img src="" alt="Martin Henriksen Dahl" style="width:100%">
-				<h4>Martin Henriksen Dahl</h4>
-				<p>BIO.</p>
-			</div>
-			<div class="w3-third w3-">
-				<img src="" alt="Stig Kvannli Olsen" style="width:100%">
-				<h4>Stig Kvannli Olsen</h4>
-				<p>BIO.</p>
-			</div>
-		</div>
-	</div>
-</div>
+  	<!-- About Section -->
+  	<div id="aboutSection" style="display: none;">
+  		<div class="w3-container w3-padding-16 w3-center">
+  			<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h4>
+  			<p>	This is a physical web application for a bachelorthesis by students at NTNU.
+  				This thesis is written for Nordic Semiconductor. BLE4LYF.
+  			</p>
+  		</div>
+
+  		<div class="w3-row-padding w3-center">
+  			<div class="w3-third">
+  				<img src="" alt="André L. Nicolaysen" style="width:100%">
+  				<h4>André L. Nicolaysen</h4>
+  				<p>BIO.</p>
+  			</div>
+  			<div class="w3-third">
+  				<img src="" alt="Martin Henriksen Dahl" style="width:100%">
+  				<h4>Martin Henriksen Dahl</h4>
+  				<p>BIO.</p>
+  			</div>
+  			<div class="w3-third w3-">
+  				<img src="" alt="Stig Kvannli Olsen" style="width:100%">
+  				<h4>Stig Kvannli Olsen</h4>
+  				<p>BIO.</p>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</body>
 <!-- Page Content End -->
 
 
 <!-- Footer -->
 <footer class="w3-border-top w3-padding-32 w3-center">
 
-	<a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
-	<img src="logos/logo_github.png" style="width:10%" > </img> </a>
+  <a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
+  <img src="logos/logo_github.png" style="width:10%" > </img> </a>
 
-	<a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
-	<img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
+  <a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
+  <img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
 
-	<a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
-	<img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
+  <a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
+  <img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
 
-	<a href="https://www.ntnu.com/" target=_blank title="NTNU - Trondheim" class="w3-margin">
-	<img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
+  <a href="https://www.ntnu.com/" target=_blank title="NTNU - Trondheim" class="w3-margin">
+  <img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
 
 </footer>
-</body>
+
 </hmtl>
