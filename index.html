@@ -43,7 +43,7 @@
     <div class="w3-container w3-center" >
   		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
   	</div>
-  	<div class="w3-container w3-content w3-center" style="max-width:800px">
+  	<div class="w3-container w3-content w3-center">
   		<div id="Connect" style="display: block;">
   		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
   		</div>
@@ -56,6 +56,7 @@
   		<hr>
   		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
   		<hr>
+      <pre id="log"></pre>
     </div>
   </div>
     <!-- Measure -->
@@ -63,7 +64,7 @@
     <div class="w3-container w3-center">
       <h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure</h4>
     </div>
-    <div class="w3-container w3-content w3-center" style="max-width:800px">
+    <div class="w3-container w3-content w3-center">
       <div class="w3-center">
   			<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
   		</div>
@@ -78,7 +79,7 @@
 
   	<!-- About Section -->
   	<div id="aboutSection" style="display: none;">
-  		<div class="w3-container w3-padding-16 w3-center">
+  		<div class="w3-container w3-center">
   			<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h4>
   			<p>	This is a physical web application for a bachelorthesis by students at NTNU.
   				This thesis is written for Nordic Semiconductor. BLE4LYF.
@@ -124,6 +125,7 @@
   			</div>
   		</div>
   	</div>
+
   </div>
 </body>
 <!-- Page Content End -->
