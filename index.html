@@ -22,10 +22,10 @@
   	<li class="w3-right w3-margin-right w3-dropdown-hover">
       <a> <i class="fa fa-bars"></i></a>
       <div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
-        <a href="#">Resonator</a>
-        <a href="#">Measure Freq</a>
+        <a onclick="toggle_visibility('Resonator', 'Measure', 'aboutSection');">Resonator</a>
+        <a onclick="toggle_visibility('Measure', 'Resonator', 'aboutSection');">Measure Freq</a>
         <a href="#">????</a>
-        <a id="about" href="#aboutSection" onclick="toggle_visibility('aboutSection');"> About <i class="fa fa-info-circle"></i></a>
+        <a onclick="toggle_visibility('aboutSection', 'Resonator', 'Measure');"> About <i class="fa fa-info-circle"></i></a>
       </div>
   	</li>
 		<li class="w3-right">
@@ -39,10 +39,10 @@
   <div class="w3-content" style="max-width:1564px">
 
   	<!-- App -->
-  	<div class="w3-container w3-center" id="App">
+  <div id="Resonator" style="display: block;">
+    <div class="w3-container w3-center" >
   		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
   	</div>
-
   	<div class="w3-container w3-content w3-center" style="max-width:800px">
   		<div id="Connect" style="display: block;">
   		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
@@ -57,8 +57,10 @@
   		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
   		<hr>
     </div>
-
-    <div class="w3-container w3-center" id="Measure">
+  </div>
+    <!-- Measure -->
+  <div id="Measure" style="display: none;">
+    <div class="w3-container w3-center">
       <h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure</h4>
     </div>
     <div class="w3-container w3-content w3-center" style="max-width:800px">
@@ -72,6 +74,7 @@
   		<hr>
   		<pre id="log"></pre>
   	</div>
+  </div>
 
   	<!-- About Section -->
   	<div id="aboutSection" style="display: none;">
