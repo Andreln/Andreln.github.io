@@ -1,50 +1,61 @@
 'use strict'
 
-var startAcc = false;
-
 var ctx;
 var data;
 var myLineChart;
 var N = 10;
 var zero_array = [];
 var i = 0;
+var showId = 'Resonator'
+var hideId1 = 'Measure'
+var hideId2 = 'aboutSection'
 
-for (let x = 0; x < N; x++)
-    zero_array.push(0);
-
-var data = {
-	labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-	datasets: [{
-		title: "Z-data",
-		label: "Frequency",
-		data: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-		fill: false,
-		lineTension: 0.1,
-		backgroundColor: "rgba(75,192,192,0.4)",
-		borderColor: "rgba(75,192,192,1)",
-		borderCapStyle: 'butt',
-		borderDash: [],
-		borderDashOffset: 0.0,
-		borderJoinStyle: 'miter',
-		pointBorderColor: "rgba(75,192,192,1)",
-		pointBackgroundColor: "#fff",
-		pointBorderWidth: 1,
-		pointHoverRadius: 5,
-		pointHoverBackgroundColor: "rgba(75,192,192,1)",
-		pointHoverBorderColor: "rgba(220,220,220,1)",
-		pointHoverBorderWidth: 2,
-		pointRadius: 1,
-		pointHitRadius: 10,
-		duration: 10,
-
-		spanGaps: false,
-	}]
-};
+setChartData();
 
 window.onload = function(){
+  initChart();
+  if(false){
+    deviceMotion();
+  }
+  toggle_visibility(showId, hideId1, hideId2);
+}
 
-  //------------- Init chart------------- //
+function setChartData(){
+  for (let x = 0; x < N; x++)
+      zero_array.push(0);
 
+  var data = {
+  	labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  	datasets: [{
+  		title: "Z-data",
+  		label: "Frequency",
+  		data: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  		fill: false,
+  		lineTension: 0.1,
+  		backgroundColor: "rgba(75,192,192,0.4)",
+  		borderColor: "rgba(75,192,192,1)",
+  		borderCapStyle: 'butt',
+  		borderDash: [],
+  		borderDashOffset: 0.0,
+  		borderJoinStyle: 'miter',
+  		pointBorderColor: "rgba(75,192,192,1)",
+  		pointBackgroundColor: "#fff",
+  		pointBorderWidth: 1,
+  		pointHoverRadius: 5,
+  		pointHoverBackgroundColor: "rgba(75,192,192,1)",
+  		pointHoverBorderColor: "rgba(220,220,220,1)",
+  		pointHoverBorderWidth: 2,
+  		pointRadius: 1,
+  		pointHitRadius: 10,
+  		duration: 10,
+
+  		spanGaps: false,
+  	}]
+  };
+}
+
+//------------- Init chart------------- //
+function initChart(){
   var ctx = document.getElementById("chart").getContext("2d");
 
 	var myLineChart = new Chart(ctx, {
@@ -64,11 +75,10 @@ window.onload = function(){
 		  }
     }
   });
+}
 
-  //------------- Init chart ------------- //
-
-  //------------- Accessing and showing sensordata from phone ------------- //
-
+//------------- Accessing and showing sensordata from phone ------------- //
+function deviceMotion(){
 	var s$ = function(e) {return document.getElementById(e);};
 
 	if (window.DeviceMotionEvent) {
@@ -95,7 +105,6 @@ window.onload = function(){
 		i++;
 		myLineChart.update();
 	}
-
 }
 
 //------------- TOGGLE VISIBILITY ------------- //
@@ -109,4 +118,3 @@ function toggle_visibility(showId, hideId1, hideId2) {
 	hideDiv2.style.display = 'none';
 
 }
-//------------- TOGGLE VISIBILITY ------------- //

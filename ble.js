@@ -20,10 +20,23 @@ window.onload = function(){
 
   document.querySelector('#refresh').addEventListener('click', disconnect);			// CHANGE!
 
-};
+}
+
+//------------- TOGGLE VISIBILITY ------------- //
+function toggle_visibility(showId, hideId1, hideId2) {
+  let showDiv = document.getElementById(showId);
+  let hideDiv1 = document.getElementById(hideId1);
+  let hideDiv2 = document.getElementById(hideId2);
+
+  showDiv.style.display = 'block'
+  hideDiv1.style.display = 'none';
+  hideDiv2.style.display = 'none';
+
+}
+//------------- TOGGLE VISIBILITY ------------- //
 
 function connect() {
-
+  log('Does this even work?');
 	if (!navigator.bluetooth) {
 	  log('Web Bluetooth API is not available.\n' +
 		  'Please make sure the Web Bluetooth flag is enabled.');
