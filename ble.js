@@ -10,7 +10,9 @@ var bleService;
 var rxCharacteristics;
 var txCharacteristics;
 
+
 window.onload = function(){
+  setChartData();
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
@@ -20,20 +22,12 @@ window.onload = function(){
 
   document.querySelector('#refresh').addEventListener('click', disconnect);			// CHANGE!
 
+  initChart();
+  if(true){
+    deviceMotion();
+  }
+  toggle_visibility(showId, hideId1, hideId2);
 }
-
-//------------- TOGGLE VISIBILITY ------------- //
-function toggle_visibility(showId, hideId1, hideId2) {
-  let showDiv = document.getElementById(showId);
-  let hideDiv1 = document.getElementById(hideId1);
-  let hideDiv2 = document.getElementById(hideId2);
-
-  showDiv.style.display = 'block'
-  hideDiv1.style.display = 'none';
-  hideDiv2.style.display = 'none';
-
-}
-//------------- TOGGLE VISIBILITY ------------- //
 
 function connect() {
   log('Does this even work?');
@@ -131,7 +125,6 @@ function sliderChange(value){
 		log('Data sent!');
 	});
 }
-
 
 function log(text) {
     console.log(text);
