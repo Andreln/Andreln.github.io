@@ -73,8 +73,6 @@ function connect() {
 	.then( characteristic => {
 	txCharacteristics = characteristic;
 	log('Got txCharacteristics...');
-	toggle_visibility('Connect');
-	toggle_visibility('Disconnect');
 	log('Connected...');
 	})
 
@@ -84,8 +82,8 @@ function connect() {
 }
 
 function disconnect() {
-	toggle_visibility('Connect');
-	toggle_visibility('Disconnect');
+	// toggle_visibility('Connect');
+	// toggle_visibility('Disconnect');
 
 	if (!bleDevice) {
 	log('No Bluetooth Device connected...');
@@ -103,7 +101,7 @@ function disconnect() {
 
 function DATARECEIVED(event){
 	let value = event.target.value;
-	// let data = getUint8(value[0]);
+	//let data = getUint8(value[0]);
 	value = value.buffer ? value : new DataView(value);
 	let data = new Uint8Array(value);
 	log ('Data received!');
