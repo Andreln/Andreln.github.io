@@ -1,5 +1,7 @@
 'use strict'
 
+
+
 const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
@@ -12,7 +14,6 @@ var txCharacteristics;
 
 
 window.onload = function(){
-  setChartData();
   document.querySelector('#connect').addEventListener('click', connect);
   document.querySelector('#disconnect').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
@@ -22,11 +23,6 @@ window.onload = function(){
 
   document.querySelector('#refresh').addEventListener('click', disconnect);			// CHANGE!
 
-  initChart();
-  if(true){
-    deviceMotion();
-  }
-  toggle_visibility(showId, hideId1, hideId2);
 }
 
 function connect() {
@@ -88,7 +84,6 @@ function connect() {
 }
 
 function disconnect() {
-
 	toggle_visibility('Connect');
 	toggle_visibility('Disconnect');
 
