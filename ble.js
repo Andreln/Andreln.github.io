@@ -34,7 +34,7 @@ function connect() {
 	}
 
 	log('Requesting Bluetooth Device...');
-	navigator.bluetooth.requestDevice()  // {filters: [{services: [serviceUUID]}]}
+	navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})  // {filters: [{services: [serviceUUID]}]}
 	.then(device => {
 	bleDevice = device;
 	log('Gonnecting to GATT server... ');
