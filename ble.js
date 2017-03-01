@@ -114,7 +114,7 @@ function DATARECEIVED(event){
 	// for (let i = 0; i <= 8; i++) {
 	// 	let data = getUint8(value[i]);
 	// 	log(i + ': ' + data);
-	}
+	//}
 }
 
 function sliderChange(value){
