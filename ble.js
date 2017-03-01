@@ -107,12 +107,13 @@ function disconnect() {
 function DATARECEIVED(event){
   log ('Data received!');
   let value = event.target.value;
-	//let data = getUint8(value[0]);
 	value = value.buffer ? value : new DataView(value);
-	//let data = new Uint8Array(value);
-	for (let i = 0; i <= 8; i++) {
-		let data = getUint8(value[i]);
-		log(i + ': ' + data);
+  let data = value.getUint8(0);
+  log(data);
+	// //let data = new Uint8Array(value);
+	// for (let i = 0; i <= 8; i++) {
+	// 	let data = getUint8(value[i]);
+	// 	log(i + ': ' + data);
 	}
 }
 
