@@ -39,7 +39,7 @@ function connect() {
 
       // Adding event listener to detect loss of connection
       //bleDevice.addEventListener('gattserverdisconnected', disconnect);
-      log('> Found' + bleDevice.name);
+      log('> Found ' + bleDevice.name + '...');
       log('Connecting to GATT Server...');
 
        // Connect to gattserver
@@ -79,7 +79,7 @@ function connect() {
   	.then( characteristic => {
   	txCharacteristics = characteristic;
   	log('Got txCharacteristics...');
-    buttonToggle('Connect', 'Disconnect')
+    buttonToggle('disconnectDiv', 'connectDiv')
   	log('Connected...');
   	})
 
