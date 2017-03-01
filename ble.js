@@ -84,7 +84,7 @@ function connect() {
 
     .then(() => {
     log('Getting MPU Service... ');
-    return server.getPrimaryService(MPU_Service_UUID);
+    return bleServer.getPrimaryService(MPU_Service_UUID);
     })
 
     .then(service => {
