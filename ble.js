@@ -39,7 +39,7 @@ function connect() {
 
       // Adding event listener to detect loss of connection
       bluetoothDevice.addEventListener('gattserverdisconnected', disconnectHandler);
-      log('> Found' + bluetoothDevice.name);
+      log('> Found' + bleDevice.name);
       log('Connecting to GATT Server...');
 
        // Connect to gattserver
