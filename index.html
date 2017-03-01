@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/wrapper.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -11,141 +12,140 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="ble.js"></script>
 <script src="viewToggle.js"></script>
-<script src="ble.js"></script>
 
-<!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <ul class="w3-navbar w3-white w3-padding-8 w3-card-2 w3-wide">
-    <li class="w3-left w3-margin-left">
-  		<a href="#app"> <b>EarthQ</b></a>
-  	</li>
-  	<li class="w3-right w3-margin-right w3-dropdown-hover">
-      <a> <i class="fa fa-bars"></i></a>
-      <div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
-        <a onclick="viewToggle('Resonator', 'Measure', 'aboutSection');">Resonator</a>
-        <a onclick="viewToggle('Measure', 'Resonator', 'aboutSection');">Measure Freq</a>
-        <a href="#">????</a>
-        <a onclick="viewToggle('aboutSection', 'Resonator', 'Measure');"> About <i class="fa fa-info-circle"></i></a>
-      </div>
-  	</li>
-		<li class="w3-right">
-		    <a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
-	  </li>
-  </ul>
-</div>
-
-
-<!-- Page content -->
 <body>
-  <div class="w3-content" style="max-width:1564px">
+  <div id="wrapper">
+    <!-- Navbar (sit on top) -->
+    <ul class="w3-navbar w3-white w3-padding-8 w3-card-2 w3-wide">
+      <li class="w3-left w3-margin-left">
+    		<a href="#app"> <b>EarthQ</b></a>
+    	</li>
+    	<li class="w3-right w3-margin-right w3-dropdown-hover">
+        <a> <i class="fa fa-bars"></i></a>
+        <div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
+          <a onclick="viewToggle('Resonator', 'Measure', 'aboutSection');">Resonator</a>
+          <a onclick="viewToggle('Measure', 'Resonator', 'aboutSection');">Measure Freq</a>
+          <a href="#">????</a>
+          <a onclick="viewToggle('aboutSection', 'Resonator', 'Measure');"> About <i class="fa fa-info-circle"></i></a>
+        </div>
+    	</li>
+  		<li class="w3-right">
+  		    <a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
+  	  </li>
+    </ul>
 
-  	<!-- App -->
-  <div id="Resonator" style="display: block;">
-    <div class="w3-container w3-center" >
-  		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
-  	</div>
-  	<div class="w3-container w3-content w3-center">
-  		<div id="Connect" style="display: block;">
-  		<button id="connect" type="button" class="btn btn-default">CONNECT</button>
-  		</div>
-  		<div id="Disconnect" style="display: block;">
-  		<button id="disconnect" type="button" class="btn btn-default">DISCONNECT</button>
-  		</div>
-  		<hr>
-  		<button id="ON-acc" type="button" class="btn btn-default">ON</button>
-  		<button id="OFF-acc" type="button" class="btn btn-default">OFF</button>
-  		<hr>
-  		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
-  		<hr>
-      <pre id="log"></pre>
+
+    <!-- Page content -->
+    <div class="w3-content">
+
+    	<!-- App -->
+    <div id="Resonator" style="display: block;">
+      <div class="w3-container w3-center" >
+    		<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
+    	</div>
+    	<div class="w3-container w3-content w3-center">
+    		<div id="connectDiv" style="display: block;">
+    		<button id="connectBtn" type="button" class="btn btn-default">CONNECT</button>
+    		</div>
+    		<div id="disconnectDiv" style="display: block;">
+    		<button id="disconnectBtn" type="button" class="btn btn-default">DISCONNECT</button>
+    		</div>
+    		<hr>
+    		<button id="ON-acc" type="button" class="btn btn-default">ON</button>
+    		<button id="OFF-acc" type="button" class="btn btn-default">OFF</button>
+    		<hr>
+    		<input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
+    		<hr>
+        <pre id="log"></pre>
+      </div>
     </div>
-  </div>
-    <!-- Measure -->
-  <div id="Measure" style="display: none;">
-    <div class="w3-container w3-center">
-      <h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure</h4>
+      <!-- Measure -->
+    <div id="Measure" style="display: none;">
+      <div class="w3-container w3-center">
+        <h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure</h4>
+      </div>
+      <div class="w3-container w3-content w3-center">
+        <div class="w3-center">
+    			<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
+    		</div>
+    		<div class="w3-center">
+    			<p id="aZ"</p>
+    		</div>
+    		<canvas id="chart" width="400" height="200"></canvas>
+    		<hr>
+    		<pre id="log"></pre>
+    	</div>
     </div>
-    <div class="w3-container w3-content w3-center">
-      <div class="w3-center">
-  			<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
-  		</div>
-  		<div class="w3-center">
-  			<p id="aZ"</p>
-  		</div>
-  		<canvas id="chart" width="400" height="200"></canvas>
-  		<hr>
-  		<pre id="log"></pre>
-  	</div>
+
+    	<!-- About Section -->
+    	<div id="aboutSection" style="display: none;">
+    		<div class="w3-container w3-center">
+    			<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h4>
+    			<p>	This is a physical web application for a bachelorthesis by students at NTNU.
+    				This thesis is written for Nordic Semiconductor. BLE4LYF.
+    			</p>
+    		</div>
+
+    		<div class="w3-row-padding w3-center">
+    			<div class="w3-third w3-margin-bottom">
+            <div class="w3-card-4">
+              <header class="w3-container w3-light-grey">
+                <h4 class=w3-left>André L. Nicolaysen</h4>
+              </header>
+              <div class="w3-container w3-margin-top">
+                <img src="png/andreln.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
+                <br>
+              </div>
+            </div>
+    			</div>
+          <div class="w3-third w3-margin-bottom">
+            <div class="w3-card-4">
+              <header class="w3-container w3-light-grey">
+                <h4 class=w3-left>Martin Henriksen Dahl</h4>
+              </header>
+              <div class="w3-container w3-margin-top">
+                <img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
+                <br>
+              </div>
+            </div>
+    			</div>
+          <div class="w3-third w3-margin-bottom">
+            <div class="w3-card-4">
+              <header class="w3-container w3-light-grey">
+                <h4 class=w3-left>Stig Kvannli Olsen</h4>
+              </header>
+              <div class="w3-container w3-margin-top">
+                <img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
+                <br>
+              </div>
+            </div>
+    			</div>
+    		</div>
+    	</div>
+
+    </div>
+    <!-- Page Content End -->
+
+
+    <!-- Footer -->
+    <footer class="w3-border-top w3-padding-32 w3-center">
+
+      <a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
+      <img src="logos/logo_github.png" style="width:10%" > </img> </a>
+
+      <a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
+      <img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
+
+      <a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
+      <img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
+
+      <a href="https://www.ntnu.no/" target=_blank title="NTNU - Trondheim" class="w3-margin">
+      <img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
+
+    </footer>
   </div>
-
-  	<!-- About Section -->
-  	<div id="aboutSection" style="display: none;">
-  		<div class="w3-container w3-center">
-  			<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h4>
-  			<p>	This is a physical web application for a bachelorthesis by students at NTNU.
-  				This thesis is written for Nordic Semiconductor. BLE4LYF.
-  			</p>
-  		</div>
-
-  		<div class="w3-row-padding w3-center">
-  			<div class="w3-third w3-margin-bottom">
-          <div class="w3-card-4">
-            <header class="w3-container w3-light-grey">
-              <h4 class=w3-left>André L. Nicolaysen</h4>
-            </header>
-            <div class="w3-container w3-margin-top">
-              <img src="png/andreln.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-              <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
-              <br>
-            </div>
-          </div>
-  			</div>
-        <div class="w3-third w3-margin-bottom">
-          <div class="w3-card-4">
-            <header class="w3-container w3-light-grey">
-              <h4 class=w3-left>Martin Henriksen Dahl</h4>
-            </header>
-            <div class="w3-container w3-margin-top">
-              <img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-              <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
-              <br>
-            </div>
-          </div>
-  			</div>
-        <div class="w3-third w3-margin-bottom">
-          <div class="w3-card-4">
-            <header class="w3-container w3-light-grey">
-              <h4 class=w3-left>Stig Kvannli Olsen</h4>
-            </header>
-            <div class="w3-container w3-margin-top">
-              <img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-              <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p>
-              <br>
-            </div>
-          </div>
-  			</div>
-  		</div>
-  	</div>
-
-  </div>
-</body>
-<!-- Page Content End -->
-
-
-<!-- Footer -->
-<footer class="w3-border-top w3-padding-32 w3-center">
-
-  <a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
-  <img src="logos/logo_github.png" style="width:10%" > </img> </a>
-
-  <a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
-  <img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
-
-  <a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
-  <img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
-
-  <a href="https://www.ntnu.no/" target=_blank title="NTNU - Trondheim" class="w3-margin">
-  <img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
-
-</footer>
+<body>
 </hmtl>

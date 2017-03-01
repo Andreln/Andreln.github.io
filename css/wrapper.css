@@ -1,4 +1,5 @@
 ﻿#wrapper {
-    max-width:800px;
+    max-width:600px;
     position: relative;
+    margin: 0 auto;
 }

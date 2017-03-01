@@ -1,7 +1,7 @@
 ﻿/* W3.CSS 2.87 Jan 2017 by Jan Egil and Borge Refsnes */
 html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
 /* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
-html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0;padding-top:52px;}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0;padding-top:0;}
 article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block}progress{vertical-align:baseline}
 audio:not([controls]){display:none;height:0}[hidden],template{display:none}
@@ -62,7 +62,7 @@ img{margin-bottom:-5px}a{color:inherit}
 ul.w3-ul{list-style-type:none;padding:0;margin:0}ul.w3-ul li{padding:6px 2px 6px 16px;border-bottom:1px solid #ddd}ul.w3-ul li:last-child{border-bottom:none}
 .w3-tooltip,.w3-display-container{position:relative}.w3-tooltip .w3-text{display:none}.w3-tooltip:hover .w3-text{display:inline-block}
 .w3-navbar{list-style-type:none;margin:0;padding:0;overflow:hidden}
-.w3-navbar li{float:left}.w3-navbar li a,.w3-navitem,.w3-navbar li .w3-btn,.w3-navbar li .w3-input{display:block;padding:8px 16px}.w3-navbar li .w3-btn,.w3-navbar li .w3-input{border:none;outline:none;width:100%}
+.w3-navbar li{float:left}.w3-navbar li a,.w3-navitem,.w3-navbar li .w3-btn,.w3-navbar li .w3-input{display:block;padding:8px 16px}.w3-navbar li .w3-btn,.w3-navbar li .w3-input{border:none;outline:none;width:auto}
 .w3-navbar li a:hover{color:#000;background-color:#ccc}
 .w3-navbar .w3-dropdown-hover,.w3-navbar .w3-dropdown-click{position:static}
 .w3-navbar .w3-dropdown-hover:hover,.w3-navbar .w3-dropdown-hover:first-child,.w3-navbar .w3-dropdown-click:hover{background-color:#ccc;color:#000}
