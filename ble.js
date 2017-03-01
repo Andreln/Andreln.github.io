@@ -5,11 +5,16 @@ const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 
+const MPU_Service_UUID = '6e40F00D-b5a3-f393-e0a9-e50e24dcca9e'
+const acc_Characteristics_UUID = '6e400ACCE-b5a3-f393-e0a9-e50e24dcca9e';
+
 var bleDevice;
 var bleServer;
 var bleService;
 var rxCharacteristics;
 var txCharacteristics;
+
+var MPU_Service;
 
 
 window.onload = function(){
@@ -76,6 +81,29 @@ function connect() {
   	.then(() => {
   	return bleService.getCharacteristic(txUUID);
   	})
+
+    .then(() => {
+    log('Getting MPU Service... ');
+    return server.getPrimaryService(MPU_Service_UUID);
+    })
+
+    .then(service => {
+    log('Got MPU service... ');
+    MPU_Service = service;
+    log('Getting characteristic... ');
+    return bleService.getCharacteristic(acc_Characteristics_UUID);
+    })
+
+    .then(characteristic => {
+    log('Got ACC characteristic... ');
+    acc_Characteristics = characteristic;
+    return acc_Characteristics.startNotifications();
+    })
+
+    .then(() => {
+    log('Notifications enabled... ');
+    acc_Characteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
+    })
 
   	.then( characteristic => {
   	txCharacteristics = characteristic;
