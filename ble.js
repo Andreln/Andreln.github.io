@@ -26,6 +26,7 @@ window.onload = function(){
 
 function connect() {
   'use strict'
+
 	if (!navigator.bluetooth) {
 	  log('Web Bluetooth API is not available.\n' +
 		  'Please make sure the Web Bluetooth flag is enabled.');
@@ -39,7 +40,7 @@ function connect() {
 
       // Adding event listener to detect loss of connection
       //bleDevice.addEventListener('gattserverdisconnected', disconnect);
-      log('> Found ' + bleDevice.name + '...');
+      log('Found ' + bleDevice.name + '...');
       log('Connecting to GATT Server...');
 
        // Connect to gattserver
@@ -104,7 +105,8 @@ function disconnect() {
 }
 
 function DATARECEIVED(event){
-	let value = event.target.value;
+  log ('Data received!');
+  let value = event.target.value;
 	//let data = getUint8(value[0]);
 	value = value.buffer ? value : new DataView(value);
 	let data = new Uint8Array(value);
