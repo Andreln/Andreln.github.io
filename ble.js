@@ -33,16 +33,13 @@ function connect() {
   'use strict'
 
 	if (!navigator.bluetooth) {
-	  log('Web Bluetooth API is not available.\n' +
-		  'Please make sure the Web Bluetooth flag is enabled.');
+    log('Web Bluetooth API is not available.\n' + 'Please make sure the Web Bluetooth flag is enabled.');
 	  return;
 	}
 
-	log('Requesting Bluetooth Device...');
-	navigator.bluetooth.requestDevice({
-    filters: [ {services: [serviceUUID]} ],
-    optionalServices: [MPU_Service_UUID]
-  })
+  let UUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
+  log('Requesting Bluetooth Device...');
+	navigator.bluetooth.requestDevice(UUIDS)
   .then(device => {
       bleDevice = device;
       log('Found ' + bleDevice.name + '...');
