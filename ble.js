@@ -43,7 +43,7 @@ function connect() {
       log('Connecting to GATT Server...');
 
        // Connect to gattserver
-      return device.gatt.connect();
+      return bleDevice.gatt.connect();
       log('> Bluetooth Device connected: ');
 	})
 
