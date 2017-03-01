@@ -38,7 +38,7 @@ function connect() {
       bleDevice = device;
 
       // Adding event listener to detect loss of connection
-      bleDevice.addEventListener('gattserverdisconnected', disconnectHandler);
+      //bleDevice.addEventListener('gattserverdisconnected', disconnect);
       log('> Found' + bleDevice.name);
       log('Connecting to GATT Server...');
 
