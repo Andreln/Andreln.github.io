@@ -2,8 +2,8 @@
 //    BLE Connection for Resonator
 //
 const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const rxUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
-const txUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const rxCharUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const txCharUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 
 const MPU_Service_UUID = '6e409999-b5a3-f393-e0a9-e50e24dcca9e'
 const acc_Characteristics_UUID = '6e408888-b5a3-f393-e0a9-e50e24dcca9e';
@@ -11,11 +11,11 @@ const acc_Characteristics_UUID = '6e408888-b5a3-f393-e0a9-e50e24dcca9e';
 var bleDevice;
 var bleServer;
 var bleService;
-var rxCharacteristics;
-var txCharacteristics;
+var rxChar;
+var txChar;
 
 var MPU_Service;
-
+var accChar;
 
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
@@ -45,74 +45,51 @@ function connect() {
   })
   .then(device => {
       bleDevice = device;
-
-      // Adding event listener to detect loss of connection
-      //bleDevice.addEventListener('gattserverdisconnected', disconnect);
       log('Found ' + bleDevice.name + '...');
-      log('Connecting to GATT Server...');
 
-       // Connect to gattserver
+
+	  // Connect to gattserver
+	  log('Connecting to GATT Server...');
       return bleDevice.gatt.connect();
       log('> Bluetooth Device connected: ');
 	})
 
-  	.then(server => {
-  	bleServer = server;
-  	log('Got GATT server... ');
-  	log('Getting service... ');
-  	return server.getPrimaryService(serviceUUID);
+  	.then(gattServer => {
+		bleServer = gattServer;
+		return server.getPrimaryService(serviceUUID);
   	})
 
   	.then(service => {
-  	log('Got service... ');
-  	bleService = service;
-  	log('Getting characteristic... ');
-  	return bleService.getCharacteristic(rxUUID);
+		bleService = service;
+		log('serviceReturn: ' + service);
+		return bleService.getCharacteristic(txCharUUID);
   	})
 
   	.then( characteristic => {
-  	log('Got rxCharacteristic... ');
-  	rxCharacteristics = characteristic;
-  	return rxCharacteristics.startNotifications();
+		txChar = characteristic;
+		log('TX Characteristic ok');
   	})
 
   	.then(() => {
-  	log('Notifications enabled... ');
-  	rxCharacteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
+		return bleService.getCharacteristic(rxCharUUID);
   	})
 
-  	.then(() => {
-  	return bleService.getCharacteristic(txUUID);
+  	.then((characteristic) => {
+		rxChar = characteristic;
+		characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+		console.log('RX characteristic ok');
+		characteristic.startNotifications();
   	})
 
-    .then(() => {
-    log('Getting MPU Service... ');
-    return bleServer.getPrimaryService(MPU_Service_UUID);
-    })
+	.then(() => {
+		return bleService.getCharacteristic(acc_Characteristics_UUID);
+  	})
 
-    .then(service => {
-    log('Got MPU service... ');
-    MPU_Service = service;
-    log('Getting characteristic... ');
-    return bleService.getCharacteristic(acc_Characteristics_UUID);
-    })
-
-    .then(characteristic => {
-    log('Got ACC characteristic... ');
-    acc_Characteristics = characteristic;
-    return acc_Characteristics.startNotifications();
-    })
-
-    .then(() => {
-    log('Notifications enabled... ');
-    acc_Characteristics.addEventListener('characteristicvaluechanged',DATARECEIVED);
-    })
-
-  	.then( characteristic => {
-  	txCharacteristics = characteristic;
-  	log('Got txCharacteristics...');
-    buttonToggle('disconnectDiv', 'connectDiv')
-  	log('Connected...');
+  	.then((characteristic) => {
+		accChar = characteristic;
+		characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+		console.log('ACC characteristic ok');
+		characteristic.startNotifications();
   	})
 
   	.catch(error => {
