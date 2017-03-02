@@ -1,9 +1,9 @@
 //
 //    BLE Connection for Resonator
 //
-const serviceUUID  = '6cf30001-1b5f-499b-9296-d2cbe9f092e4';
-const rxCharUUID   = '6cf30002-1b5f-499b-9296-d2cbe9f092e4';
-const txCharUUID   = '6cf30003-1b5f-499b-9296-d2cbe9f092e4';
+const serviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const rxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const txCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
 const MPU_Service_UUID         = '6cf30004-1b5f-499b-9296-d2cbe9f092e4'
 const acc_Characteristics_UUID = '6cf30005-1b5f-499b-9296-d2cbe9f092e4';
