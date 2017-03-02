@@ -77,7 +77,7 @@ function connect() {
   })
 
   .then(() => {
-      return bleServer.getPrimaryService(acc_Characteristics_UUID);
+      return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
   .then(service => {
