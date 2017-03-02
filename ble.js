@@ -44,19 +44,16 @@ function connect() {
       bleDevice = device;
       log('Found ' + bleDevice.name + '...');
 
-
-	  // Connect to gattserver
-	  log('Connecting to GATT Server...');
+      // Connect to gattserver
+      log('Connecting to GATT Server...');
       return bleDevice.gatt.connect();
-      log('> Bluetooth Device connected: ');
-	})
+      .then(gattServer => {
+          bleServer = gattServer;
+          log('> Bluetooth Device connected: ');
+      })
+  })
 
-  	.then(gattServer => {
-		bleServer = gattServer;
-		return server.getPrimaryService(serviceUUID);
-  	})
-
-  	.then(service => {
+	 .then(service => {
 		bleService = service;
 		log('serviceReturn: ' + service);
 		return bleService.getCharacteristic(txCharUUID);
