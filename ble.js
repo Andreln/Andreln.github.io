@@ -38,7 +38,8 @@ function connect() {
 	  return;
 	}
 
-  let UUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
+  // let UUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
+  let UUIDS = { filters:[{ services: [ serviceUUID ], [MPU_Service_UUID]}]};
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(UUIDS)
   .then(device => {
