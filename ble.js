@@ -5,8 +5,8 @@ const serviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const rxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 const txCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
-const MPU_Service_UUID         = '6cf30004-1b5f-499b-9296-d2cbe9f092e4'
-const acc_Characteristics_UUID = '6cf30005-1b5f-499b-9296-d2cbe9f092e4';
+const MPU_Service_UUID         = '72ed0004-9ae5-4dbe-9172-3cdf3c68c1ea'
+const acc_Characteristics_UUID = '72ed0005-9ae5-4dbe-9172-3cdf3c68c1ea';
 
 var bleDevice;
 var bleServer;
