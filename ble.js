@@ -38,16 +38,10 @@ function connect() {
 	  return;
 	}
 
-  // let UUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
-  // navigator.bluetooth.requestDevice({
-  //     filters: [ {services: [serviceUUID]} ]
-  // })
-
+  let deviceUUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
 
   log('Requesting Bluetooth Device...');
-  navigator.bluetooth.requestDevice({
-      filters: [ {services: [MPU_Service_UUID]} ]
-  })
+  navigator.bluetooth.requestDevice(deviceUUIDS)
   .then(device => {
       bleDevice = device;
       bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
