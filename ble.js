@@ -55,43 +55,29 @@ function connect() {
       return bleServer.getPrimaryService(serviceUUID);
   })
 
-// txCharUUID
+
   .then(service => {
       bleService = service;
-      return bleService.getCharacteristic(txCharUUID);
+      log('serviceReturn: ' + bleService);
+
+      return Promise.all([
+          service.getCharacteristic(txCharUUID)
+          .then(characteristic => {
+              txChar = characteristic;
+              log('Got txChar...');
+          }),
+          service.getCharacteristic(rxCharUUID)
+          .then(characteristic => {
+              rxChar = characteristic;
+              characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+              characteristic.startNotifications();
+              log('Got rxChar...');
+          }),
+      ])
   })
-
-  .then(characteristic => {
-      txChar = characteristic;
-      log('TX Characteristic ok');
-  })
-
-
-// rxCharUUID
-  .then(() => {
-		  return bleService.getCharacteristic(rxCharUUID);
-	})
-
-	.then((characteristic) => {
-		  rxChar = characteristic;
-		    characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-		      console.log('RX characteristic ok');
-		        characteristic.startNotifications();
-	})
-
-	.then(() => {
-		return bleService.getCharacteristic(acc_Characteristics_UUID);
-  	})
-
-  	.then((characteristic) => {
-		accChar = characteristic;
-		characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-		console.log('ACC characteristic ok');
-		characteristic.startNotifications();
-  	})
 
   	.catch(error => {
-  	log('> connect ' + error);
+  	log(error);
   	});
 }
 
