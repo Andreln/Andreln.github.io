@@ -43,39 +43,41 @@ function connect() {
   navigator.bluetooth.requestDevice(UUIDS)
   .then(device => {
       bleDevice = device;
-      bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral)
+      bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
       log('Found ' + bleDevice.name + '...');
-      log('Connecting to GATT server...')
-      return bleDevice.gatt.connect()
+      log('Connecting to GATT server...');
+      return bleDevice.gatt.connect();
   })
 
   .then(gattServer => {
       bleServer = gattServer;
-      log('> Bluetooth Device connected: ');
-      return bleServer.getPrimaryService(serviceUUID)
+      log('Bluetooth Device connected...');
+      return bleServer.getPrimaryService(serviceUUID);
   })
 
+// txCharUUID
   .then(service => {
       bleService = service;
-      log('serviceReturn: ' + service);
       return bleService.getCharacteristic(txCharUUID);
   })
 
-  	.then( characteristic => {
-		txChar = characteristic;
-		log('TX Characteristic ok');
-  	})
+  .then(characteristic => {
+      txChar = characteristic;
+      log('TX Characteristic ok');
+  })
 
-  	.then(() => {
-		return bleService.getCharacteristic(rxCharUUID);
-  	})
 
-  	.then((characteristic) => {
-		rxChar = characteristic;
-		characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-		console.log('RX characteristic ok');
-		characteristic.startNotifications();
-  	})
+// rxCharUUID
+  .then(() => {
+		  return bleService.getCharacteristic(rxCharUUID);
+	})
+
+	.then((characteristic) => {
+		  rxChar = characteristic;
+		    characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+		      console.log('RX characteristic ok');
+		        characteristic.startNotifications();
+	})
 
 	.then(() => {
 		return bleService.getCharacteristic(acc_Characteristics_UUID);
