@@ -76,6 +76,25 @@ function connect() {
       ])
   })
 
+  .then(bleServer => {
+      return bleServer.getPrimaryService(MPU_Service_UUID);
+  })
+
+  .then(service => {
+      MPU_Service = service;
+      log('serviceReturn: ' + MPU_Service);
+
+      return Promise.all([
+          service.getCharacteristic(acc_Characteristics_UUID)
+          .then(characteristic => {
+              accChar = characteristic;
+              //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+              characteristic.startNotifications();
+              log('Got accChar...');
+          }),
+      ])
+  })
+
   	.catch(error => {
   	log(error);
   	});
