@@ -33,31 +33,33 @@ function connect() {
   'use strict'
 
 	if (!navigator.bluetooth) {
-    log('Web Bluetooth API is not available.\n' + 'Please make sure the Web Bluetooth flag is enabled.');
+    log('Web Bluetooth API is not available.\n' +
+        'Please make sure the Web Bluetooth flag is enabled.');
 	  return;
 	}
 
   let UUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
   log('Requesting Bluetooth Device...');
-	navigator.bluetooth.requestDevice(UUIDS)
+  navigator.bluetooth.requestDevice(UUIDS)
   .then(device => {
       bleDevice = device;
+      bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral)
       log('Found ' + bleDevice.name + '...');
-
-      // Connect to gattserver
-      log('Connecting to GATT Server...');
-      return bleDevice.gatt.connect();
-      .then(gattServer => {
-          bleServer = gattServer;
-          log('> Bluetooth Device connected: ');
-      })
+      log('Connecting to GATT server...')
+      return bleDevice.gatt.connect()
   })
 
-	 .then(service => {
-		bleService = service;
-		log('serviceReturn: ' + service);
-		return bleService.getCharacteristic(txCharUUID);
-  	})
+  .then(gattServer => {
+      bleServer = gattServer;
+      log('> Bluetooth Device connected: ');
+      return bleServer.getPrimaryService(serviceUUID)
+  })
+
+  .then(service => {
+      bleService = service;
+      log('serviceReturn: ' + service);
+      return bleService.getCharacteristic(txCharUUID);
+  })
 
   	.then( characteristic => {
 		txChar = characteristic;
@@ -93,17 +95,24 @@ function connect() {
 
 function disconnect() {
 	if (!bleDevice) {
-	log('No Bluetooth Device connected...');
-	return;
+	   log('No Bluetooth Device connected...');
+	    return;
 	}
-	log('Disconnecting from Bluetooth Device...');
+
+  log('Disconnecting from Bluetooth Device...');
 	if (bleDevice.gatt.connected) {
-	bleDevice.gatt.disconnect();
-	log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
-	} else {
-	log('> Bluetooth Device is already disconnected');
+	   bleDevice.gatt.disconnect();
+	    log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
+	}
+  else {
+	   log('> Bluetooth Device is already disconnected');
 	}
 	isConnected = false;
+}
+
+function disconnectedFromPeripheral () {
+  log('Something went wrong. You are now disconnected from the device');
+  buttonToggle('disconnectDiv','connectDiv');
 }
 
 function DATARECEIVED(event){
