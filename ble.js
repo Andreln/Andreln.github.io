@@ -76,7 +76,7 @@ function connect() {
       ])
   })
 
-  .then(bleServer => {
+  .then(() => {
       return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
