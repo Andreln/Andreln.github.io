@@ -1,9 +1,9 @@
 //
 //    BLE Connection for Resonator
 //
-const serviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const rxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
-const txCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const UARTserviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const UARTrxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const UARTtxCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
 const MPU_Service_UUID         = '72ed0004-9ae5-4dbe-9172-3cdf3c68c1ea';
 const acc_Characteristics_UUID = '72ed0005-9ae5-4dbe-9172-3cdf3c68c1ea';
@@ -38,7 +38,7 @@ function connect() {
 	  return;
 	}
 
-  let deviceUUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID, acc_Characteristics_UUID]};
+  let deviceUUIDS = { filters:[{ services: [ UARTserviceUUID ]}], optionalServices: [MPU_Service_UUID, acc_Characteristics_UUID]};
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -53,7 +53,7 @@ function connect() {
   .then(gattServer => {
       bleServer = gattServer;
       log('Bluetooth Device connected...');
-      return bleServer.getPrimaryService(acc_Characteristics_UUID);
+      return bleServer.getPrimaryService(UARTserviceUUID);
   })
 
 
@@ -62,12 +62,12 @@ function connect() {
       log('serviceReturn: ' + bleService);
 
       return Promise.all([
-          service.getCharacteristic(txCharUUID)
+          service.getCharacteristic(UARTtxCharUUID)
           .then(characteristic => {
               txChar = characteristic;
               log('Got txChar...');
           }),
-          service.getCharacteristic(rxCharUUID)
+          service.getCharacteristic(UARTrxCharUUID)
           .then(characteristic => {
               rxChar = characteristic;
               characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
