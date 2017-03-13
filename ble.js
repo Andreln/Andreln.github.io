@@ -38,7 +38,7 @@ function connect() {
 	  return;
 	}
 
-  let deviceUUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID] };
+  let deviceUUIDS = { filters:[{ services: [ serviceUUID ]}], optionalServices: [MPU_Service_UUID],[acc_Characteristics_UUID] };
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -53,7 +53,7 @@ function connect() {
   .then(gattServer => {
       bleServer = gattServer;
       log('Bluetooth Device connected...');
-      return bleServer.getPrimaryService(MPU_Service_UUID);
+      return bleServer.getPrimaryService(acc_Characteristics_UUID);
   })
 
 
