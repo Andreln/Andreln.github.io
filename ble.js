@@ -86,6 +86,7 @@ function connect() {
   })
 
   .then(service => {
+      log('Succsessully retrieved primary mpu service...')
       MPU_Service = service;
       log('serviceReturn: ' + MPU_Service);
 
