@@ -5,8 +5,11 @@ const UARTserviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const UARTrxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
 const UARTtxCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
-const MPU_Service_UUID         = '72ed0004-9ae5-4dbe-9172-3cdf3c68c1ea';
-const acc_Characteristics_UUID = '72ed0005-9ae5-4dbe-9172-3cdf3c68c1ea';
+// const MPU_Service_UUID         = '72ed0004-9ae5-4dbe-9172-3cdf3c68c1ea';
+// const acc_Characteristics_UUID = '72ed0005-9ae5-4dbe-9172-3cdf3c68c1ea';
+
+const MPU_Service_UUID         = '00000004-1212-efde-1523-785fef13d123';
+const acc_Characteristics_UUID = '00000005-1212-efde-1523-785fef13d123';
 
 var bleDevice;
 var bleServer;
