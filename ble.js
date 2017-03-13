@@ -78,8 +78,8 @@ function connect() {
   })
 
   .then(() => {
-      log('Trying to get acc_Characteristics_UUID')
-      return bleServer.getPrimaryService(acc_Characteristics_UUID);
+      log('Trying to get second service')
+      return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
   .then(service => {
