@@ -53,7 +53,7 @@ function connect() {
   .then(gattServer => {
       bleServer = gattServer;
       log('Bluetooth Device connected...');
-      return bleServer.getPrimaryService(serviceUUID);
+      return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
 
