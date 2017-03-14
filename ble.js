@@ -83,7 +83,7 @@ function connect() {
   })
 
   .then(() => {
-     MPU_Service.getCharacteristic(MPU_Char_UUID);
+     return MPU_Service.getCharacteristic(MPU_Char_UUID);
   })
 
   .then(characteristic => {
