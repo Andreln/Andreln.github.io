@@ -80,17 +80,19 @@ function connect() {
   .then(service => {
       log('Succsessully retrieved primary mpu service...')
       MPU_Service = service;
-      MPU_Service.getCharacteristic(MPU_Char_UUID)
-      .then(characteristic => {
-          log('Succsessully retrieved MPU characteristic');
-          MPU_Characteristic = characteristic;
-          //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-          characteristic.startNotifications();
-          log('Got MPU_Characteristic...');
-      })
-  })
+      return Promise.all([
+        MPU_Service.getCharacteristic(MPU_Char_UUID)
+        .then(characteristic => {
+            log('Succsessully retrieved MPU characteristic');
+            MPU_Characteristic = characteristic;
+            //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+            // characteristic.startNotifications();
+            log('Got MPU_Characteristic...');
+          }),
+        ])
+    })
   //
-  //    
+  //
   //
   // .then(characteristic => {
   //     log('Succsessully retrieved MPU characteristic');
