@@ -15,7 +15,7 @@ var rxChar;
 var txChar;
 
 var MPU_Service;
-var accChar;
+var MPU_Characteristic;
 
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
@@ -80,22 +80,20 @@ function connect() {
   .then(service => {
       log('Succsessully retrieved primary mpu service...')
       MPU_Service = service;
-
-      return Promise.all([
-          service.getCharacteristic(MPU_Char_UUID)
-          .then(characteristic => {
-              log('Succsessully retrieved MPU characteristic');
-              accChar = characteristic;
-              //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-              characteristic.startNotifications();
-              log('Got accChar...');
-          }),
-      ])
   })
 
-  	.catch(error => {
-  	log(error);
-  	});
+  .then(() => MPU_Service.getCharacteristic(MPU_Char_UUID))
+  .then(characteristic => {
+      log('Succsessully retrieved MPU characteristic');
+      MPU_Characteristic = characteristic;
+      //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+      characteristic.startNotifications();
+      log('Got MPU_Characteristic...');
+  })
+
+  .catch(error => {
+    log('> connect ' + error);
+  });
 }
 
 function disconnect() {
