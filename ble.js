@@ -10,7 +10,7 @@ const MPU_Char_UUID      = '00000005-1212-efde-1523-785fef13d123';
 
 var bleDevice;
 var bleServer;
-var bleService;
+var UART_Service;
 var rxChar;
 var txChar;
 
@@ -58,13 +58,13 @@ function connect() {
 
 
   .then(service => {
-      bleService = service;
+      UART_Service = service;
       return Promise.all([
-          service.getCharacteristic(UART_TX_Char_UUID)
+          UART_Service.getCharacteristic(UART_TX_Char_UUID)
           .then(characteristic => {
               txChar = characteristic;
           }),
-          service.getCharacteristic(UART_RX_Char_UUID)
+          UART_Service.getCharacteristic(UART_RX_Char_UUID)
           .then(characteristic => {
               rxChar = characteristic;
               characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
