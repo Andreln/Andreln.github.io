@@ -59,37 +59,32 @@ function connect() {
 
   .then(service => {
       bleService = service;
-      log('serviceReturn: ' + bleService);
-
       return Promise.all([
           service.getCharacteristic(UART_TX_Char_UUID)
           .then(characteristic => {
               txChar = characteristic;
-              log('Got txChar...');
           }),
           service.getCharacteristic(UART_RX_Char_UUID)
           .then(characteristic => {
               rxChar = characteristic;
               characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
               characteristic.startNotifications();
-              log('Got rxChar...');
           }),
       ])
   })
 
   .then(() => {
-      log('Trying to get second service')
       return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
   .then(service => {
       log('Succsessully retrieved primary mpu service...')
       MPU_Service = service;
-      log('serviceReturn: ' + MPU_Service);
 
       return Promise.all([
           service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
+              log('Succsessully retrieved MPU characteristic');
               accChar = characteristic;
               //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
               characteristic.startNotifications();
