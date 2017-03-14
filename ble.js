@@ -88,7 +88,6 @@ function connect() {
       log('serviceReturn: ' + MPU_Service);
 
       return Promise.all([
-          log('Trying to fetch MPU CHAR')
           service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
               accChar = characteristic;
