@@ -50,57 +50,65 @@ function connect() {
       return bleDevice.gatt.connect();
   })
 
+  // .then(gattServer => {
+  //     bleServer = gattServer;
+  //     log('Bluetooth Device connected...');
+  //     return bleServer.getPrimaryService(UART_Service_UUID);
+  // })
+  //
+  //
+  // .then(service => {
+  //     UART_Service = service;
+  //     return Promise.all([
+  //         UART_Service.getCharacteristic(UART_TX_Char_UUID)
+  //         .then(characteristic => {
+  //             txChar = characteristic;
+  //         }),
+  //         UART_Service.getCharacteristic(UART_RX_Char_UUID)
+  //         .then(characteristic => {
+  //             rxChar = characteristic;
+  //             characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+  //             characteristic.startNotifications();
+  //         }),
+  //     ])
+  // })
+
   .then(gattServer => {
       bleServer = gattServer;
       log('Bluetooth Device connected...');
-      return bleServer.getPrimaryService(UART_Service_UUID);
+      return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
 
   .then(service => {
-      UART_Service = service;
+      MPU_Service = service;
       return Promise.all([
-          UART_Service.getCharacteristic(UART_TX_Char_UUID)
+          MPU_Service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
-              txChar = characteristic;
-          }),
-          UART_Service.getCharacteristic(UART_RX_Char_UUID)
-          .then(characteristic => {
-              rxChar = characteristic;
-              characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-              characteristic.startNotifications();
+              MPU_Characteristic = characteristic;
+              log('Got MPU char')
           }),
       ])
   })
 
-  .then(() => {
-      return bleServer.getPrimaryService(MPU_Service_UUID);
-  })
-
-  .then(service => {
-      log('Succsessully retrieved primary mpu service...')
-      MPU_Service = service;
-      return Promise.all([
-        MPU_Service.getCharacteristic(MPU_Char_UUID)
-        .then(characteristic => {
-            log('Succsessully retrieved MPU characteristic');
-            MPU_Characteristic = characteristic;
-            //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-            // characteristic.startNotifications();
-            log('Got MPU_Characteristic...');
-          }),
-        ])
-    })
-  //
-  //
-  //
-  // .then(characteristic => {
-  //     log('Succsessully retrieved MPU characteristic');
-  //     MPU_Characteristic = characteristic;
-  //     //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-  //     characteristic.startNotifications();
-  //     log('Got MPU_Characteristic...');
+  // .then(() => {
+  //     return bleServer.getPrimaryService(MPU_Service_UUID);
   // })
+  //
+  // .then(service => {
+  //     log('Succsessully retrieved primary mpu service...')
+  //     MPU_Service = service;
+  //     return Promise.all([
+  //       MPU_Service.getCharacteristic(MPU_Char_UUID)
+  //       .then(characteristic => {
+  //           log('Succsessully retrieved MPU characteristic');
+  //           MPU_Characteristic = characteristic;
+  //           //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+  //           // characteristic.startNotifications();
+  //           log('Got MPU_Characteristic...');
+  //         }),
+  //       ])
+  //   })
 
   .catch(error => {
     log('> connect ' + error);
