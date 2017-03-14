@@ -1,15 +1,12 @@
 //
 //    BLE Connection for Resonator
 //
-const UARTserviceUUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const UARTrxCharUUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
-const UARTtxCharUUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_Service_UUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_RX_Char_UUID  = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_TX_Char_UUID  = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
-// const MPU_Service_UUID         = '72ed0004-9ae5-4dbe-9172-3cdf3c68c1ea';
-// const acc_Characteristics_UUID = '72ed0005-9ae5-4dbe-9172-3cdf3c68c1ea';
-
-const MPU_Service_UUID         = '00000004-1212-efde-1523-785fef13d123';
-const acc_Characteristics_UUID = '00000005-1212-efde-1523-785fef13d123';
+const MPU_Service_UUID   = '00000004-1212-efde-1523-785fef13d123';
+const MPU_Char_UUID      = '00000005-1212-efde-1523-785fef13d123';
 
 var bleDevice;
 var bleServer;
@@ -41,7 +38,7 @@ function connect() {
 	  return;
 	}
 
-  let deviceUUIDS = { filters:[{ services: [UARTserviceUUID]}], optionalServices: [MPU_Service_UUID, acc_Characteristics_UUID]};
+  let deviceUUIDS = { filters:[{ services: [UART_Service_UUID]}], optionalServices: [MPU_Service_UUID, MPU_Char_UUID]};
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -56,7 +53,7 @@ function connect() {
   .then(gattServer => {
       bleServer = gattServer;
       log('Bluetooth Device connected...');
-      return bleServer.getPrimaryService(UARTserviceUUID);
+      return bleServer.getPrimaryService(UART_Service_UUID);
   })
 
 
@@ -65,12 +62,12 @@ function connect() {
       log('serviceReturn: ' + bleService);
 
       return Promise.all([
-          service.getCharacteristic(UARTtxCharUUID)
+          service.getCharacteristic(UART_TX_Char_UUID)
           .then(characteristic => {
               txChar = characteristic;
               log('Got txChar...');
           }),
-          service.getCharacteristic(UARTrxCharUUID)
+          service.getCharacteristic(UART_RX_Char_UUID)
           .then(characteristic => {
               rxChar = characteristic;
               characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
@@ -91,7 +88,8 @@ function connect() {
       log('serviceReturn: ' + MPU_Service);
 
       return Promise.all([
-          service.getCharacteristic(acc_Characteristics_UUID)
+          log('Trying to fetch MPU CHAR')
+          service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
               accChar = characteristic;
               //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
