@@ -46,13 +46,13 @@ function connect() {
       bleDevice = device;
       bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
       log('Found ' + bleDevice.name + '...');
-      log('Connecting to GATT server...');
+      log('Connecting to GATT-server...');
       return bleDevice.gatt.connect();
   })
 
   .then(gattServer => {
       bleServer = gattServer;
-      log('Bluetooth Device connected...');
+      log('Bluetooth Device Connected...');
       return bleServer.getPrimaryService(MPU_Service_UUID);
   })
 
@@ -64,7 +64,7 @@ function connect() {
           MPU_Service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
               MPU_Characteristic = characteristic;
-              log('Got MPU characteristic...');
+              log('MPU characteristic retrieved...');
               //MPU_Characteristic.addEventListener('characteristicvaluechanged', 0);
               //MPU_Characteristic.startNotifications();
           }),
