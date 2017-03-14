@@ -59,14 +59,14 @@ function connect() {
 
   .then(service => {
       MPU_Service = service;
-      log('Service Retrieved...');
+      log('MPU Service Retrieved...');
       return Promise.all([
           MPU_Service.getCharacteristic(MPU_Char_UUID)
           .then(characteristic => {
               MPU_Characteristic = characteristic;
               log('Got MPU characteristic...');
-              MPU_Characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-              MPU_Characteristic.startNotifications();
+              //MPU_Characteristic.addEventListener('characteristicvaluechanged', 0);
+              //MPU_Characteristic.startNotifications();
           }),
       ])
   })
@@ -78,16 +78,19 @@ function connect() {
 
   .then(service => {
       UART_Service = service;
+      log('UART Service Retrieved...');
       return Promise.all([
           UART_Service.getCharacteristic(UART_TX_Char_UUID)
           .then(characteristic => {
               txChar = characteristic;
+              log('UART TX characteristic retrieved...');
           }),
           UART_Service.getCharacteristic(UART_RX_Char_UUID)
           .then(characteristic => {
               rxChar = characteristic;
-              characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-              characteristic.startNotifications();
+              log('UART RX characteristic retrieved...');
+              //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
+              //characteristic.startNotifications();
           }),
       ])
   })
