@@ -17,13 +17,8 @@ var txChar;
 var MPU_Service;
 var MPU_Characteristic;
 
+var accValueZ
 
-var ctx;
-var data;
-var myLineChart;
-var N = 10;
-var zero_array = [];
-var i = 0;
 
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
@@ -133,24 +128,16 @@ function disconnectedFromPeripheral () {
 
 
 function MPU_Data_Received(){
+  let d = new Date();
+  let timeVar = d.getMilliseconds();
+
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  for(i = 0; i<3; i++) {
-    let accelValue = value.getUint8(i) | ((value.getUint8(i+1) << 8 )&0xff00);
-    document.getElementById(i).value = accelValue;
+  accValueZ = value.getUint8(i) | ((value.getUint8(i+1) << 8 )&0xff00);
+  document.getElementById(i).value = accelValue;
+  document.getElementbyId(3).value = timeVar;
 
-    let d = new Date();
-    let n = d.getSeconds();
-    document.getElementById(3).value = n;
-
-		// myLineChart.data.datasets[0].data.shift();                           // Shift array one step to the left
-		// myLineChart.data.datasets[0].data.push(accelValue);                  // Insert accelerometer value to the right in array
-		// myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
-		// i++;
-		// myLineChart.update();
-    // if(i==10000); i=0;
-  }
 }
 
 
@@ -160,56 +147,6 @@ function DATARECEIVED(event){
 	value = value.buffer ? value : new DataView(value);
   let data = value.getUint8(0);
   log(data);
-}
-
-//------------- Init chart------------- //
-function initChart(){
-  var ctx = document.getElementById("chart").getContext("2d");
-
-  var myLineChart = new Chart(ctx, {
-  type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      animation: false,
-    }
-  });
-  log('Chart Initialized');
-}
-
-function setChartData(){
-  for (let x = 0; x < N; x++)
-      zero_array.push(0);
-
-  var data = {
-    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    datasets: [{
-      title: "Z-data",
-      label: "Frequency",
-      data: [1, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      duration: 10,
-
-      spanGaps: false,
-    }]
-  };
-  log('Chart data set');
 }
 
 // function sliderChange(value){
