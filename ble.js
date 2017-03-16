@@ -124,11 +124,12 @@ function disconnectedFromPeripheral () {
 function MPU_Data_Received(){
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
-  let accel_x = value.getUint8(0);
-  let accel_y = value.getUint8(1);
-  let accel_z = value.getUint8(2);
 
-  document.getElementById("accel_x_value").value = accel_x;
+  for(i = 0; i<8; i++) {
+    let i_value = value.getUint8(i);
+    document.getElementById(i).value = i_value;
+  }
+
 }
 
 function DATARECEIVED(event){
