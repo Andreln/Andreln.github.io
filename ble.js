@@ -65,7 +65,7 @@ function connect() {
           .then(characteristic => {
               MPU_Characteristic = characteristic;
               log('MPU characteristic retrieved...');
-              MPU_Characteristic.addEventListener('characteristicvaluechanged', 0);
+              MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
               MPU_Characteristic.startNotifications();
           }),
       ])
