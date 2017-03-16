@@ -48,7 +48,7 @@ var data = {
   log('Chart Initialized');
 
 function updateGraph(x) {
-
+    let i = 0;
     myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
   	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
   	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
