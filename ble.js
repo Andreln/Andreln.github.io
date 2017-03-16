@@ -17,7 +17,7 @@ var txChar;
 var MPU_Service;
 var MPU_Characteristic;
 
-var accValueZ
+var accValueZ;
 
 
 window.onload = function(){
@@ -137,7 +137,6 @@ function MPU_Data_Received(){
   accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
   document.getElementById(accelerometerValue).value = accelValue;
   document.getElementbyId(timeVar).value = timeVar;
-
 }
 
 
