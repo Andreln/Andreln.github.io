@@ -7,12 +7,9 @@ var N = 10;
 var zero_array = [];
 var i = 0;
 
-var x;
-var y;
-
 //------------- Init chart------------- //
 function initChart(){
-  var ctx = document.getElementById("chart").getContext("2d");
+  ctx = document.getElementById("chart").getContext("2d");
 
   var myLineChart = new Chart(ctx, {
   type: 'line',
