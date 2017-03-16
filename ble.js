@@ -21,12 +21,6 @@ window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
-  //
-  // document.querySelector('#ON').addEventListener('click', disconnect);				// CHANGE!
-  // document.querySelector('#OFF').addEventListener('click', disconnect);				// CHANGE!
-  //
-  // document.querySelector('#refresh').addEventListener('click', disconnect);			// CHANGE!
-
 }
 
 function connect() {
@@ -134,6 +128,10 @@ function MPU_Data_Received(){
   for(i = 0; i<3; i++) {
     let accelValue = value.getUint8(i) | ((value.getUint8(i+1) << 8 )&0xff00);
     document.getElementById(i).value = accelValue;
+
+    let d = new Date();
+    let n = d.getSeconds();
+    document.getElementById(3).value = n;
   }
 }
 
