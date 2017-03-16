@@ -99,6 +99,11 @@ function connect() {
   });
 }
 
+function log(text) {
+    console.log(text);
+    document.querySelector('#log').textContent += text + '\n';
+}
+
 function disconnect() {
   if (!bleDevice) {
      log('No Bluetooth Device connected...');
@@ -121,16 +126,17 @@ function disconnectedFromPeripheral () {
   buttonToggle('disconnectDiv','connectDiv');
 }
 
+
 function MPU_Data_Received(){
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  for(i = 0; i<8; i++) {
-    let i_value = value.getUint8(i);
-    document.getElementById(i).value = i_value;
+  for(i = 0; i<3; i++) {
+    let accelValue = value.getUint8(i) | ((value.getUint8(i+1) << 8 )&0xff00);
+    document.getElementById(i).value = accelValue;
   }
-
 }
+
 
 function DATARECEIVED(event){
   log ('Data received!');
@@ -140,15 +146,10 @@ function DATARECEIVED(event){
   log(data);
 }
 
-function sliderChange(value){
-	log(value);
-	let newData = new Uint8Array([value]);
-	return txCharacteristics.writeValue(newData).then(function() {
-		log('Data sent!');
-	});
-}
-
-function log(text) {
-    console.log(text);
-    document.querySelector('#log').textContent += text + '\n';
-}
+// function sliderChange(value){
+// 	log(value);
+// 	let newData = new Uint8Array([value]);
+// 	return txCharacteristics.writeValue(newData).then(function() {
+// 		log('Data sent!');
+// 	});
+// }
