@@ -37,13 +37,15 @@ var data = {
 
   ctx = document.getElementById("chart").getContext("2d");
 
+  var lineOptions = {
+    responsive: true,
+    animation: false,
+  }
+
   var myLineChart = new Chart(ctx, {
   type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      animation: false,
-    }
+  data: data,
+  options: lineOptions,
   });
   log('Chart Initialized');
 

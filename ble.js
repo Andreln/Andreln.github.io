@@ -137,7 +137,7 @@ function MPU_Data_Received(){
     document.getElementById('accelerometerValue').value = accValueZ;
     document.getElementById('timeGet').value = timeY;
 
-    // updateGraph(accValueZ,timeY);
+    updateGraph(accValueZ,timeY);
 }
 
 
