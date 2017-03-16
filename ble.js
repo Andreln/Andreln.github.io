@@ -135,7 +135,7 @@ function MPU_Data_Received(){
   value = value.buffer ? value: new DataView(value);
 
   accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
-  document.getElementById(accelerometerValue).value = accelValue;
+  document.getElementById(accelerometerValue).value = accValueZ;
   document.getElementbyId(timeVar).value = timeVar;
 }
 
