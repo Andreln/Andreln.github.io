@@ -144,9 +144,9 @@ function MPU_Data_Received(){
     let n = d.getSeconds();
     document.getElementById(3).value = n;
 
-		myLineChart.data.datasets[0].data.shift();                       // Shift array one step to the left
-		myLineChart.data.datasets[0].data.push(accelValue);          // Insert accelerometer value to the right in array
-		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
+		//myLineChart.data.datasets[0].data.shift();                           // Shift array one step to the left
+		myLineChart.data.datasets[0].data.push(accelValue);                  // Insert accelerometer value to the right in array
+		//myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
 		i++;
 		myLineChart.update();
     if(i==10000); i=0;
