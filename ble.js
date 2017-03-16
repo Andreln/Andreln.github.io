@@ -23,8 +23,6 @@ window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
-
-  deviceMotion();
 }
 
 // BLE-Connection
@@ -142,7 +140,7 @@ function MPU_Data_Received(){
     document.getElementById('accelerometerValue').value = accValueZ;
     document.getElementById('timeGet').value = timeY;
 
-    updateGraph(accValueZ,timeY);
+    updateGraph(accValueZ);
 }
 
 
