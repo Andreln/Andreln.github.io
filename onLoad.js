@@ -5,7 +5,6 @@ window.onload = function(){
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
 
-  setChartData();
   initChart();
-
+  setChartData();
 }
