@@ -7,10 +7,13 @@ var N = 10;
 var zero_array = [];
 var i = 0;
 
-// window.onload = function(){
-//   initChart();
-//   setChartData();
-// }
+var x;
+var y;
+
+window.onload = function(){
+  initChart();
+  setChartData();
+}
 
 //------------- Init chart------------- //
 function initChart(){
@@ -62,6 +65,15 @@ function setChartData(){
   log('Chart data set');
 }
 
+function updateGraph(x, y) {
+
+    myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
+  	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
+  	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
+
+  	myLineChart.update();
+    return("Whooop");
+}
 
 
 
