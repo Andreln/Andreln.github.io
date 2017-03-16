@@ -17,6 +17,7 @@ var txChar;
 var MPU_Service;
 var MPU_Characteristic;
 var accValueZ;
+var timeY;
 
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
@@ -127,16 +128,17 @@ function disconnectedFromPeripheral () {
 
 function MPU_Data_Received(){
     let d = new Date();
-    let timeVar = d.getMilliseconds();
+    timeY = d.getMilliseconds();
 
     let value = event.target.value;
     value = value.buffer ? value: new DataView(value);
 
     accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
     document.getElementById('accelerometerValue').value = accValueZ;
-    document.getElementById('timeGet').value = timeVar;
+    document.getElementById('timeGet').value = timeY;
 
-    updateGraph(accValueZ, timeVar);
+    updateGraph(accValueZ,timeY);
+    setTimeout(updateGraph,1000);
 }
 
 
