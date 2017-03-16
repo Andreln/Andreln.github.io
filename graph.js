@@ -50,7 +50,6 @@ var data = {
   log('Chart Initialized');
 
 function updateGraph(x,y) {
-    let i = 0;
     myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
   	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
   	myLineChart.data.labels.shift();
@@ -61,32 +60,32 @@ function updateGraph(x,y) {
 
 
 
-// //------------- Accessing and showing sensordata from phone ------------- //
-// function deviceMotion(){
-// 	var s$ = function(e) {return document.getElementById(e);};
-//
-// 	if (window.DeviceMotionEvent) {
-// 		window.addEventListener('devicemotion', function(ev) {
-// 			var acc = ev.acceleration;
-// 			dmHdlr(acc.z);
-// 		}, false);
-// 	}
-// 	else {
-// 		log("devicemotion not supported on your device");
-// 	}
-//
-// 	var lastDM = new Date().getTime();
-//
-// 	function dmHdlr(aZ) {
-// 		var currDM = new Date().getTime();
-// 		lastDM = currDM;
-//
-// 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-//
-// 		myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
-// 		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array
-// 		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
-// 		i++;
-// 		myLineChart.update();
-// 	}
-// }
+//------------- Accessing and showing sensordata from phone ------------- //
+function deviceMotion(){
+	var s$ = function(e) {return document.getElementById(e);};
+
+	if (window.DeviceMotionEvent) {
+		window.addEventListener('devicemotion', function(ev) {
+			var acc = ev.acceleration;
+			dmHdlr(acc.z);
+		}, false);
+	}
+	else {
+		log("devicemotion not supported on your device");
+	}
+
+	var lastDM = new Date().getTime();
+
+	function dmHdlr(aZ) {
+		var currDM = new Date().getTime();
+		lastDM = currDM;
+
+		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
+
+		myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
+		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array
+		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
+		i++;
+		myLineChart.update();
+	}
+}
