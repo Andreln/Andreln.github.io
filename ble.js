@@ -18,6 +18,15 @@ var MPU_Service;
 var MPU_Characteristic;
 var accValueZ;
 
+
+window.onload = function(){
+  document.querySelector('#connectBtn').addEventListener('click', connect);
+  document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
+  document.querySelector('#refresh').addEventListener('click', disconnect);
+}
+
+
+
 // BLE-Connection
 function connect() {
   'use strict'

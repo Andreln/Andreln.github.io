@@ -1,32 +1,11 @@
-'use strict'
 
 var ctx;
 var data;
 var myLineChart;
-var N = 10;
-var zero_array = [];
-var i = 0;
 
-//------------- Init chart------------- //
-function initChart(){
-  ctx = document.getElementById("chart").getContext("2d");
+//------------- Set data in chart------------- //
 
-  var myLineChart = new Chart(ctx, {
-  type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      animation: false,
-    }
-  });
-  log('Chart Initialized');
-}
-
-function setChartData(){
-  for (let x = 0; x < N; x++)
-      zero_array.push(0);
-
-  var data = {
+var data = {
     labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     datasets: [{
       title: "Z-data",
@@ -55,17 +34,27 @@ function setChartData(){
     }]
   };
   log('Chart data set');
-}
 
-// function updateGraph(x, y) {
-//
-//     myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
-//   	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
-//   	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
-//
-//   	myLineChart.update();
-//     return("Whooop");
-// }
+  ctx = document.getElementById("chart").getContext("2d");
+
+  var myLineChart = new Chart(ctx, {
+  type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      animation: false,
+    }
+  });
+  log('Chart Initialized');
+
+function updateGraph(x) {
+
+    myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
+  	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
+  	myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
+
+  	myLineChart.update();
+}
 
 
 
