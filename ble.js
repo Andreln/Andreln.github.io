@@ -65,8 +65,8 @@ function connect() {
           .then(characteristic => {
               MPU_Characteristic = characteristic;
               log('MPU characteristic retrieved...');
-              //MPU_Characteristic.addEventListener('characteristicvaluechanged', 0);
-              //MPU_Characteristic.startNotifications();
+              MPU_Characteristic.addEventListener('characteristicvaluechanged', 0);
+              MPU_Characteristic.startNotifications();
           }),
       ])
   })
@@ -100,25 +100,35 @@ function connect() {
 }
 
 function disconnect() {
-	if (!bleDevice) {
-	   log('No Bluetooth Device connected...');
-	    return;
-	}
+  if (!bleDevice) {
+     log('No Bluetooth Device connected...');
+      return;
+  }
 
   log('Disconnecting from Bluetooth Device...');
-	if (bleDevice.gatt.connected) {
-	   bleDevice.gatt.disconnect();
-	    log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
-	}
+  if (bleDevice.gatt.connected) {
+     bleDevice.gatt.disconnect();
+      log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
+  }
   else {
-	   log('> Bluetooth Device is already disconnected');
-	}
-	isConnected = false;
+     log('> Bluetooth Device is already disconnected');
+  }
+  isConnected = false;
 }
 
 function disconnectedFromPeripheral () {
   log('Something went wrong. You are now disconnected from the device');
   buttonToggle('disconnectDiv','connectDiv');
+}
+
+function MPU_Data_Received(){
+  let value = event.target.value:
+  value = value.buffer ? value: new DataView(value);
+  let accel.x = value.getUint8(0);
+  let accel.y = value.getUint8(1);
+  let accel.z = value.getUint8(2);
+
+  log('x: ' + accel.x)
 }
 
 function DATARECEIVED(event){
