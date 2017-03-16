@@ -138,7 +138,6 @@ function MPU_Data_Received(){
     document.getElementById('timeGet').value = timeY;
 
     updateGraph(accValueZ,timeY);
-    setTimeout(updateGraph,1000);
 }
 
 
