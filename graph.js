@@ -7,10 +7,10 @@ var N = 10;
 var zero_array = [];
 var i = 0;
 
-window.onload = function(){
-  initChart();
-  setChartData();
-}
+// window.onload = function(){
+//   initChart();
+//   setChartData();
+// }
 
 //------------- Init chart------------- //
 function initChart(){
