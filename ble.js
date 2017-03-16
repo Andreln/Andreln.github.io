@@ -128,7 +128,7 @@ function MPU_Data_Received(){
   let accel_y = value.getUint8(1);
   let accel_z = value.getUint8(2);
 
-  log('x: ' + accel_x);
+  document.getElementById("accel_x_value").value = accel_x;
 }
 
 function DATARECEIVED(event){
