@@ -122,13 +122,13 @@ function disconnectedFromPeripheral () {
 }
 
 function MPU_Data_Received(){
-  let value = event.target.value:
+  let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
   let accel.x = value.getUint8(0);
   let accel.y = value.getUint8(1);
   let accel.z = value.getUint8(2);
 
-  log('x: ' + accel.x)
+  log('x: ' + accel.x);
 }
 
 function DATARECEIVED(event){
@@ -137,11 +137,6 @@ function DATARECEIVED(event){
 	value = value.buffer ? value : new DataView(value);
   let data = value.getUint8(0);
   log(data);
-	// //let data = new Uint8Array(value);
-	// for (let i = 0; i <= 8; i++) {
-	// 	let data = getUint8(value[i]);
-	// 	log(i + ': ' + data);
-	//}
 }
 
 function sliderChange(value){
