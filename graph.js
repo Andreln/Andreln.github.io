@@ -49,41 +49,41 @@ var data = {
   });
   log('Chart Initialized');
 
-function updateGraph(x,y) {
+function updateGraph(x) {
     myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
   	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
-  	myLineChart.data.labels.shift();
-    myLineChart.data.labels.push(y)   // Incremet x-labels
+//  	myLineChart.data.labels.shift();
+//    myLineChart.data.labels.push(y)   // Incremet x-labels
 
   	myLineChart.update();
 }
 
 
 //------------- Accessing and showing sensordata from phone ------------- //
-function deviceMotion(){
-	var s$ = function(e) {return document.getElementById(e);};
-
-	if (window.DeviceMotionEvent) {
-		window.addEventListener('devicemotion', function(ev) {
-			var acc = ev.acceleration;
-			dmHdlr(acc.z);
-		}, false);
-	}
-	else {
-		log("devicemotion not supported on your device");
-	}
-
-	var lastDM = new Date().getTime();
-
-	function dmHdlr(aZ) {
-		var currDM = new Date().getTime();
-		lastDM = currDM;
-
-		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-
-    let i = 0;
-		myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
-		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array   // Incremet x-labels
-		myLineChart.update();
-	}
-}
+// function deviceMotion(){
+// 	var s$ = function(e) {return document.getElementById(e);};
+//
+// 	if (window.DeviceMotionEvent) {
+// 		window.addEventListener('devicemotion', function(ev) {
+// 			var acc = ev.acceleration;
+// 			dmHdlr(acc.z);
+// 		}, false);
+// 	}
+// 	else {
+// 		log("devicemotion not supported on your device");
+// 	}
+//
+// 	var lastDM = new Date().getTime();
+//
+// 	function dmHdlr(aZ) {
+// 		var currDM = new Date().getTime();
+// 		lastDM = currDM;
+//
+// 		s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
+//
+//     let i = 0;
+// 		myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
+// 		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array   // Incremet x-labels
+// 		myLineChart.update();
+// 	}
+// }

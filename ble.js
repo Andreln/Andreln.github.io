@@ -136,10 +136,13 @@ function MPU_Data_Received(){
     value = value.buffer ? value: new DataView(value);
 
     accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
+
+    accValueZ = (accValueZ / 16384)
+
     document.getElementById('accelerometerValue').value = accValueZ;
     document.getElementById('timeGet').value = timeY;
 
-    // updateGraph(accValueZ,timeY);
+    updateGraph(accValueZ,timeY);
 }
 
 
