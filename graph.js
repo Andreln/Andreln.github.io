@@ -59,7 +59,6 @@ function updateGraph(x,y) {
 }
 
 
-
 //------------- Accessing and showing sensordata from phone ------------- //
 function deviceMotion(){
 	var s$ = function(e) {return document.getElementById(e);};
@@ -84,9 +83,7 @@ function deviceMotion(){
 
     let i = 0;
 		myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
-		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array
-		myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
-		i++;
+		myLineChart.data.datasets[0].data.push(aZ);          // Insert accelerometer value to the right in array   // Incremet x-labels
 		myLineChart.update();
 	}
 }
