@@ -16,19 +16,9 @@ var txChar;
 
 var MPU_Service;
 var MPU_Characteristic;
-
 var accValueZ;
 
-
-window.onload = function(){
-  document.querySelector('#connectBtn').addEventListener('click', connect);
-  document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
-  document.querySelector('#refresh').addEventListener('click', disconnect);
-
-  initChart();
-  setChartData();
-}
-
+// BLE-Connection
 function connect() {
   'use strict'
 
@@ -98,6 +88,8 @@ function connect() {
     log('> connect ' + error);
   });
 }
+// BLE-Connection End
+
 
 function log(text) {
     console.log(text);
@@ -105,53 +97,53 @@ function log(text) {
 }
 
 function disconnect() {
-  if (!bleDevice) {
-     log('No Bluetooth Device connected...');
-      return;
-  }
+    if (!bleDevice) {
+       log('No Bluetooth Device connected...');
+        return;
+    }
 
-  log('Disconnecting from Bluetooth Device...');
-  if (bleDevice.gatt.connected) {
-     bleDevice.gatt.disconnect();
-      log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
-  }
-  else {
-     log('> Bluetooth Device is already disconnected');
-  }
-  isConnected = false;
+    log('Disconnecting from Bluetooth Device...');
+    if (bleDevice.gatt.connected) {
+       bleDevice.gatt.disconnect();
+        log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
+    }
+    else {
+       log('> Bluetooth Device is already disconnected');
+    }
+    isConnected = false;
 }
 
 function disconnectedFromPeripheral () {
-  log('Something went wrong. You are now disconnected from the device');
-  buttonToggle('disconnectDiv','connectDiv');
+    log('Something went wrong. You are now disconnected from the device');
+    buttonToggle('disconnectDiv','connectDiv');
 }
 
 
 function MPU_Data_Received(){
-  let d = new Date();
-  let timeVar = d.getMilliseconds();
+    let d = new Date();
+    let timeVar = d.getMilliseconds();
 
-  let value = event.target.value;
-  value = value.buffer ? value: new DataView(value);
+    let value = event.target.value;
+    value = value.buffer ? value: new DataView(value);
 
-  accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
-  document.getElementById('accelerometerValue').value = accValueZ;
-  document.getElementById('timeGet').value = timeVar;
+    accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
+    document.getElementById('accelerometerValue').value = accValueZ;
+    document.getElementById('timeGet').value = timeVar;
 
-  // myLineChart.data.datasets[0].data[9].shift();           // Shift array one step to the left
-  myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
-  myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
+    myLineChart.data.datasets[0].data[9].shift();           // Shift array one step to the left
+    myLineChart.data.datasets[0].data.push(accValueZ);          // Insert accelerometer value to the right in array
+    myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
 
-  myLineChart.update();
+    myLineChart.update();
 }
 
 
 function DATARECEIVED(event){
-  log ('Data received!');
-  let value = event.target.value;
-	value = value.buffer ? value : new DataView(value);
-  let data = value.getUint8(0);
-  log(data);
+    log ('Data received!');
+    let value = event.target.value;
+  	value = value.buffer ? value : new DataView(value);
+    let data = value.getUint8(0);
+    log(data);
 }
 
 // function sliderChange(value){
