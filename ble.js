@@ -18,14 +18,11 @@ var MPU_Service;
 var MPU_Characteristic;
 var accValueZ;
 
-
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
 }
-
-
 
 // BLE-Connection
 function connect() {
@@ -139,11 +136,7 @@ function MPU_Data_Received(){
     document.getElementById('accelerometerValue').value = accValueZ;
     document.getElementById('timeGet').value = timeVar;
 
-    myLineChart.data.datasets[0].data[9].shift();           // Shift array one step to the left
-    myLineChart.data.datasets[0].data.push(accValueZ);          // Insert accelerometer value to the right in array
-    myLineChart.data.labels = [(i+0), (i+1), (i+2), (i+3), (i+4), (i+5), (i+6), (i+7), (i+8)];    // Incremet x-labels
-
-    myLineChart.update();
+    updateGraph(accValueZ);
 }
 
 
