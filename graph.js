@@ -37,16 +37,26 @@ var data = {
 
   ctx = document.getElementById("chart").getContext("2d");
 
-  var lineOptions = {
-    responsive: true,
-    animation: false,
-  }
-
   var myLineChart = new Chart(ctx, {
   type: 'line',
   data: data,
-  options: lineOptions,
-  });
+  options: {
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 5,
+                min: -5,
+                stepSize: 1
+            }
+        }]
+    },
+    animation: {
+      duration: 0
+    },
+    responsive: false
+  }
+});
+
   log('Chart Initialized');
 
 function updateGraph(y) {
