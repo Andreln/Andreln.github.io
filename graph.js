@@ -49,11 +49,14 @@ var data = {
   });
   log('Chart Initialized');
 
-function updateGraph(x) {
+function updateGraph(y) {
+    let d = new Date();
+    timeX = d.getMilliseconds();
+
     myLineChart.data.datasets[0].data.shift();           // Shift array one step to the left
-  	myLineChart.data.datasets[0].data.push(x);          // Insert accelerometer value to the right in array
-//  	myLineChart.data.labels.shift();
-//    myLineChart.data.labels.push(y)   // Incremet x-labels
+  	myLineChart.data.datasets[0].data.push(y);          // Insert accelerometer value to the right in array
+ 	  myLineChart.data.labels.shift();
+    myLineChart.data.labels.push(timeX)   // Incremet x-labels
 
   	myLineChart.update();
 }
