@@ -127,15 +127,12 @@ function disconnectedFromPeripheral () {
 
 
 function MPU_Data_Received(){
-    let d = new Date();
-    timeY = d.getMilliseconds();
-
     let value = event.target.value;
     value = value.buffer ? value: new DataView(value);
 
     accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
 
-    accValueZ = (accValueZ / 16384)
+    accValueZ = (accValueZ / 16384) - 1;
     accValueZ = accValueZ.toFixed(2);
 
     document.getElementById('accelerometerValue').value = accValueZ;
