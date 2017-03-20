@@ -53,7 +53,7 @@ var data = {
     animation: {
       duration: 0
     },
-    responsive: false
+    responsive: true
   }
 });
 
