@@ -1,12 +1,15 @@
 //
 //    BLE Connection for Resonator
 //
-const UART_Service_UUID  = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-const UART_RX_Char_UUID  = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
-const UART_TX_Char_UUID  = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_Service_UUID   = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_RX_Char_UUID   = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+const UART_TX_Char_UUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 
-const MPU_Service_UUID   = '00000004-1212-efde-1523-785fef13d123';
-const MPU_Char_UUID      = '00000005-1212-efde-1523-785fef13d123';
+const MPU_Service_UUID    = '00000004-1212-efde-1523-785fef13d123';
+const MPU_Char_UUID       = '00000005-1212-efde-1523-785fef13d123';
+
+const FREQ_Service_UUID   = '49F89999-EDD1-4C81-8702-585449BA92A8';
+const FREQ_Char_UUID      = '49F88888-EDD1-4C81-8702-585449BA92A8';
 
 var bleDevice;
 var bleServer;
@@ -35,7 +38,8 @@ function connect() {
 	  return;
 	}
 
-  let deviceUUIDS = { filters:[{ services: [UART_Service_UUID]}], optionalServices: [MPU_Service_UUID, MPU_Char_UUID]};
+  let deviceUUIDS = { filters:[{ services: [UART_Service_UUID]}],
+                      optionalServices: [MPU_Service_UUID, MPU_Char_UUID, FREQ_Service_UUID, FREQ_Char_UUID]};
 
   log('Requesting Bluetooth Device...');
   navigator.bluetooth.requestDevice(deviceUUIDS)
