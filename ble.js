@@ -8,8 +8,8 @@ const UART_TX_Char_UUID   = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
 const MPU_Service_UUID    = '00000004-1212-efde-1523-785fef13d123';
 const MPU_Char_UUID       = '00000005-1212-efde-1523-785fef13d123';
 
-const FREQ_Service_UUID   = '49F89999-EDD1-4C81-8702-585449BA92A8';
-const FREQ_Char_UUID      = '49F88888-EDD1-4C81-8702-585449BA92A8';
+const FREQ_Service_UUID   = '49f89999-edd1-4c81-8702-585449ba92a8';
+const FREQ_Char_UUID      = '49f88888-edd1-4c81-8702-585449ba92a8';
 
 var bleDevice;
 var bleServer;
