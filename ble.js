@@ -29,6 +29,7 @@ window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
+  document.querySelector('#frequencyInput').addEventListener("change", sendFrequency);
 }
 
 // BLE-Connection
@@ -74,8 +75,6 @@ function connect() {
           }),
       ])
   })
-
-
 
   .then(() => {
       return bleServer.getPrimaryService(FREQ_Service_UUID);
@@ -155,7 +154,7 @@ function MPU_Data_Received(){
     let value = event.target.value;
     value = value.buffer ? value: new DataView(value);
 
-    accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8 )&0xff00);
+    accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8)&0xff00);
 
     accValueZ = (accValueZ / 16384) - 1;
     accValueZ = accValueZ.toFixed(2);
@@ -173,6 +172,21 @@ function DATARECEIVED(event){
   	value = value.buffer ? value : new DataView(value);
     let data = value.getUint8(0);
     log(data);
+}
+
+function sendFrequency(){
+  log('Fly data, fly!');
+  let data = document.getElementById("frequencyInput").value;
+
+  uint8_t data[0] = 1;
+  uint8_t [1] = 
+  uint8_t [2] =
+
+  try {
+    FREQ_Characteristic.writeValue(01 00 01 00);
+  } catch(error){
+    log(error);
+  }
 }
 
 // function sliderChange(value){
