@@ -93,6 +93,10 @@ function connect() {
       ])
   })
 
+  .then(() => {
+      return bleServer.getPrimaryService(UART_Service_UUID);
+  })
+  
   .then(service => {
       UART_Service = service;
       log('UART Service Retrieved...');
