@@ -69,8 +69,8 @@ function connect() {
           .then(characteristic => {
               MPU_Characteristic = characteristic;
               log('MPU characteristic retrieved...');
-              MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
-              MPU_Characteristic.startNotifications();
+              // MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
+              // MPU_Characteristic.startNotifications();
           }),
       ])
   })
@@ -96,7 +96,7 @@ function connect() {
   .then(() => {
       return bleServer.getPrimaryService(UART_Service_UUID);
   })
-  
+
   .then(service => {
       UART_Service = service;
       log('UART Service Retrieved...');
