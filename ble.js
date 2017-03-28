@@ -22,6 +22,9 @@ var MPU_Characteristic;
 var accValueZ;
 var timeY;
 
+var FREQ_Service;
+var FREQ_Characteristic;
+
 window.onload = function(){
   document.querySelector('#connectBtn').addEventListener('click', connect);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
@@ -72,8 +75,22 @@ function connect() {
       ])
   })
 
+
+
   .then(() => {
-      return bleServer.getPrimaryService(UART_Service_UUID);
+      return bleServer.getPrimaryService(FREQ_Service_UUID);
+  })
+
+  .then(service => {
+      FREQ_Service = service;
+      log('FREQ Service Retrieved...');
+      return Promise.all([
+          FREQ_Service.getCharacteristic(FREQ_Char_UUID)
+          .then(characteristic => {
+              FREQ_Characteristic = characteristic;
+              log('FREQ characteristic retrieved...');
+          }),
+      ])
   })
 
   .then(service => {
