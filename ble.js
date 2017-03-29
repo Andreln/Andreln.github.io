@@ -183,7 +183,7 @@ function sendFrequency(){
   data[1] = freqValue & 0xff;
   data[2] = (freqValue >> 8) & 0xff;
 
-  data = [0, 1, data[1], data[2], 0, 0];
+  data = [1, data[1], data[2], 0, 0, 0, 0, 0];
   log(data);
   try {
     FREQ_Characteristic.writeValue(data);
