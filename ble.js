@@ -178,17 +178,22 @@ function sendFrequency(){
   log('Fly data, fly!');
   let freqValue = document.getElementById("frequencyInput").value;
 
-  let data_1 = freqValue & 0xff;
-  let data_2 = (freqValue >> 8) & 0xff;
+  let data = new Uint8Array(7);
 
-  let data = new Uint8Array([1, data_1, data_2, 0, 0, 0, 0, 0]);
+  data[0] = 1
+  data[1] = freqValue & 0xff;
+  data[2] = (freqValue >> 8) & 0xff;
+  data[3] = 0
+  data[4] = 0
+  data[5] = 0
+  data[6] = 0
+
   log(data);
   try {
     FREQ_Characteristic.writeValue(data);
   } catch (error) {
     log(error);
   }
-  log('Did it work?');
 }
 
 // function sliderChange(value){
