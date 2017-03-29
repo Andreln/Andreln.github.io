@@ -4,3 +4,11 @@
 <hr>
 <input id="slide" type="range" min="10" max="100" step="10" value="10" onchange="sliderChange(this.value);">
 </div>
+
+
+// Convert from two uint8 to decimal
+	uint16_to_2x_uint8 = data[1] | ((data[2] << 8) & 0xff00);
+
+// Convert uint16 / dec to two uint8
+  data[1] = Value & 0xff;
+  data[2] = (Value >> 8) & 0xff;

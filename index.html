@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/wrapper.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -14,9 +15,6 @@
 <script src="graph.js" defer></script>
 <script src="ble.js"></script>
 <script src="viewToggle.js"></script>
-
-
-
 
 
 <body>
@@ -57,7 +55,7 @@
     		<button id="disconnectBtn" type="button" class="btn btn-default">DISCONNECT</button>
     		</div>
         <hr>
-        <input id="frequencyInput" type="number" name="Timer us" min="1" max="4096">
+        <input id="frequencyInput" class="input-number input-number-lg" placeholder="Frequency[Hz]">
         <hr>
         <div>
         <input id="accelerometerValue" type="number" placeholder="Accelerometer 0 Value"></input>

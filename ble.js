@@ -176,17 +176,15 @@ function DATARECEIVED(event){
 
 function sendFrequency(){
   log('Fly data, fly!');
-  let data = document.getElementById("frequencyInput").value;
+  let freqValue = document.getElementById("frequencyInput").value;
 
-  uint8_t data[0] = 1;
-  uint8_t [1] = 
-  uint8_t [2] =
+  let data = new Uint8Array(7);
+  // data[0] = 1;
+  data[1] = freqValue & 0xff;
+  data[2] = (freqValue >> 8) & 0xff;
 
-  try {
-    FREQ_Characteristic.writeValue(01 00 01 00);
-  } catch(error){
-    log(error);
-  }
+  data = [0, 1, data[1], data[2], 0, 0];
+  FREQ_Characteristic.writeValue(data);
 }
 
 // function sliderChange(value){
