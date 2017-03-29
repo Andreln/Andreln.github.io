@@ -184,7 +184,8 @@ function sendFrequency(){
   data[2] = (freqValue >> 8) & 0xff;
 
   data = [0, 1, data[1], data[2], 0, 0];
-  FREQ_Characteristic.writeValue(data);
+  log(data);
+//  FREQ_Characteristic.writeValue(data);
 }
 
 // function sliderChange(value){
