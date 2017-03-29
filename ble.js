@@ -190,6 +190,7 @@ function sendFrequency(){
   } catch (error) {
     log(error);
   }
+  log('Did it work?');
 }
 
 // function sliderChange(value){
