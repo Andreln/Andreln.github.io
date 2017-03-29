@@ -185,7 +185,11 @@ function sendFrequency(){
 
   data = [0, 1, data[1], data[2], 0, 0];
   log(data);
-//  FREQ_Characteristic.writeValue(data);
+  try {
+    FREQ_Characteristic.writeValue(data);
+  } catch (error) {
+    log(error);
+  }
 }
 
 // function sliderChange(value){
