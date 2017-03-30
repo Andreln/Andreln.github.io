@@ -30,6 +30,12 @@ window.onload = function(){
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
   document.querySelector('#frequencyInput').addEventListener("change", sendFrequency);
+  
+  document.getElementById("MPU_Service_UUID").textContent=MPU_Service_UUID;
+  document.getElementById("MPU_Char_UUID").textContent=MPU_Char_UUID;
+  
+  document.getElementById("FREQ_Service_UUID").textContent=FREQ_Service_UUID;
+  document.getElementById("FREQ_Char_UUID").textContent=FREQ_Char_UUID;
 }
 
 // BLE-Connection
@@ -88,29 +94,7 @@ function connect() {
           .then(characteristic => {
               FREQ_Characteristic = characteristic;
               log('FREQ characteristic retrieved...');
-          }),
-      ])
-  })
-
-  .then(() => {
-      return bleServer.getPrimaryService(UART_Service_UUID);
-  })
-
-  .then(service => {
-      UART_Service = service;
-      log('UART Service Retrieved...');
-      return Promise.all([
-          UART_Service.getCharacteristic(UART_TX_Char_UUID)
-          .then(characteristic => {
-              txChar = characteristic;
-              log('UART TX characteristic retrieved...');
-          }),
-          UART_Service.getCharacteristic(UART_RX_Char_UUID)
-          .then(characteristic => {
-              rxChar = characteristic;
-              log('UART RX characteristic retrieved...');
-              //characteristic.addEventListener('characteristicvaluechanged', DATARECEIVED);
-              //characteristic.startNotifications();
+			  connectedToPeripheral();
           }),
       ])
   })
@@ -144,9 +128,13 @@ function disconnect() {
     isConnected = false;
 }
 
+function connectedToPeripheral(){
+	buttonToggle('disconnectDiv','connectDiv');
+}
+
 function disconnectedFromPeripheral () {
     log('Something went wrong. You are now disconnected from the device');
-    buttonToggle('disconnectDiv','connectDiv');
+    buttonToggle('connectDiv','disconnectDiv');
 }
 
 
