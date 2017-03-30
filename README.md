@@ -1,3 +1,3 @@
-# EarthQ
+# Resonator
 
-Test for two way communication between physical web and NRF52 DK
+Bachelorsthesis for Nordic Semiconductor by Students at NTNU.

@@ -1,163 +1,158 @@
 <!DOCTYPE html>
 <html>
-<title>Earthquake Machine</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="css/wrapper.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Resonator</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/w3.css">
+	<link rel="stylesheet" href="css/customCSS.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-<script src="graph.js" defer></script>
-<script src="ble.js"></script>
-<script src="views.js"></script>
+	<script src="graph.js" defer></script>
+	<script src="ble.js"></script>
+	<script src="views.js"></script>
 
 
-<body id="wrapper">
-    <!-- Navbar (sit on top) -->
-    <ul class="w3-navbar w3-white w3-padding-8 w3-card-2 w3-wide">
-		<li class="w3-left w3-margin-left">
-    		<a href="#app"> <b>Resonator</b></a>
-		</li>
-    	<li class="w3-right w3-margin-right w3-dropdown-hover">
-			<a> <i class="fa fa-bars"></i></a>
-			<div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
-				<a onclick="View('Resonator');">Resonator</a>
-				<a onclick="View('measureDiv');" 'Resonator', 'aboutSection');">Measure Freq</a>
-				<a href="#">App</a>
-				<a onclick="View('aboutSectionDiv');""> About <i class="fa fa-info-circle"></i></a>
+<body>
+	<div class="push">
+		<!-- Connection Bar -->
+		<div class="progress" style="display: none;">
+			<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%">
 			</div>
-		<li class="w3-right" id="Configure" >
-			<a data-toggle="modal" data-target="#configureModal"><i class="fa fa-cog"></i></a>
-		</li>
-  		<li class="w3-right">
-  		    <a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
-		</li>
-    </ul>
-	
-	<!-- Configure Modal -->
-	<div class="modal fade" id="configureModal" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Configure - Resonator</h4>
-				</div>
-				<div class="modal-body">
-					<table class="table table-bordered table-responsive" style="font-size:13px">
-						<tr>
-							<th colspan="2">UUID - Accelerometer</th>
-						</tr>
-						<tr>
-							<td>Service</td>
-							<td id="MPU_Service_UUID"></td> 
-						</tr>
-						<tr>
-							<td>Characteristic</td>
-							<td id="MPU_Char_UUID"></td> 
-						</tr>
-					</table>
-					<table class="table table-bordered table-responsive" style="font-size:13px">
-						<tr>
-							<th colspan="2">UUID - Frequency Control</th>
-						</tr>
-						<tr>
-							<td>Service</td>
-							<td id="FREQ_Service_UUID">z</td> 
-						</tr>
-						<tr>
-							<td>Characteristic</td>
-							<td id="FREQ_Char_UUID"></td> 
-						</tr>
-					</table>
-					
-					<div class="text-center">
-						<button id="toggleLogButton" type="button" class="btn btn-default" onclick="toggleDiv('logDiv');">Toggle Log</button>
-					</div>
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-
-
-    <!-- Page content -->
-    <div class="w3-content">
-
-    	<!-- Connection -->
-		<div id="Resonator" style="display: block;">
-		  <div class="w3-container w3-center" >
-				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Resonator</h4>
-			</div>
-			<div class="w3-container w3-content w3-center">
-				<div id="connectDiv" style="display: block;">
-					<button id="connectBtn" type="button" class="btn btn-default">CONNECT</button>
-				</div>
-				<div id="disconnectDiv" style="display: none;">
-					<button id="disconnectBtn" type="button" class="btn btn-default">DISCONNECT</button>
-				</div>
-		  </div>
 		</div>
 		
-		<!-- Frequency Control -->
-		<div id="frequencyControl" style="display: none;">
-		  <div class="w3-container w3-center" >
-				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Frequency Control</h4>
-			</div>
-			<div class="w3-container w3-content w3-center">
-				<div id="connectDiv" style="display: block;">
-				<button id="connectBtn" type="button" class="btn btn-default">CONNECT</button>
-				</div>
-				<div id="disconnectDiv" style="display: none;">
-				<button id="disconnectBtn" type="button" class="btn btn-default">DISCONNECT</button>
-				</div>
-			<hr>
-				<input id="frequencyInput" class="input-number input-number-lg" placeholder="Frequency[Hz]">
-			<hr>
-		  </div>
-		</div>
-
-		<!-- Accelerometer Measurement-->
-		<div id="measureDiv" style="display: none;">
-			<div class="w3-container w3-center">
-				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Measure Frequency</h4>
-			</div>
-			<div class="w3-container w3-content w3-center">
-				<div class="w3-center">
-					<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
-				</div>
-				<div>
-					<input id="accelerometerValue" type="number" placeholder="Accelerometer 0 Value"></input>
-					<input id="timeGet" type="number" placeholder="Time"></input>
-					<canvas id="chart" width="400" height="200"></canvas>
-				</div>
+		<div class="progress" style="display: block;">
+			<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%">
 			</div>
 		</div>
 
-		<!-- Log -->
-		<div id="logDiv" style="display: none;">
-			<div class="w3-container w3-center">
-				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Log</h4>
-			</div>
-			<div class="w3-container w3-content w3-center">
-				<pre id="log"></pre>
+		<!-- Navbar (sit on top) -->
+		<ul class="w3-navbar w3-white w3-padding-8 w3-card-2 w3-wide">
+			<li class="w3-left w3-margin-left">
+				<a href="#app"> <b>Resonator</b></a>
+			</li>
+			<li class="w3-right w3-margin-right w3-dropdown-hover">
+				<a> <i class="fa fa-bars"></i></a>
+				<div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
+					<a onclick="View('Control');">Control</a>
+					<a href="#">App</a>
+					<a onclick="View('aboutSectionDiv');"> About <i class="fa fa-info-circle"></i></a>
+				</div>
+			<li class="w3-right" id="Configure" >
+				<a data-toggle="modal" data-target="#configureModal"><i class="fa fa-cog"></i></a>
+			</li>
+			<li class="w3-right">
+				<a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
+			</li>
+		</ul>
+		
+
+
+
+		
+		<!-- Configure Modal -->
+		<div class="modal fade" id="configureModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Configure - Resonator</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-bordered table-responsive" style="font-size:13px">
+							<tr>
+								<th colspan="2">UUID - Accelerometer</th>
+							</tr>
+							<tr>
+								<td>Service</td>
+								<td id="MPU_Service_UUID"></td> 
+							</tr>
+							<tr>
+								<td>Characteristic</td>
+								<td id="MPU_Char_UUID"></td> 
+							</tr>
+						</table>
+						<table class="table table-bordered table-responsive" style="font-size:13px">
+							<tr>
+								<th colspan="2">UUID - Frequency Control</th>
+							</tr>
+							<tr>
+								<td>Service</td>
+								<td id="FREQ_Service_UUID">z</td> 
+							</tr>
+							<tr>
+								<td>Characteristic</td>
+								<td id="FREQ_Char_UUID"></td> 
+							</tr>
+						</table>
+						
+						<div class="text-center">
+							<button id="toggleLogButton" type="button" class="btn btn-default" onclick="toggleDiv('logDiv');">Toggle Log</button>
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 
 
 
-		<!-- About Section -->
-		<div id="aboutSectionDiv" style="display: none;">
+		<!-- Connection VIEW!-->
+		<div id="Resonator" class="View" style="display: block;">
+			<div id="connectDiv" style="display: block;">
+				<button id="connectBtn" type="button" class="btn btn-primary btn-lg">CONNECT</button>
+			</div>
+			<div id="disconnectDiv" style="display: none;">
+				<button id="disconnectBtn" type="button" class="btn btn-primary btn-lg">DISCONNECT</button>
+			</div>
+		</div>
+			
+		<!-- Bar Frequency Control / Measure Frequency VIEW! -->
+		<div id="Control" class="View" style="display: none;">
+			
+			<ul class="nav nav-tabs nav-justified">
+				<li class="active"> <a data-toggle="tab" href="#frequencyControlDiv">Frequency Control</a></li>
+				<li > <a data-toggle="tab" href="#measureFrequencyDiv"> Measure Frequency </a></li>
+			</ul>
+			
+			<div class="tab-content">
+			
+				<div id="frequencyControlDiv" class="tab-pane fade in active">
+					<div class="w3-container w3-content w3-center">
+						<hr>
+							<input id="frequencyInput" class="input-number input-number-lg" placeholder="Frequency[Hz]">
+						<hr>
+					</div>
+				</div>
+				
+				<div id="measureFrequencyDiv" class="tab-pane fade">
+					<div class="w3-container w3-content w3-center">
+						<div class="w3-center">
+							<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
+						</div>
+						<div>
+							<input id="accelerometerValue" type="number" placeholder="Accelerometer 0 Value"></input>
+							<input id="timeGet" type="number" placeholder="Time"></input>
+							<canvas id="chart" width="400" height="200"></canvas>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+
+
+		<!-- About Section VIEW !-->
+		<div id="aboutSectionDiv" class="View" style="display: none;">
 			<div class="w3-container w3-center">
 				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">About</h4>
 				<p>	This is a physical web application for a bachelorthesis by students at NTNU.
@@ -181,7 +176,7 @@
 				<div class="w3-third w3-margin-bottom">
 					<div class="w3-card-4">
 						<header class="w3-container w3-light-grey">
-							<h4 class=w3-left>Martin Henriksen Dahl</h4>
+							<h4 class="w3-left">Martin Henriksen Dahl</h4>
 						</header>
 						<div class="w3-container w3-margin-top">
 							<img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
@@ -193,7 +188,7 @@
 				<div class="w3-third w3-margin-bottom">
 					<div class="w3-card-4">
 						<header class="w3-container w3-light-grey">
-							<h4 class=w3-left>Stig Kvannli Olsen</h4>
+							<h4 class="w3-left">Stig Kvannli Olsen</h4>
 						</header>
 						<div class="w3-container w3-margin-top">
 							<img src="png/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
@@ -205,22 +200,34 @@
 			</div>
 		</div>
 
-    </div>
 
-    <footer class="w3-border-top w3-padding-32 w3-center">
+		<!-- Log -->
+		<div id="logDiv" style="display: none;">
+			<div class="w3-container w3-center">
+				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Log</h4>
+			</div>
+			<div class="w3-container w3-content w3-center">
+				<pre id="log"></pre>
+			</div>
+		</div>
+		
+	</div>	
+		<footer>
+			<div class="w3-center w3-padding-12">
+				<a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
+				<img src="logos/logo_github.png" style="width:10%" > </img> </a>
 
-      <a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin">
-      <img src="logos/logo_github.png" style="width:10%" > </img> </a>
+				<a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
+				<img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
 
-      <a href="https://google.github.io/physical-web/" target=_blank title="The Physical Web" class="w3-margin">
-      <img src="logos/logo_physicalweb.png" style="width:4%" > </img> </a>
+				<a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
+				<img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
 
-      <a href="https://www.nordicsemi.com/" target=_blank title="Nordic Semiconductor" class="w3-margin">
-      <img src="logos/logo_nordic_text.png" style="width:16%"> </img> </a>
+				<a href="https://www.ntnu.no/" target=_blank title="NTNU - Trondheim" class="w3-margin">
+				<img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
+			</div>
+		</footer>
+		
+</body>
 
-      <a href="https://www.ntnu.no/" target=_blank title="NTNU - Trondheim" class="w3-margin">
-      <img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
-
-    </footer>
-<body>
-</hmtl>
+</html>

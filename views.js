@@ -21,17 +21,17 @@ function toggleDiv(divId){
 
 
 function View(currentPage) {
-	let views = new Array('Resonator', 'measureDiv', 'aboutSectionDiv', 'frequencyControl');
 	
-	for(i = 0; i<views.length; i++) {
-		
-		let div = document.getElementById(views[i]);
-		
-		if(currentPage !== views[i]) {
-			div.style.display = 'none';
+	let div = document.getElementsByClassName("View");
+	
+	for(i = 0; i<div.length; i++) {
+				
+		if(currentPage !== div[i].id) {
+			div[i].style.display = 'none';
 		}
 		else {
-			div.style.display = 'block';
+			div[i].style.display = 'block';
 		}
 	}	
 }
+

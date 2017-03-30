@@ -1,0 +1,41 @@
+﻿@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+@media (max-width: 768px){
+    .nav-justified > li {
+        display: table-cell;
+        width: 1%;
+  }
+    .nav-justified > li > a  {
+        border-bottom: 1px solid #ddd !important;
+        border-radius: 4px 4px 0 0 !important;
+        margin-bottom: 0 !important;
+  }
+    .nav-justified > li.active > a  {
+        border-bottom: 1px solid transparent !important;
+  }
+
+}
+
+.progress {height: 5px;margin:0px;}
+
+
+body {
+    max-width:500px;
+    margin: 0 auto;
+}
+
+.push {
+	height: 90vh;
+}
+
+.nav-tabs.centered > li, .nav-pills.centered > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs.centered, .nav-pills.centered {
+    text-align:center;
+}
+
+
