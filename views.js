@@ -4,7 +4,7 @@ function buttonToggle(buttonShowId, buttonHideId) {
 	let buttonShow = document.getElementById(buttonShowId);
 	let buttonHide = document.getElementById(buttonHideId);
 
-	buttonShow.style.display = 'block'
+	buttonShow.style.display = 'block';
 	buttonHide.style.display = 'none';
 }
 
@@ -17,8 +17,6 @@ function toggleDiv(divId){
 	else{
 		div.style.display = 'block';
 	}
-
-	log('Does this work???');
 }
 
 
