@@ -184,6 +184,7 @@ function sendFrequency(){
   log(data);
   try {
     FREQ_Characteristic.writeValue(data);
+    log('Data sent');
   } catch (error) {
     log(error);
   }
