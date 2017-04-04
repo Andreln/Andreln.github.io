@@ -23,7 +23,7 @@
 			<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%">
 			</div>
 		</div>
-		
+
 		<div class="progress" style="display: block;">
 			<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%">
 			</div>
@@ -37,8 +37,9 @@
 			<li class="w3-right w3-margin-right w3-dropdown-hover">
 				<a> <i class="fa fa-bars"></i></a>
 				<div class="w3-dropdown-content w3-white w3-card-4" style="right:0">
-					<a onclick="View('Control');">Control</a>
-					<a href="#">App</a>
+					<a onclick="View('ConnectionView');">Connection</a>
+					<a onclick="View('ControlView');">Control</a>
+					<a href="#">App -WIP-</a>
 					<a onclick="View('aboutSectionDiv');"> About <i class="fa fa-info-circle"></i></a>
 				</div>
 			<li class="w3-right" id="Configure" >
@@ -48,11 +49,9 @@
 				<a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
 			</li>
 		</ul>
-		
 
 
 
-		
 		<!-- Configure Modal -->
 		<div class="modal fade" id="configureModal" role="dialog">
 			<div class="modal-dialog">
@@ -69,11 +68,11 @@
 							</tr>
 							<tr>
 								<td>Service</td>
-								<td id="MPU_Service_UUID"></td> 
+								<td id="MPU_Service_UUID"></td>
 							</tr>
 							<tr>
 								<td>Characteristic</td>
-								<td id="MPU_Char_UUID"></td> 
+								<td id="MPU_Char_UUID"></td>
 							</tr>
 						</table>
 						<table class="table table-bordered table-responsive" style="font-size:13px">
@@ -82,73 +81,82 @@
 							</tr>
 							<tr>
 								<td>Service</td>
-								<td id="FREQ_Service_UUID">z</td> 
+								<td id="FREQ_Service_UUID">z</td>
 							</tr>
 							<tr>
 								<td>Characteristic</td>
-								<td id="FREQ_Char_UUID"></td> 
+								<td id="FREQ_Char_UUID"></td>
 							</tr>
 						</table>
-						
+
 						<div class="text-center">
 							<button id="toggleLogButton" type="button" class="btn btn-default" onclick="toggleDiv('logDiv');">Toggle Log</button>
 						</div>
-						
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 
 
 
 		<!-- Connection VIEW!-->
-		<div id="Resonator" class="View" style="display: block;">
-			<div id="connectDiv" style="display: block;">
-				<button id="connectBtn" type="button" class="btn btn-primary btn-lg">CONNECT</button>
+			<div id="ConnectionView" class="View w3-container w3-content w3-center w3-padding-top" style="display: block;">
+				<div id="connectDiv" style="display: block;">
+					<button id="connectBtn" type="button" class="btn btn-primary btn-lg">CONNECT</button>
+				</div>
+				<div id="disconnectDiv" style="display: none;">
+					<button id="disconnectBtn" type="button" class="btn btn-primary btn-lg">DISCONNECT</button>
+				</div>
 			</div>
-			<div id="disconnectDiv" style="display: none;">
-				<button id="disconnectBtn" type="button" class="btn btn-primary btn-lg">DISCONNECT</button>
-			</div>
-		</div>
-			
 		<!-- Bar Frequency Control / Measure Frequency VIEW! -->
-		<div id="Control" class="View" style="display: none;">
-			
+		<div id="ControlView" class="View" style="display: none;">
+
 			<ul class="nav nav-tabs nav-justified">
 				<li class="active"> <a data-toggle="tab" href="#frequencyControlDiv">Frequency Control</a></li>
 				<li > <a data-toggle="tab" href="#measureFrequencyDiv"> Measure Frequency </a></li>
 			</ul>
-			
+
 			<div class="tab-content">
-			
 				<div id="frequencyControlDiv" class="tab-pane fade in active">
-					<div class="w3-container w3-content w3-center">
-						<hr>
-							<input id="frequencyInput" class="input-number input-number-lg" placeholder="Frequency[Hz]">
-						<hr>
+					<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<div class="btn-group">
+									<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
+										<span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</div>
+							</div>
+							<input type="number" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control" />
+								<span class="input-group-btn">
+									<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
+										<span class="glyphicon glyphicon-plus"></span>
+									</button>
+								</span>
+						</div>
 					</div>
 				</div>
-				
 				<div id="measureFrequencyDiv" class="tab-pane fade">
-					<div class="w3-container w3-content w3-center">
-						<div class="w3-center">
+					<div class="w3-container w3-content w3-center w3-padding-top">
+						<div class="w3-center w3-padding-top">
 							<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
 						</div>
-						<div>
+						<div class="w3-center w3-padding-top">
 							<input id="accelerometerValue" type="number" placeholder="Accelerometer 0 Value"></input>
 							<input id="timeGet" type="number" placeholder="Time"></input>
 							<canvas id="chart" width="400" height="200"></canvas>
 						</div>
 					</div>
 				</div>
-				
 			</div>
+
 		</div>
-		
+
 
 
 		<!-- About Section VIEW !-->
@@ -210,8 +218,8 @@
 				<pre id="log"></pre>
 			</div>
 		</div>
-		
-	</div>	
+
+	</div>
 		<footer>
 			<div class="w3-center w3-padding-12">
 				<a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin" style="text-decoration:none">
@@ -227,7 +235,7 @@
 				<img src="logos/logo_ntnu_text.png" style="width:20%"> </img> </a>
 			</div>
 		</footer>
-		
+
 </body>
 
 </html>

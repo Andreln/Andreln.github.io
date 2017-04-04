@@ -30,10 +30,10 @@ window.onload = function(){
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
   document.querySelector('#frequencyInput').addEventListener("change", sendFrequency);
-  
+
   document.getElementById("MPU_Service_UUID").textContent=MPU_Service_UUID;
   document.getElementById("MPU_Char_UUID").textContent=MPU_Char_UUID;
-  
+
   document.getElementById("FREQ_Service_UUID").textContent=FREQ_Service_UUID;
   document.getElementById("FREQ_Char_UUID").textContent=FREQ_Char_UUID;
 }
@@ -95,7 +95,7 @@ function connect() {
               FREQ_Characteristic = characteristic;
               log('FREQ characteristic retrieved...');
 			  connectedToPeripheral();
-			  
+
           }),
       ])
   })
@@ -186,10 +186,11 @@ function sendFrequency(){
   }
 }
 
-// function sliderChange(value){
-// 	log(value);
-// 	let newData = new Uint8Array([value]);
-// 	return txCharacteristics.writeValue(newData).then(function() {
-// 		log('Data sent!');
-// 	});
-// }
+function changeFreqValue(value){
+  let freqValue = document.getElementById("frequencyInput").value;
+  freqValue = Number(freqValue);
+  value = Number(value);
+  let newValue = freqValue + value;
+  document.getElementById("frequencyInput").value = newValue;
+  sendFrequency();
+}
