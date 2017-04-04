@@ -165,17 +165,15 @@ function DATARECEIVED(event){
 
 function sendFrequency(){
   let freqValue = document.getElementById("frequencyInput").value;
-  let data = new Uint8Array(8);
+  let data = new Uint8Array(4);
   let value = parseInt(freqValue);
 
   data[0] = 1;
   data[1] = (value >> 8) & 0xff;
   data[2] = (value & 0xff);
   data[3] = 0;
-  data[4] = 0;
-  data[5] = 0;
-  data[6] = 0;
-  data[7] = 0;
+
+
 
   log(data);
   try {
