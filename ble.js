@@ -167,7 +167,7 @@ function sendFrequency(){
   log('Fly data, fly!');
   let freqValue = document.getElementById("frequencyInput").value;
 
-  let data = new Uint8Array(8);
+  let data = new Uint8Array(7);
 
   data[0] = 1;
   data[1] = freqValue & 0xff;
