@@ -18,7 +18,7 @@ function toggleDiv(divId){
 		div.style.display = 'block';
 	}
 
-	log('Does this work?');
+	log('Does this work???');
 }
 
 
