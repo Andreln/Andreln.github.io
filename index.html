@@ -18,15 +18,14 @@
 
 <body>
 	<div class="push">
+
 		<!-- Connection Bar -->
-		<div class="progress" style="display: none;">
-			<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%">
-			</div>
+		<div id="connectedProgress" class="progress" style="display: none;">
+			<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
 		</div>
 
-		<div class="progress" style="display: block;">
-			<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%">
-			</div>
+		<div id="notConnectedProgress" class="progress" style="display: block;">
+			<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
 		</div>
 
 		<!-- Navbar (sit on top) -->
@@ -42,9 +41,9 @@
 					<a href="#">App -WIP-</a>
 					<a onclick="View('aboutSectionDiv');"> About <i class="fa fa-info-circle"></i></a>
 				</div>
-			<li class="w3-right" id="Configure" >
-				<a data-toggle="modal" data-target="#configureModal"><i class="fa fa-cog"></i></a>
-			</li>
+					<li class="w3-right" id="Configure" >
+						<a data-toggle="modal" data-target="#configureModal"><i class="fa fa-cog"></i></a>
+					</li>
 			<li class="w3-right">
 				<a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
 			</li>
