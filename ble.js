@@ -133,7 +133,7 @@ function connectedToPeripheral(){
 	View('ControlView');
   toggleDiv('connectedProgress');
   toggleDiv('notConnectedProgress');
-  buttonToggle(disconnectBtn, connectBtn);
+  buttonToggle('disconnectBtn', 'connectBtn');
 }
 
 function disconnectedFromPeripheral () {
