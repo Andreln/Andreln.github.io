@@ -95,7 +95,6 @@ function connect() {
               FREQ_Characteristic = characteristic;
               log('FREQ characteristic retrieved...');
 			        connectedToPeripheral();
-
           }),
       ])
   })
@@ -133,7 +132,7 @@ function connectedToPeripheral(){
 	View('ControlView');
   toggleDiv('connectedProgress');
   toggleDiv('notConnectedProgress');
-  buttonToggle('disconnectBtn', 'connectBtn');
+  buttonToggle('disconnectDiv', 'connectDiv');
 }
 
 function disconnectedFromPeripheral () {
