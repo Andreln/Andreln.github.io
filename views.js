@@ -34,3 +34,22 @@ function View(currentPage) {
 		}
 	}
 }
+
+function statusBar(status){
+	let connectedBar = document.getElementById('connectedProgress');
+	let disconnectedBar = document.getElementById('notConnectedProgress');
+
+	if(status=='connected'){
+		connectedBar.style.display = 'block';
+	}
+	else {
+		connectedBar.style.display = 'none';
+	}
+
+	if(status=='notConnected'){
+		disconnectedBar.style.display = 'block';
+	}
+	else {
+		disconnectedBar.style.display = 'none';
+	}
+}

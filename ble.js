@@ -130,14 +130,15 @@ function disconnect() {
 
 function connectedToPeripheral(){
 	View('ControlView');
-  toggleDiv('connectedProgress');
-  toggleDiv('notConnectedProgress');
+  statusBar('connected');
   buttonToggle('disconnectDiv', 'connectDiv');
 }
 
 function disconnectedFromPeripheral () {
     log('Something went wrong. You are now disconnected from the device');
     View('ConnectionView');
+    statusBar('notConnected');
+    buttonToggle('connectDiv', 'disconnectDiv');
 }
 
 
