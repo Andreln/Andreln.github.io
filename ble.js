@@ -94,7 +94,7 @@ function connect() {
           .then(characteristic => {
               FREQ_Characteristic = characteristic;
               log('FREQ characteristic retrieved...');
-			  connectedToPeripheral();
+			        connectedToPeripheral();
 
           }),
       ])
@@ -130,12 +130,14 @@ function disconnect() {
 }
 
 function connectedToPeripheral(){
-	View('App');
+	View('ControlView');
+  toggleDiv('connectedProgress');
+  toggleDiv('notConnectedProgress');
 }
 
 function disconnectedFromPeripheral () {
     log('Something went wrong. You are now disconnected from the device');
-    buttonToggle('connectDiv','disconnectDiv');
+    View('ConnectionView');
 }
 
 
