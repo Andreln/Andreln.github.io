@@ -26,6 +26,8 @@ body {
 
 .push {
 	height: 90vh;
+	margin: 0 auto;	
+	position: relative;
 }
 
 .nav-tabs.centered > li, .nav-pills.centered > li {
