@@ -33,6 +33,9 @@ function View(currentPage) {
 			div[i].style.display = 'block';
 		}
 	}
+	
+	document.getElementById('Dropdown').style.display = 'hide';
+	
 }
 
 function statusBar(status){
