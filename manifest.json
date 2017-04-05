@@ -18,7 +18,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "andreln.github.io/index.html",
+  "start_url": "https://andreln.github.io/",
   "display": "standalone",
   "orientation": "portrait"
 }
