@@ -1,5 +1,5 @@
 ﻿@import url('https://getbootstrap.com/dist/css/bootstrap.css');
-/* @media (max-width: 768px){
+@media (max-width: 768px){
     .nav-justified > li {
         display: table-cell;
         width: 1%;
@@ -13,7 +13,7 @@
         border-bottom: 1px solid transparent !important;
   }
 
-} */
+}
 
 
 .progress {height: 5px;margin:0px;}
