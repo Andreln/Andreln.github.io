@@ -26,8 +26,8 @@ body {
 }
 
 .push {
-	height: 90vh;
-	margin: 0 auto;	
+	height: 80vh;
+	margin: 0 auto;
 	position: relative;
 }
 
@@ -41,8 +41,3 @@ body {
 .nav-tabs.centered, .nav-pills.centered {
     text-align:center;
 }
-
-
-
-
-
