@@ -14,7 +14,7 @@
 	<script src="graph.js" defer></script>
 	<script src="ble.js"></script>
 	<script src="views.js"></script>
-	
+
 	<link rel="manifest" href="/manifest.json">
 
 <body>
@@ -126,7 +126,7 @@
 
 			<div class="tab-content">
 				<div id="frequencyControlDiv" class="tab-pane fade in active">
-					<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
+					<div class="w3-container w3-content w3-center w3-padding-top" style="width:60%">
 						<div class="input-group">
 							<div class="input-group-btn">
 								<div class="btn-group">
@@ -138,6 +138,23 @@
 							<input type="number" min="51" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control" />
 							<span class="input-group-btn">
 								<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+					<div class="w3-container w3-content w3-center w3-padding-top" style="width:60%">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<div class="btn-group">
+									<button id="decrementVolume" class="btn btn-primary btn-block" onclick="changeVolumeValue('-1');">
+										<span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</div>
+							</div>
+							<input type="number" min="51" max="800" name="Frequency" id="amplitudeInput" placeholder="Volume %" class="form-control" />
+							<span class="input-group-btn">
+								<button id="incrementVolume" class="btn btn-primary btn-block" onclick="changeVolumeValue('1');">
 									<span class="glyphicon glyphicon-plus"></span>
 								</button>
 							</span>
@@ -161,7 +178,7 @@
 		</div>
 
 		<div id="appView" class="View" style="display: none;">
-			<div class="w3-container w3-center"> 
+			<div class="w3-container w3-center">
 			</div>
 		</div>
 

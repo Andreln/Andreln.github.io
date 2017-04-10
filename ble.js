@@ -176,9 +176,29 @@ function sendFrequency(){
   data[2] = (value & 0xff);
   data[3] = 0;
 
+ //  log(data);
+  try {
+    FREQ_Characteristic.writeValue(data);
+  } catch (error) {
+    log(error);
+  }
+}
 
+// Sends frequency value and volumevalue
+function sendFrequency(){
+  let freqValue = document.getElementById("frequencyInput").value;
+  let data = new Uint8Array(4);
+  freqValue = parseInt(freqValue);
 
-  log(data);
+  let volumeValue = document.getElementById("amplitudeInput").value;
+  volumValue = parseInt(volumeValue);
+
+  data[0] = 1;
+  data[1] = (freqValue >> 8) & 0xff;
+  data[2] = (freqValue & 0xff);
+  data[3] = volumValue;
+
+ //  log(data);
   try {
     FREQ_Characteristic.writeValue(data);
   } catch (error) {
@@ -192,5 +212,14 @@ function changeFreqValue(value){
   value = Number(value);
   let newValue = freqValue + value;
   document.getElementById("frequencyInput").value = newValue;
+  sendFrequency();
+}
+
+function changeVolumeValue(value){
+  let volumeValue = document.getElementById("amplitudeInput").value;
+  volumeValue = Number(volumeValue);
+  value = Number(value);
+  let newValue = volumeValue + value;
+  document.getElementById("amplitudeInput").value = newValue;
   sendFrequency();
 }
