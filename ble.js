@@ -44,8 +44,6 @@ function connectFrequencyControl() {
 	  return;
 	}
 	
-	connectLoaderToggle('connectingToFreqDiv','connectBtnToFreqDiv');
-
 	let deviceUUIDS = { filters:[{ services: [FREQ_Service_UUID]}]};
 
 	log('Requesting Bluetooth Device...');
@@ -55,6 +53,7 @@ function connectFrequencyControl() {
 		bleDeviceFreqControl.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
 		log('Found ' + bleDeviceFreqControl.name + '...');
 		log('Connecting to GATT-server...');
+		connectLoaderToggle('connectingToFreqDiv','connectBtnToFreqDiv');
 		return bleDeviceFreqControl.gatt.connect();
 	})
 
@@ -94,7 +93,7 @@ function connectAccelerometer() {
 	  return;
 	}
 	
-	connectLoaderToggle('connectingToAccelerometerDiv','connectBtnToAccelerometerDiv');
+
 
 	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}]};
 
@@ -105,6 +104,7 @@ function connectAccelerometer() {
 		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
 		log('Found ' + bleDeviceAccelerometer.name + '...');
 		log('Connecting to GATT-server...');
+		connectLoaderToggle('connectingToAccelerometerDiv','connectBtnToAccelerometerDiv');
 		return bleDeviceAccelerometer.gatt.connect();
 	})
 
