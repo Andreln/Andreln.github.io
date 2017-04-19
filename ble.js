@@ -93,8 +93,6 @@ function connectAccelerometer() {
 	  return;
 	}
 	
-
-
 	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}]};
 
 	log('Requesting Bluetooth Device...');
@@ -139,8 +137,6 @@ function connectAccelerometer() {
   
 
 }
-
-
 // BLE-Connection End
 
 
