@@ -72,8 +72,8 @@ function connectFrequencyControl() {
 		  .then(characteristic => {
 				FREQ_Characteristic = characteristic;
 				log('Freq characteristic retrieved...');
-				connectLoaderToggle('connectToAccelerometerDiv','connectToFreqDiv');
-				connectLoaderToggle('connectBtnToFreqDiv','connectingToFreqDiv');
+				//connectLoaderToggle('connectToAccelerometerDiv','connectToFreqDiv');
+				//connectLoaderToggle('connectBtnToFreqDiv','connectingToFreqDiv');
 		  }),
 	  ])
 	})
@@ -127,7 +127,7 @@ function connectAccelerometer() {
 				// MPU_Characteristic.startNotifications();
 				
 				View('ControlView');
-				connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
+				//connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
 				statusBar('connected');
 		  }),
 	  ])
