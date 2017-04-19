@@ -1,11 +1,11 @@
 //------------- TOGGLE VISIBILITY ------------- //
 
-function buttonToggle(buttonShowId, buttonHideId) {
-	let buttonShow = document.getElementById(buttonShowId);
-	let buttonHide = document.getElementById(buttonHideId);
+function connectLoaderToggle(divShowId, divHideId) {
+	let divShow = document.getElementById(divShowId);
+	let divHide = document.getElementById(divHideId);
 
-	buttonShow.style.display = 'block';
-	buttonHide.style.display = 'none';
+	divShow.style.display = 'block';
+	divHide.style.display = 'none';
 }
 
 function toggleDiv(divId){
@@ -20,13 +20,13 @@ function toggleDiv(divId){
 }
 
 
-function View(currentPage) {
+function View(thisPage) {
 
 	let div = document.getElementsByClassName("View");
 
 	for(i = 0; i<div.length; i++) {
 
-		if(currentPage !== div[i].id) {
+		if(thisPage !== div[i].id) {
 			div[i].style.display = 'none';
 		}
 		else {
