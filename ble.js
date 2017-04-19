@@ -6,11 +6,11 @@ const MPU_Service_UUID    = '00000004-1212-efde-1523-785fef13d123';
 const MPU_Char_UUID       = '00000005-1212-efde-1523-785fef13d123';
 
 
-var bleDeviceAccelerometer;
-var bleServerAccelerometer;
-
 var bleDeviceFreqControl;
 var bleServerFreqControl;
+
+var bleDeviceAccelerometer;
+var bleServerAccelerometer;
 
 var MPU_Service;
 var MPU_Characteristic;
@@ -51,17 +51,17 @@ function connectFrequencyControl() {
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 	.then(device => {
-		bleDevice = device;
-		bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
-		log('Found ' + bleDevice.name + '...');
+		bleDeviceFreqControl = device;
+		bleDeviceFreqControl.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
+		log('Found ' + bleDeviceFreqControl.name + '...');
 		log('Connecting to GATT-server...');
-		return bleDevice.gatt.connect();
+		return bleDeviceFreqControl.gatt.connect();
 	})
 
 	.then(gattServer => {
 		bleServerFreqControl = gattServer;
 		log('Connected to Frequency Control...');
-		return bleServer.getPrimaryService(FREQ_Service_UUID);
+		return bleServerFreqControl.getPrimaryService(FREQ_Service_UUID);
 	})
 
 	.then(service => {
@@ -101,17 +101,17 @@ function connectAccelerometer() {
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 	.then(device => {
-		bleDevice = device;
-		bleDevice.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
-		log('Found ' + bleDevice.name + '...');
+		bleDeviceAccelerometer = device;
+		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
+		log('Found ' + bleDeviceAccelerometer.name + '...');
 		log('Connecting to GATT-server...');
-		return bleDevice.gatt.connect();
+		return bleDeviceAccelerometer.gatt.connect();
 	})
 
 	.then(gattServer => {
-		bleServer = gattServer;
+		bleServerAccelerometer = gattServer;
 		log('Bluetooth Device Connected...');
-		return bleServer.getPrimaryService(MPU_Service_UUID);
+		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
 	})
 
 
