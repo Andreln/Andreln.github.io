@@ -1,6 +1,3 @@
-//
-//    BLE Connection for Resonator
-//
 
 const FREQ_Service_UUID   = '49f89999-edd1-4c81-8702-585449ba92a8';
 const FREQ_Char_UUID      = '49f88888-edd1-4c81-8702-585449ba92a8';
@@ -73,8 +70,10 @@ function connectFrequencyControl() {
 	  return Promise.all([
 		  FREQ_Service.getCharacteristic(FREQ_Char_UUID)
 		  .then(characteristic => {
-			  FREQ_Characteristic = characteristic;
-			  log('Freq characteristic retrieved...');
+				FREQ_Characteristic = characteristic;
+				log('Freq characteristic retrieved...');
+				connectLoaderToggle('connectToAccelerometerDiv','connectToFreqDiv');
+				connectLoaderToggle('connectBtnToFreqDiv','connectingToFreqDiv');
 		  }),
 	  ])
 	})
@@ -83,8 +82,7 @@ function connectFrequencyControl() {
 		log('> connect ' + error);
 	});
 	
-	connectLoaderToggle('connectToAccelerometerDiv','connectToFreqDiv');
-	connectLoaderToggle('connectBtnToFreqDiv','connectingToFreqDiv');
+
 }
 
 function connectAccelerometer() {
@@ -127,6 +125,10 @@ function connectAccelerometer() {
 				log('MPU characteristic retrieved...');
 				// MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
 				// MPU_Characteristic.startNotifications();
+				
+				View('ControlView');
+				connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
+				statusBar('connected');
 		  }),
 	  ])
 	})
@@ -135,8 +137,7 @@ function connectAccelerometer() {
 		log('> connect ' + error);
 	});
   
-  	View('ControlView');
-	connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
+
 }
 
 
