@@ -141,7 +141,7 @@ function connectAccelerometer() {
     MPU_Control_Service = service;
     log('MPU Control Service Retrieved...');
     return Promise.all([
-      MPU_Service.getCharacteristic(MPU_Control_Char_UUID)
+      MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
       .then(characteristic => {
         MPU_Control_Characteristic = characteristic;
         log('MPU Control characteristic retrieved...');
