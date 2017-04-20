@@ -1,10 +1,11 @@
 
-const FREQ_Service_UUID   = '49f89999-edd1-4c81-8702-585449ba92a8';
-const FREQ_Char_UUID      = '49f88888-edd1-4c81-8702-585449ba92a8';
+const FREQ_Service_UUID         = '49f89999-edd1-4c81-8702-585449ba92a8';
+const FREQ_Char_UUID            = '49f88888-edd1-4c81-8702-585449ba92a8';
 
-const MPU_Service_UUID    = '00000004-1212-efde-1523-785fef13d123';
-const MPU_Char_UUID       = '00000005-1212-efde-1523-785fef13d123';
-
+const MPU_Service_UUID          = '00000004-1212-efde-1523-785fef13d123';
+const MPU_Char_UUID             = '00000005-1212-efde-1523-785fef13d123';
+const MPU_Control_Service_UUID  = '00005555-9999-efde-1523-785fef13d123';
+const MPU_Control_UUID          = '00006666-9999-efde-1523-785fef13d123';
 
 var bleDeviceFreqControl;
 var bleServerFreqControl;
@@ -14,6 +15,10 @@ var bleServerAccelerometer;
 
 var MPU_Service;
 var MPU_Characteristic;
+var MPU_Control_Service;
+var MPU_Control_Characteristic;
+
+
 var accValueZ;
 var timeY;
 
@@ -43,7 +48,7 @@ function connectFrequencyControl() {
         'Please make sure the Web Bluetooth flag is enabled.');
 	  return;
 	}
-	
+
 	let deviceUUIDS = { filters:[{ services: [FREQ_Service_UUID]}]};
 
 	log('Requesting Bluetooth Device...');
@@ -76,24 +81,25 @@ function connectFrequencyControl() {
 		  }),
 	  ])
 	})
-	
+
 	.catch(error => {
 		log('> connect ' + error);
 	});
-	
+
 
 }
 
 function connectAccelerometer() {
   'use strict'
-	
+
 	if (!navigator.bluetooth) {
 	log('Web Bluetooth API is not available.\n' +
 		'Please make sure the Web Bluetooth flag is enabled.');
 	  return;
 	}
-	
-	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}]};
+
+	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}],
+                                optionalServices: [MPU_Control_Service_UUID, MPU_Control_Char_UUID]};
 
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -123,18 +129,18 @@ function connectAccelerometer() {
 				log('MPU characteristic retrieved...');
 				// MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
 				// MPU_Characteristic.startNotifications();
-				
+
 				View('ControlView');
 				connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
 				statusBar('connected');
 		  }),
 	  ])
 	})
-	
+
 	.catch(error => {
 		log('> connect ' + error);
 	});
-  
+
 
 }
 // BLE-Connection End
@@ -191,32 +197,41 @@ function MPU_Data_Received(){
     updateGraph(accValueZ);
 }
 
+// Starts and changes modes on frequency measurment
+function setModeMPU(onOff, Mode){
+  let onOff = parseInt(onOff);
+  let Mode = parseInt(Mode);
+  let data = new Uint8Array(1);
 
-function DATARECEIVED(event){
-    log ('Data received!');
-    let value = event.target.value;
-  	value = value.buffer ? value : new DataView(value);
-    let data = value.getUint8(0);
-    log(data);
-}
+  data[0] = onOff;
+  data[1] = Mode;
 
-function sendFrequency(){
-  let freqValue = document.getElementById("frequencyInput").value;
-  let data = new Uint8Array(4);
-  let value = parseInt(freqValue);
-
-  data[0] = 1;
-  data[1] = (value >> 8) & 0xff;
-  data[2] = (value & 0xff);
-  data[3] = 0;
-
- //  log(data);
   try {
-    FREQ_Characteristic.writeValue(data);
+    MPU_Characteristic.writeValue(data);
   } catch (error) {
     log(error);
   }
 }
+
+
+function changeFreqValue(value){
+	let freqValue = document.getElementById("frequencyInput").value;
+	freqValue = Number(freqValue);
+	value = Number(value);
+	let newValue = freqValue + value;
+	document.getElementById("frequencyInput").value = newValue;
+	sendFrequency();
+}
+
+function changeVolumeValue(value){
+	let volumeValue = document.getElementById("amplitudeInput").value;
+	volumeValue = Number(volumeValue);
+	value = Number(value);
+	let newValue = volumeValue + value;
+	document.getElementById("amplitudeInput").value = newValue;
+	sendFrequency();
+}
+
 
 // Sends frequency value and volumevalue
 function sendFrequency(){
@@ -238,22 +253,4 @@ function sendFrequency(){
   } catch (error) {
     log(error);
   }
-}
-
-function changeFreqValue(value){
-	let freqValue = document.getElementById("frequencyInput").value;
-	freqValue = Number(freqValue);
-	value = Number(value);
-	let newValue = freqValue + value;
-	document.getElementById("frequencyInput").value = newValue;
-	sendFrequency();
-}
-
-function changeVolumeValue(value){
-	let volumeValue = document.getElementById("amplitudeInput").value;
-	volumeValue = Number(volumeValue);
-	value = Number(value);
-	let newValue = volumeValue + value;
-	document.getElementById("amplitudeInput").value = newValue;
-	sendFrequency();
 }
