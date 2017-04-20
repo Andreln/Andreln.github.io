@@ -4,6 +4,7 @@ const FREQ_Char_UUID            = '49f88888-edd1-4c81-8702-585449ba92a8';
 
 const MPU_Service_UUID          = '00000004-1212-efde-1523-785fef13d123';
 const MPU_Char_UUID             = '00000005-1212-efde-1523-785fef13d123';
+
 const MPU_Control_Service_UUID  = '01015555-1212-efde-1523-785fef13d123';
 const MPU_Control_Char_UUID     = '01016666-1212-efde-1523-785fef13d123';
 
@@ -133,12 +134,13 @@ function connectAccelerometer() {
 
   .then(() => {
 		log('Getting MPU Control Serice...');
-		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
+		return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
 	})
 
   .then(service => {
     MPU_Control_Service = service;
     log('MPU Control Service Retrieved...');
+    log(MPU_Control_Service);
     return Promise.all([
       MPU_Service.getCharacteristic(MPU_Control_Char_UUID)
       .then(characteristic => {
