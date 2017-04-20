@@ -132,7 +132,7 @@ function connectAccelerometer() {
 	  ])
 	})
 
-  .then() {
+  .then( () => {
     return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
   })
 
