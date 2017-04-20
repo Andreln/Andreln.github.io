@@ -112,29 +112,30 @@ function connectAccelerometer() {
 		return bleDeviceAccelerometer.gatt.connect();
 	})
 
-	.then(gattServer => {
-		bleServerAccelerometer = gattServer;
-		log('Bluetooth Device Connected...');
-		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
-	})
+	// .then(gattServer => {
+	// 	bleServerAccelerometer = gattServer;
+	// 	log('Bluetooth Device Connected...');
+	// 	return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
+	// })
+  //
+	// .then(service => {
+	// 	MPU_Service = service;
+	// 	log('MPU Service Retrieved...');
+	// 	return Promise.all([
+	// 		MPU_Service.getCharacteristic(MPU_Char_UUID)
+	// 		.then(characteristic => {
+	// 			MPU_Characteristic = characteristic;
+	// 			log('MPU characteristic retrieved...');
+	// 			// MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
+	// 			// MPU_Characteristic.startNotifications();
+	// 	  }),
+	//   ])
+	// })
 
-	.then(service => {
-		MPU_Service = service;
-		log('MPU Service Retrieved...');
-		return Promise.all([
-			MPU_Service.getCharacteristic(MPU_Char_UUID)
-			.then(characteristic => {
-				MPU_Characteristic = characteristic;
-				log('MPU characteristic retrieved...');
-				// MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
-				// MPU_Characteristic.startNotifications();
-		  }),
-	  ])
-	})
-
-  .then(() => {
+  .then((gattServer) => {
+    bleServerAccelerometer = gattServer;
 		log('Getting MPU Control Service...');
-		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
+		return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
 	})
 
   .then(service => {
