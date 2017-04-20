@@ -4,8 +4,8 @@ const FREQ_Char_UUID            = '49f88888-edd1-4c81-8702-585449ba92a8';
 
 const MPU_Service_UUID          = '00000004-1212-efde-1523-785fef13d123';
 const MPU_Char_UUID             = '00000005-1212-efde-1523-785fef13d123';
-const MPU_Control_Service_UUID  = '00005555-9999-efde-1523-785fef13d123';
-const MPU_Control_Char_UUID     = '00006666-9999-efde-1523-785fef13d123';
+const MPU_Control_Service_UUID  = '00005555-2121-efde-1523-785fef13d123';
+const MPU_Control_Char_UUID     = '00006666-2121-efde-1523-785fef13d123';
 
 var bleDeviceFreqControl;
 var bleServerFreqControl;
@@ -17,7 +17,6 @@ var MPU_Service;
 var MPU_Characteristic;
 var MPU_Control_Service;
 var MPU_Control_Characteristic;
-
 
 var accValueZ;
 var timeY;
