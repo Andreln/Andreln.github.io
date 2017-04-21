@@ -8,6 +8,14 @@ function connectLoaderToggle(divShowId, divHideId) {
 	divHide.style.display = 'none';
 }
 
+function buttonToggle(buttonShowId, buttonHideId) {
+	let buttonShow = document.getElementById(buttonShowId);
+	let buttonHide = document.getElementById(buttonHideId);
+
+	buttonShow.style.display = 'block';
+	buttonHide.style.display = 'none';
+}
+
 function toggleDiv(divId){
 	let div = document.getElementById(divId);
 
@@ -33,9 +41,9 @@ function View(thisPage) {
 			div[i].style.display = 'block';
 		}
 	}
-	
+
 	document.getElementById('Dropdown').style.display = 'hide';
-	
+
 }
 
 function statusBar(status){

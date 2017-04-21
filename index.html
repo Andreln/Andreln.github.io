@@ -149,24 +149,25 @@
 			</ul>
 
 			<div class="tab-content">
+
 				<div id="frequencyControlDiv" class="tab-pane fade in active">
-					<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<div class="btn-group">
-									<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
+						<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
+							<div class="input-group">
+								<div class="input-group-btn">
+									<div class="btn-group">
+										<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
+											<span class="glyphicon glyphicon-minus"></span>
+										</button>
+									</div>
 								</div>
+								<input type="number" min="51" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control" />
+								<span class="input-group-btn">
+									<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
+										<span class="glyphicon glyphicon-plus"></span>
+									</button>
+								</span>
 							</div>
-							<input type="number" min="51" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control" />
-							<span class="input-group-btn">
-								<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
-									<span class="glyphicon glyphicon-plus"></span>
-								</button>
-							</span>
 						</div>
-					</div>
 					<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
 						<div class="input-group">
 							<div class="input-group-btn">
@@ -185,18 +186,35 @@
 						</div>
 					</div>
 				</div>
+
 				<div id="measureFrequencyDiv" class="tab-pane fade">
-					<div class="w3-container w3-content w3-center w3-padding-top">
-						<div class="w3-center w3-padding-top">
-							<button id="Toggle-acc" type="button" class="btn btn-default">Toggle Accelerometer</button>
-						</div>
-						<div class="w3-center w3-padding-top">
-							<input id="accelerometerValue" type="number" placeholder="Accelerometer 0 Value"></input>
-							<input id="timeGet" type="number" placeholder="Time"></input>
+
+							<div id="btnturnAccOnOffdiv" class="text-center w3-card-4 w3-round w3-half w3-margin-top" style="display: block;" >
+								<h4> On/Off Switch <h4>
+								<button id="turnAccOn" type="button" class="btn btn-primary text-center" style="display: block;"> Accelerometer On </button>
+								<button id="turnAccOff" type="button" class="btn btn-primary text-center" style="display: none;"> Accelerometer Off </button>
+							</div>
+
+							<div id="btnToggleModeToRealTimediv"class="w3-center w3-half" style="display: block;">
+								<h4> Mode <h4>
+								<button id="toggleModeToRealTime" type="button" class="btn btn-primary">Real-Time</button>
+							</div>
+
+							<div id="btnToggleModeToTakeMeasurementdiv" class="w3-center w3-half" style="display: none;">
+								<h4> Mode Set <h4>
+								<button id="toggleModeToTakeMeasurement" type="button" class="btn btn-primary">Take Measurement</button>
+							</div>
+
+					<!--
+						<div class="w3-card-4 w3-round w3-margin-top">
 							<canvas id="chart" width="400" height="200"></canvas>
 						</div>
-					</div>
+
+						<div class="w3-container w3-card-4 w3-round w3-margin-top">
+							<h3> Freq: xx </h3>
+						</div> -->
 				</div>
+
 			</div>
 
 		</div>
