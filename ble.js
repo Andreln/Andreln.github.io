@@ -244,7 +244,7 @@ function setModeMPU(onOff, Mode){
   Mode = parseInt(Mode);
 
   if(onOff==1 || onOff==0){
-    let data = new Uint8Array(1);
+    let data = new Uint8Array(2);
     data[0] = onOff;
     data[1] = Mode;
 
