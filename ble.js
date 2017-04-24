@@ -250,6 +250,7 @@ function setModeMPU(onOff, Mode){
 
     try {
       MPU_Control_Characteristic.writeValue(data);
+      log(data);
     } catch (error) {
       log(error);
     }
