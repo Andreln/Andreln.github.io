@@ -212,7 +212,7 @@ function MPU_Data_Received(){
     accValueZ = (accValueZ / 16384) - 1;
     accValueZ = accValueZ.toFixed(2);
 
-    document.getElementById('accelerometerValue').value = accValueZ;
+    // document.getElementById('accelerometerValue').value = accValueZ;
     // document.getElementById('timeGet').value = timeY;
 
     updateGraph(accValueZ);
