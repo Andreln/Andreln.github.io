@@ -37,6 +37,11 @@ window.onload = function(){
 
   document.getElementById("FREQ_Service_UUID").textContent=FREQ_Service_UUID;
   document.getElementById("FREQ_Char_UUID").textContent=FREQ_Char_UUID;
+
+  document.querySelector('#turnAccOn').addEventListener('click', MPU_Control_ON);
+  document.querySelector('#turnAccOff').addEventListener('click', MPU_Control_OFF);
+  document.querySelector('#toggleModeToRealTime').addEventListener('click', MPU_Control_MODE1);
+  document.querySelector('#toggleModeToTakeMeasurement').addEventListener('click', MPU_Control_MODE2);
 }
 
 // BLE-Connection
@@ -213,20 +218,46 @@ function MPU_Data_Received(){
     updateGraph(accValueZ);
 }
 
+
+
+function MPU_Control_ON(){
+  setModeMPU(1,0);
+}
+
+function MPU_Control_OFF(){
+  setModeMPU(0,0);
+}
+
+function MPU_Control_MODE1(){
+  setModeMPU(1,1);
+}
+
+function MPU_Control_MODE2(){
+  setModeMPU(1,2);
+}
+
+
 // Starts and changes modes on frequency measurment
 function setModeMPU(onOff, Mode){
-  let onOff = parseInt(onOff);
-  let Mode = parseInt(Mode);
-  let data = new Uint8Array(1);
 
-  data[0] = onOff;
-  data[1] = Mode;
+  onOff = parseInt(onOff);
+  Mode = parseInt(Mode);
 
-  try {
-    MPU_Characteristic.writeValue(data);
-  } catch (error) {
-    log(error);
-  }
+  if(onOff==1 || onOff==0){
+    let data = new Uint8Array(1);
+    data[0] = onOff;
+    data[1] = Mode;
+
+    try {
+      MPU_Control_Characteristic.writeValue(data);
+    } catch (error) {
+      log(error);
+    }
+
+    }
+    else{
+        // Nothing
+    }
 }
 
 
