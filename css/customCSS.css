@@ -22,13 +22,13 @@
 body {
     max-width:500px;
     margin: 0 auto;
-	position: relative;
+    position: relative;
 }
 
 .push {
-	height: 80vh;
+	min-height: 85vh;
 	margin: 0 auto;
-	position: relative;
+  position: relative !important;
 }
 
 .nav-tabs.centered > li, .nav-pills.centered > li {
