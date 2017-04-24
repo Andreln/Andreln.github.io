@@ -6,10 +6,14 @@
 	<link rel="stylesheet" href="css/w3.css">
 	<link rel="stylesheet" href="css/customCSS.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 
 	<script src="graph.js" defer></script>
 	<script src="ble.js"></script>
@@ -189,13 +193,15 @@
 
 				<div id="measureFrequencyDiv" class="tab-pane fade">
 
-							<div id="btnturnAccOnOffdiv" class="w3-center w3-container" style="display: block;" >
-								<h4> On/Off Switch <h4>
-								<button id="turnAccOn" type="button" class="btn btn-primary text-center"> Accelerometer On </button>
-								<button id="turnAccOff" type="button" class="btn btn-primary text-center"> Accelerometer Off </button>
+							<div id="btnturnAccOnOffdiv" class="w3-center w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: block;" >
+								<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="startMPU()">
+							</div>
+							<div id="btnToggleModeSetDiv" class="w3-center w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: none;" >
+								<input id="btnToggleModeSet" type="checkbox" checked data-toggle="toggle" data-on="Real-Time" data-off="Measure" data-offstyle="primary" data-width="60%" onchange="setModeMPU()">
 							</div>
 
-							<div id="btnToggleModeToRealTimediv" class="w3-center w3-container" style="display: block;">
+
+							<!-- <div id="btnToggleModeToRealTimediv" class="w3-center w3-container" style="display: block;">
 								<h4> Mode <h4>
 								<button id="toggleModeToRealTime" type="button" class="btn btn-primary">Real-Time</button>
 							</div>
@@ -203,14 +209,14 @@
 							<div id="btnToggleModeToTakeMeasurementdiv" class="w3-center w3-container" style="display: blcok;">
 								<h4> Mode Set <h4>
 								<button id="toggleModeToTakeMeasurement" type="button" class="btn btn-primary">Take Measurement</button>
-							</div>
+							</div> -->
 
 
-						<div class="w3-card-4 w3-round w3-margin-top">
+						<div id="chartDiv" class="w3-center w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: none;">
 							<canvas id="chart" width="400" height="200"></canvas>
 						</div>
 
-						<div class="w3-container w3-card-4 w3-round w3-margin-top">
+						<div id="freqDiv" class="w3-container w3-card-4 w3-round w3-margin-top" style="display: none;">
 							<h3> Freq: xx </h3>
 						</div>
 				</div>
@@ -279,7 +285,7 @@
 
 
 		<!-- Log -->
-		<div id="logDiv" style="display: block;">
+		<div id="logDiv" style="display: none;">
 			<div class="w3-container w3-center">
 				<h4 class="w3-border-bottom w3-padding-12 w3-wide" style="color: #337ab7">Log</h4>
 			</div>

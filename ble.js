@@ -25,6 +25,8 @@ var timeY;
 var FREQ_Service;
 var FREQ_Characteristic;
 
+var isOn = 0;
+
 window.onload = function(){
   document.querySelector('#connectToAccBtn').addEventListener('click', connectAccelerometer);
   document.querySelector('#connectToFreqBtn').addEventListener('click', connectFrequencyControl);
@@ -38,10 +40,10 @@ window.onload = function(){
   document.getElementById("FREQ_Service_UUID").textContent=FREQ_Service_UUID;
   document.getElementById("FREQ_Char_UUID").textContent=FREQ_Char_UUID;
 
-  document.querySelector('#turnAccOn').addEventListener('click', MPU_Control_ON);
-  document.querySelector('#turnAccOff').addEventListener('click', MPU_Control_OFF);
-  document.querySelector('#toggleModeToRealTime').addEventListener('click', MPU_Control_MODE1);
-  document.querySelector('#toggleModeToTakeMeasurement').addEventListener('click', MPU_Control_MODE2);
+  // document.querySelector('#turnAccOn').addEventListener('click', MPU_Control_ON);
+  // document.querySelector('#turnAccOff').addEventListener('click', MPU_Control_OFF);
+  // document.querySelector('#toggleModeToRealTime').addEventListener('click', MPU_Control_MODE1);
+  // document.querySelector('#toggleModeToTakeMeasurement').addEventListener('click', MPU_Control_MODE2);
 }
 
 // BLE-Connection
@@ -220,25 +222,50 @@ function MPU_Data_Received(){
 
 
 
-function MPU_Control_ON(){
-  setModeMPU(1,0);
-}
-
-function MPU_Control_OFF(){
-  setModeMPU(0,0);
-}
-
-function MPU_Control_MODE1(){
-  setModeMPU(1,1);
-}
-
-function MPU_Control_MODE2(){
-  setModeMPU(1,2);
-}
+// function MPU_Control_ON(){
+//   setModeMPU(1,0);
+// }
+//
+// function MPU_Control_OFF(){
+//   setModeMPU(0,0);
+// }
+//
+// function MPU_Control_MODE1(){
+//   setModeMPU(1,1);
+// }
+//
+// function MPU_Control_MODE2(){
+//   setModeMPU(1,2);
+// }
 
 
 // Starts and changes modes on frequency measurment
-function setModeMPU(onOff, Mode){
+
+function startMPU() {
+  if(isOn==1){ // Accelerometer is OFF
+    //log(isOn);
+    document.getElementById('btnToggleModeSetDiv').style.display ='none';
+    document.getElementById('chartDiv').style.display ='none';
+    document.getElementById('freqDiv').style.display ='none';
+
+    isOn=0;
+  }
+  else {  // Accelerometer is ON
+    //log(isOn);
+    document.getElementById('btnToggleModeSetDiv').style.display ='block';
+    document.getElementById('chartDiv').style.display ='none';
+    document.getElementById('freqDiv').style.display ='block';
+    $('#btnToggleModeSet').bootstrapToggle('on');
+    isOn=1;
+  }
+}
+
+function setModeMPU() {
+  toggleDiv('chartDiv');
+  toggleDiv('freqDiv');
+}
+
+function sendModeMPU(onOff, Mode){
 
   onOff = parseInt(onOff);
   Mode = parseInt(Mode);
