@@ -25,25 +25,24 @@ var timeY;
 var FREQ_Service;
 var FREQ_Characteristic;
 
-var isOn = 0;
+var isAccOn = 0;
+var setAccMode = 1;
+
+var isFreqOn = 0;
 
 window.onload = function(){
   document.querySelector('#connectToAccBtn').addEventListener('click', connectAccelerometer);
   document.querySelector('#connectToFreqBtn').addEventListener('click', connectFrequencyControl);
   document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
   document.querySelector('#refresh').addEventListener('click', disconnect);
-  document.querySelector('#frequencyInput').addEventListener("change", sendFrequency);
 
   document.getElementById("MPU_Service_UUID").textContent=MPU_Service_UUID;
   document.getElementById("MPU_Char_UUID").textContent=MPU_Char_UUID;
+  document.getElementById("MPU_Control_Service_UUID").textContent=MPU_Control_Service_UUID;
+  document.getElementById("MPU_Control_Char_UUID").textContent=MPU_Control_Char_UUID;
 
   document.getElementById("FREQ_Service_UUID").textContent=FREQ_Service_UUID;
   document.getElementById("FREQ_Char_UUID").textContent=FREQ_Char_UUID;
-
-  // document.querySelector('#turnAccOn').addEventListener('click', MPU_Control_ON);
-  // document.querySelector('#turnAccOff').addEventListener('click', MPU_Control_OFF);
-  // document.querySelector('#toggleModeToRealTime').addEventListener('click', MPU_Control_MODE1);
-  // document.querySelector('#toggleModeToTakeMeasurement').addEventListener('click', MPU_Control_MODE2);
 }
 
 // BLE-Connection
@@ -220,64 +219,45 @@ function MPU_Data_Received(){
     updateGraph(accValueZ);
 }
 
+function setModeMPU(input) {
 
-
-// function MPU_Control_ON(){
-//   setModeMPU(1,0);
-// }
-//
-// function MPU_Control_OFF(){
-//   setModeMPU(0,0);
-// }
-//
-// function MPU_Control_MODE1(){
-//   setModeMPU(1,1);
-// }
-//
-// function MPU_Control_MODE2(){
-//   setModeMPU(1,2);
-// }
-
-
-// Starts and changes modes on frequency measurment
-
-function startMPU() {
-  if(isOn==1){ // Accelerometer is OFF
-    //log(isOn);
-    document.getElementById('btnToggleModeSetDiv').style.display ='none';
-    document.getElementById('chartDiv').style.display ='none';
-    document.getElementById('freqDiv').style.display ='none';
-
-    isOn=0;
+  if(input=='toggleMode'){
+    if(setAccMode==1){
+      setAccMode=2;
+      document.getElementById('chartDiv').style.display ='none';
+      document.getElementById('freqDiv').style.display ='block';
+    }
+    else{
+      setAccMode=1;
+      document.getElementById('chartDiv').style.display ='block';
+      document.getElementById('freqDiv').style.display ='none';
+    }
   }
-  else {  // Accelerometer is ON
-    //log(isOn);
-    document.getElementById('btnToggleModeSetDiv').style.display ='block';
-    document.getElementById('chartDiv').style.display ='none';
-    document.getElementById('freqDiv').style.display ='block';
-    $('#btnToggleModeSet').bootstrapToggle('on');
-    isOn=1;
+
+  else if(input=='toggleOnOff'){
+    if(isAccOn==1){
+      isAccOn=0;
+    }
+    else{
+      isAccOn=1;
+    }
   }
+  sendModeMPU();
 }
 
-function setModeMPU() {
-  toggleDiv('chartDiv');
-  toggleDiv('freqDiv');
-}
+function sendModeMPU(){
 
-function sendModeMPU(onOff, Mode){
-
-  onOff = parseInt(onOff);
-  Mode = parseInt(Mode);
+  onOff = parseInt(isAccOn);
+  Mode = parseInt(setAccMode);
 
   if(onOff==1 || onOff==0){
-    let data = new Uint8Array(2);
+    let data = new Uint8Array(3);
     data[0] = onOff;
     data[1] = Mode;
 
     try {
-      MPU_Control_Characteristic.writeValue(data);
       log(data);
+      MPU_Control_Characteristic.writeValue(data);
     } catch (error) {
       log(error);
     }
@@ -294,7 +274,13 @@ function changeFreqValue(value){
 	freqValue = Number(freqValue);
 	value = Number(value);
 	let newValue = freqValue + value;
-	document.getElementById("frequencyInput").value = newValue;
+  if(newValue<25){
+    newValue = 25;
+  }
+  if(newValue>800){
+    newValue = 800;
+  }
+  document.getElementById("frequencyInput").value = newValue;
 	sendFrequency();
 }
 
@@ -307,6 +293,15 @@ function changeVolumeValue(value){
 	sendFrequency();
 }
 
+function frequencyMode(){   // On/Off
+  if(isFreqOn==0) {
+    isFreqOn=1;
+  }
+  else {
+    isFreqOn=0;
+  }
+  sendFrequency();
+}
 
 // Sends frequency value and volumevalue
 function sendFrequency(){
@@ -317,13 +312,14 @@ function sendFrequency(){
   let volumeValue = document.getElementById("amplitudeInput").value;
   volumValue = parseInt(volumeValue);
 
-  data[0] = 1;
+  data[0] = isFreqOn;
   data[1] = (freqValue >> 8) & 0xff;
   data[2] = (freqValue & 0xff);
   data[3] = volumValue;
 
  //  log(data);
   try {
+    log(data);
     FREQ_Characteristic.writeValue(data);
   } catch (error) {
     log(error);
