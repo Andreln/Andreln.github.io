@@ -286,10 +286,10 @@ function MPU_Control_Data_Received() {
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  // data[2] = value.getUint8(2);
-  // data[3] = value.getUint8(3);
-  // data[4] = value.getUint8(4);
-  // data[5] = value.getUint8(5);
+  data[2] = value.getUint8(2);
+  data[3] = value.getUint8(3);
+  data[4] = value.getUint8(4);
+  data[5] = value.getUint8(5);
   //
   // log(data[0] + '  ' + data[1] + '  ' + data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
   //
