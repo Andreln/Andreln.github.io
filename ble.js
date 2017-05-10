@@ -342,8 +342,8 @@ function sendFrequency(){
 
 function MPU_Control_Data_Received() {
   log('test');
-  // let value = event.target.value;
-  // value = value.buffer ? value: new DataView(value);
-  //
-  // log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
+  let value = event.target.value;
+  value = value.buffer ? value: new DataView(value);
+
+  log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
 }
