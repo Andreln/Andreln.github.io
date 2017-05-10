@@ -286,16 +286,18 @@ function MPU_Control_Data_Received() {
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  console.dir(value);
+  data[2] = value.getUint8(2);
+  data[3] = value.getUint8(3);
+  data[4] = value.getUint8(4);
+  data[5] = value.getUint8(5);
 
-
-  x =  (value[3] & 0xFF)
-      |((value[4] & 0xFF) << 8)
-      |((value[5] & 0xFF) << 16)
-      |((value[6] & 0xFF) << 24);
-
-  log(x);
-  // log(value[0] + '  ' + value[1] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5]);
+  // x =  (data[3] & 0xFF)
+  //     |((data[4] & 0xFF) << 8)
+  //     |((data[5] & 0xFF) << 16)
+  //     |((data[6] & 0xFF) << 24);
+  //
+  // log(x);
+  log(data[0] + '  ' + data[1] + '  ' + data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
 }
 
 function changeFreqValue(value){
