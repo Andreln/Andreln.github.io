@@ -293,8 +293,8 @@ function MPU_Control_Data_Received() {
 
   log(data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
 
-  let x = (data[3] & 0xFF) | ((data[4] & 0xFF) << 8) | ((data[5] & 0xFF) << 16) | ((data[6] & 0xFF) << 24);
-  
+  let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
+
   log(x);
 }
 
