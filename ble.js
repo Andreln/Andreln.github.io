@@ -297,11 +297,11 @@ function MPU_Control_Data_Received() {
 
   log('x: '+ x);
 
-  let y = value.getFloat32(2, true);
+  let y = value.getFloat32(0, true);
 
   log('y: '+ y);
 
-  let z = value.getFloat32(2, false);
+  let z = value.getFloat32(0, false);
 
   log('z: '+ z);
 }
