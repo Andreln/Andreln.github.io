@@ -148,7 +148,7 @@ function connectAccelerometer() {
     MPU_Control_Service = service;
     log('MPU Control Service Retrieved...');
     return Promise.all([
-      MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
+      MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID);
       .then(characteristic => {
         MPU_Control_Characteristic = characteristic;
         console.dir(MPU_Control_Characteristic);
@@ -162,7 +162,10 @@ function connectAccelerometer() {
     ])
   })
 
-  .then(_ => MPU_Control_Characteristic.startNotifications())
+  .then(_ => {
+    MPU_Control_Characteristic.startNotifications();
+    log('Notifications started on MPU Control');
+  })
 
 	.catch(error => {
 		log('> connect ' + error);
