@@ -288,12 +288,11 @@ function MPU_Control_Data_Received() {
 
   console.dir(value);
 
-  value = *(float*)&value;
 
   x =  (value[3] & 0xFF)
       |((value[4] & 0xFF) << 8)
       |((value[5] & 0xFF) << 16)
-      |((value[6] & 0xFF) << 24)
+      |((value[6] & 0xFF) << 24);
 
   log(x);
   // log(value[0] + '  ' + value[1] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5]);
