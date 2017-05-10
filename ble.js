@@ -296,6 +296,10 @@ function MPU_Control_Data_Received() {
   let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
 
   log(x);
+
+  let y = value.getFloat32(2);
+
+  log(y);
 }
 
 function changeFreqValue(value){
