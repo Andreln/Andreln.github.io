@@ -152,7 +152,7 @@ function connectAccelerometer() {
         MPU_Control_Characteristic = characteristic;
         log('MPU Control characteristic retrieved...');
         MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
-        MPU_Control_Characteristic.startNotifications();
+        // MPU_Control_Characteristic.startNotifications();
         View('ControlView');
         connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
         statusBar('connected');
