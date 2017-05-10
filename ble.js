@@ -134,7 +134,7 @@ function connectAccelerometer() {
         console.dir(MPU_Characteristic);
 				log('MPU characteristic retrieved...');
 				MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
-				MPU_Characteristic.startNotifications();
+				//MPU_Characteristic.startNotifications();
 		  }),
 	  ])
 	})
@@ -161,6 +161,7 @@ function connectAccelerometer() {
       }),
     ])
   })
+
   .then(_ => MPU_Control_Characteristic.startNotifications())
 
 	.catch(error => {
