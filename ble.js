@@ -150,6 +150,7 @@ function connectAccelerometer() {
       MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
       .then(characteristic => {
         MPU_Control_Characteristic = characteristic;
+        console.dir(MPU_Control_Characteristic);
         log('MPU Control characteristic retrieved...');
         MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
         // MPU_Control_Characteristic.startNotifications();
