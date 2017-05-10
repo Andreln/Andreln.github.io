@@ -286,14 +286,33 @@ function MPU_Control_Data_Received() {
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  data[2] = value.getUint8(2);
-  data[3] = value.getUint8(3);
-  data[4] = value.getUint8(4);
-  data[5] = value.getUint8(5);
+  // data[2] = value.getUint8(2);
+  // data[3] = value.getUint8(3);
+  // data[4] = value.getUint8(4);
+  // data[5] = value.getUint8(5);
+  //
+  // log(data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
+  //
+  // let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
+  //
+  // log('x: '+ x);
+  //
+  // let y = value.getFloat32(0, true);
+  //
+  // log('y: '+ y);
+  //
+  // let z = value.getFloat32(0, false);
+  //
+  // log('z: '+ z);
 
-  log(data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
+  data[2-2] = value.getUint8(2);
+  data[3-2] = value.getUint8(3);
+  data[4-2] = value.getUint8(4);
+  data[5-2] = value.getUint8(5);
 
-  let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
+  log(data[2-2] + '  ' + data[3-2] + '  ' + data[4-2] + '  ' + data[5-2]);
+
+  let x = (data[2-2] & 0xFF) | ((data[3-2] & 0xFF) << 8) | ((data[4-2] & 0xFF) << 16) | ((data[5-2] & 0xFF) << 24);
 
   log('x: '+ x);
 
