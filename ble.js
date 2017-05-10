@@ -217,21 +217,6 @@ function disconnectedFromPeripheral () {
 }
 
 
-function MPU_Data_Received(){
-    let value = event.target.value;
-    value = value.buffer ? value: new DataView(value);
-
-    accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8)&0xff00);
-
-    accValueZ = (accValueZ / 16384) - 1;
-    accValueZ = accValueZ.toFixed(2);
-
-    // document.getElementById('accelerometerValue').value = accValueZ;
-    // document.getElementById('timeGet').value = timeY;
-
-    updateGraph(accValueZ);
-}
-
 function setModeMPU(input) {
 
   if(input=='toggleMode'){
@@ -281,6 +266,29 @@ function sendModeMPU(){
     }
 }
 
+function MPU_Data_Received(){
+    let value = event.target.value;
+    value = value.buffer ? value: new DataView(value);
+
+    accValueZ = value.getUint8(0) | ((value.getUint8(1) << 8)&0xff00);
+
+    accValueZ = (accValueZ / 16384) - 1;
+    accValueZ = accValueZ.toFixed(2);
+
+    // document.getElementById('accelerometerValue').value = accValueZ;
+    // document.getElementById('timeGet').value = timeY;
+
+    updateGraph(accValueZ);
+}
+
+function MPU_Control_Data_Received() {
+  log('test');
+  let value = event.target.value;
+  value = value.buffer ? value: new DataView(value);
+
+  console.dir(value);
+  // log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
+}
 
 function changeFreqValue(value){
 	let freqValue = document.getElementById("frequencyInput").value;
@@ -337,13 +345,4 @@ function sendFrequency(){
   } catch (error) {
     log(error);
   }
-}
-
-
-function MPU_Control_Data_Received() {
-  log('test');
-  let value = event.target.value;
-  value = value.buffer ? value: new DataView(value);
-
-  log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
 }
