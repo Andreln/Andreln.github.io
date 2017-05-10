@@ -161,6 +161,7 @@ function connectAccelerometer() {
       }),
     ])
   })
+  .then(_ => MPU_Control_Characteristic.startNotifications())
 
 	.catch(error => {
 		log('> connect ' + error);
