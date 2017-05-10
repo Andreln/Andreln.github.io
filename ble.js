@@ -295,11 +295,15 @@ function MPU_Control_Data_Received() {
 
   let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
 
-  log(x);
+  log('x: '+ x);
 
   let y = value.getFloat32(2, true);
 
-  log(y);
+  log('y: '+ y);
+
+  let z = value.getFloat32(2, false);
+
+  log('z: '+ z);
 }
 
 function changeFreqValue(value){
