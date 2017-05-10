@@ -151,8 +151,8 @@ function connectAccelerometer() {
       .then(characteristic => {
         MPU_Control_Characteristic = characteristic;
         log('MPU Control characteristic retrieved...');
-        // MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
-        // MPU_Control_Characteristic.startNotifications();
+        MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
+        MPU_Control_Characteristic.startNotifications();
         View('ControlView');
         connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
         statusBar('connected');
@@ -329,8 +329,9 @@ function sendFrequency(){
 
 
 function MPU_Control_Data_Received() {
-  let value = event.target.value;
-  value = value.buffer ? value: new DataView(value);
-
-  log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
+  log('test');
+  // let value = event.target.value;
+  // value = value.buffer ? value: new DataView(value);
+  //
+  // log(value[1] + '  ' + value[2] + '  ' + value[2] + '  ' + value[3] + '  ' + value[4] + '  ' + value[5] + '  ' + value[6]);
 }
