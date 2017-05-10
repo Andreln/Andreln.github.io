@@ -167,10 +167,10 @@ function connectAccelerometer() {
     log('Notifications started on MPU Control');
   })
 
-  .then(_ => {
-    MPU_Characteristic.startNotifications();
-    log('Notifications started on MPU');
-  })
+  // .then(_ => {
+  //   MPU_Characteristic.startNotifications();
+  //   log('Notifications started on MPU');
+  // })
 
 	.catch(error => {
 		log('> connect ' + error);
