@@ -294,8 +294,8 @@ function MPU_Control_Data_Received() {
   log(data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
 
   let x = (data[3] & 0xFF) | ((data[4] & 0xFF) << 8) | ((data[5] & 0xFF) << 16) | ((data[6] & 0xFF) << 24);
-  //
-  // log(x);
+  
+  log(x);
 }
 
 function changeFreqValue(value){
