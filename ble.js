@@ -321,24 +321,24 @@ function changeFreqValue(value){
 	sendFrequency();
 }
 
-function changeVolumeValue(value){
-	let volumeValue = document.getElementById("amplitudeInput").value;
-	volumeValue = Number(volumeValue);
-	value = Number(value);
-	let newValue = volumeValue + value;
-	document.getElementById("amplitudeInput").value = newValue;
-	sendFrequency();
-}
-
-function frequencyMode(){   // On/Off
-  if(isFreqOn==0) {
-    isFreqOn=1;
-  }
-  else {
-    isFreqOn=0;
-  }
-  sendFrequency();
-}
+// function changeVolumeValue(value){
+// 	let volumeValue = document.getElementById("amplitudeInput").value;
+// 	volumeValue = Number(volumeValue);
+// 	value = Number(value);
+// 	let newValue = volumeValue + value;
+// 	document.getElementById("amplitudeInput").value = newValue;
+// 	sendFrequency();
+// }
+// 
+// function frequencyMode(){   // On/Off
+//   if(isFreqOn==0) {
+//     isFreqOn=1;
+//   }
+//   else {
+//     isFreqOn=0;
+//   }
+//   sendFrequency();
+// }
 
 // Sends frequency value and volumevalue
 function sendFrequency(){
