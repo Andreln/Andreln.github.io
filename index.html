@@ -160,76 +160,69 @@
 		<!-- Bar Frequency Control / Measure Frequency VIEW! -->
 		<div id="ControlView" class="View" style="display: none;">
 
-			<ul class="nav nav-tabs nav-justified">
-				<li class="active"> <a data-toggle="tab" href="#frequencyControlDiv">Frequency Control</a></li>
-				<li > <a data-toggle="tab" href="#measureFrequencyDiv"> Measure Frequency </a></li>
-			</ul>
-
-			<div class="tab-content">
-
-				<div id="frequencyControlDiv" class="tab-pane fade in active">
-					<div id="btnturnFreqOnOffdiv" class="w3-center w3-container w3-margin-top w3-padding-top w3-padding-bottom" style="display: block;" >
-						<input id="toggleFreq" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Vibration: On" data-off="Vibration: Off" data-width="60%" onchange="frequencyMode()">
-					</div>
-						<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
+				<div id="frequencyControlDiv" class="center-block w3-card-2 w3-margin-top w3-padding-bottom"style="display: block; width:95%">
+					<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
+						<h4><b>Frequency Control</b></h4>
+					</header>
+					<div>
+						<div id="btnturnFreqOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
+							<input id="toggleFreq" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Vibration: On" data-off="Vibration: Off" data-width="65%" onchange="frequencyMode()">
+						</div>
+						<div class="w3-container w3-content w3-center w3-padding-top w3-padding-bottom" style="width:70%">
 							<div class="input-group">
 								<div class="input-group-btn">
 									<div class="btn-group">
 										<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
-											<span class="glyphicon glyphicon-minus"></span>
+										<span class="glyphicon glyphicon-minus"></span>
 										</button>
 									</div>
 								</div>
 								<input type="number" min="25" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control text-center" onChange="changeFreqValue(0)"/>
 								<span class="input-group-btn">
 									<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
-										<span class="glyphicon glyphicon-plus"></span>
+									<span class="glyphicon glyphicon-plus"></span>
 									</button>
 								</span>
 							</div>
 						</div>
-					<div class="w3-container w3-content w3-center w3-padding-top" style="width:70%">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<div class="btn-group">
-									<button id="decrementVolume" class="btn btn-primary btn-block" onclick="changeVolumeValue('-1');">
-										<span class="glyphicon glyphicon-minus"></span>
-									</button>
+				  </div>
+				</div>
+
+				<div id="measureFrequencyDiv" class="center-block w3-card-2 w3-margin-top w3-padding-bottom"style="display: block; width:95%">
+					<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
+					  <h4><b>Accelerometer Control</b></h4>
+					</header>
+					<div>
+							<div id="btnturnAccOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
+								<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="setModeMPU('toggleOnOff')">
+							</div>
+
+							<div id="btnToggleModeSetDiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
+								<input id="btnToggleModeSet" type="checkbox" checked data-toggle="toggle" data-on="Real-Time" data-off="Measure" data-offstyle="primary" data-width="60%" onchange="setModeMPU('toggleMode')">
+							</div>
+
+							<div id="chartDiv" class="center-block w3-container w3-margin-top w3-padding-top w3-padding-bottom" style="display: block; width:95%">
+								<canvas id="chart" width="400" height="200"></canvas>
+							</div>
+
+							<div id="freqDiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: none;">
+
+								<div id="takeNewMeasurementBtnDiv">
+									<button id="takeNewMeasurementBtn" type="button" class="btn btn-primary">New Measurement</button>
+								</div>
+
+								<div class="panel panel-primary center-block w3-margin-top " style="width:70%">
+									<div class="panel-heading"> <h3 class="panel-title"> Frequency[Hz] </h3>
+									</div>
+									<div id="freqDivInput" class="panel-body w3-center"> Nothing measured yet
+									</div>
 								</div>
 							</div>
-							<input type="number" min="0" max="100" name="Frequency" id="amplitudeInput" placeholder="Volume %" class="form-control" />
-							<span class="input-group-btn">
-								<button id="incrementVolume" class="btn btn-primary btn-block" onclick="changeVolumeValue('1');">
-									<span class="glyphicon glyphicon-plus"></span>
-								</button>
-							</span>
 						</div>
 					</div>
-				</div>
-
-				<div id="measureFrequencyDiv" class="tab-pane fade">
-
-						<div id="btnturnAccOnOffdiv" class="w3-center w3-container w3-margin-top w3-padding-top w3-padding-bottom" style="display: block;" >
-							<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="setModeMPU('toggleOnOff')">
-						</div>
-						<div id="btnToggleModeSetDiv" class="w3-center w3-container w3-margin-top w3-padding-top w3-padding-bottom" style="display: block;" >
-							<input id="btnToggleModeSet" type="checkbox" checked data-toggle="toggle" data-on="Real-Time" data-off="Measure" data-offstyle="primary" data-width="60%" onchange="setModeMPU('toggleMode')">
-						</div>
-
-						<div id="chartDiv" class="center-block w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: block; width:90%">
-							<canvas id="chart" width="400" height="200"></canvas>
-						</div>
-
-						<div id="freqDiv" class="panel panel-primary center-block w3-margin-top " style="display: none; width:70%">
-							<div class="panel-heading"> <h3 class="panel-title"> Frequency[Hz] </h3>  </div>
-
-							<div id="freqDivInput" class="panel-body w3-center"> Nothing measured yet </div>
-						</div>
-				</div>
 
 			</div>
 
-		</div>
 
 		<div id="appView" class="View" style="display: none;">
 			<div class="w3-container w3-center">

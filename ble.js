@@ -224,11 +224,25 @@ function setModeMPU(input) {
       setAccMode=2;
       document.getElementById('chartDiv').style.display ='none';
       document.getElementById('freqDiv').style.display ='block';
+
+      promise.then(() => {
+        MPU_Characteristic.stopNotifications();
+      })
+      promise.then(() => {
+        MPU_Control_Characteristic.startNotifications();
+      })
     }
     else{
-      setAccMode=1;
+      setAccMode=1
       document.getElementById('chartDiv').style.display ='block';
       document.getElementById('freqDiv').style.display ='none';
+
+      promise.then(() => {
+        MPU_Control_Characteristic.stopNotifications();
+      })
+      promise.then(() => {
+        MPU_Characteristic.startNotifications();
+      })
     }
   }
 
