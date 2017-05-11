@@ -216,12 +216,14 @@
 							<input id="btnToggleModeSet" type="checkbox" checked data-toggle="toggle" data-on="Real-Time" data-off="Measure" data-offstyle="primary" data-width="60%" onchange="setModeMPU('toggleMode')">
 						</div>
 
-						<div id="chartDiv" class="w3-center w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: block;">
+						<div id="chartDiv" class="center-block w3-container w3-margin-top w3-card-2 w3-round w3-padding-top w3-padding-bottom" style="display: block; width:90%">
 							<canvas id="chart" width="400" height="200"></canvas>
 						</div>
 
-						<div id="freqDiv" class="w3-container w3-card-4 w3-round w3-margin-top" style="display: none;">
-							<h3> Freq: xx </h3>
+						<div id="freqDiv" class="panel panel-primary center-block w3-margin-top " style="display: none; width:70%">
+							<div class="panel-heading"> <h3 class="panel-title"> Frequency[Hz] </h3>  </div>
+
+							<div id="freqDivInput" class="panel-body w3-center"> Nothing measured yet </div>
 						</div>
 				</div>
 
