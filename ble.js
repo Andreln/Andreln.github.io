@@ -316,10 +316,10 @@ function MPU_Control_Data_Received() {
   let y = value.getUint32(0, true);
 
   log('y: '+ y);
-  //
-  // let z = value.getFloat32(0, false);
-  //
-  // log('z: '+ z);
+
+  let z = value.getFloat32(0, false);
+
+  log('z: '+ z);
 }
 
 function changeFreqValue(value){
