@@ -16,7 +16,7 @@
 }
 
 
-.progress {height: 5px;margin:0px;}
+.progress {height: 5px;margin:0px;border-radius:0!important;}
 
 
 body {

@@ -288,7 +288,7 @@ function MPU_Control_Data_Received() {
 
   let data = value.getFloat32(2, true);    // Get float from array, use little endian.
 
-  document.getElementById("freqDivInput").innerHTML = data + "Hz";
+  document.getElementById("freqDivInput").innerHTML = data + " Hz";
 
 }
 
