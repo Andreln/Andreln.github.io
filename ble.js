@@ -329,7 +329,7 @@ function changeFreqValue(value){
 // 	document.getElementById("amplitudeInput").value = newValue;
 // 	sendFrequency();
 // }
-// 
+//
 // function frequencyMode(){   // On/Off
 //   if(isFreqOn==0) {
 //     isFreqOn=1;
@@ -346,13 +346,15 @@ function sendFrequency(){
   let data = new Uint8Array(4);
   freqValue = parseInt(freqValue);
 
-  let volumeValue = document.getElementById("amplitudeInput").value;
-  volumValue = parseInt(volumeValue);
+  // let volumeValue = document.getElementById("amplitudeInput").value;
+  // volumValue = parseInt(volumeValue);
+  let volumValue = 10;      // Hardcoded to 20% on firmware side. This is just a placeholder.
+
 
   data[0] = isFreqOn;
   data[1] = (freqValue >> 8) & 0xff;
   data[2] = (freqValue & 0xff);
-  data[3] = volumValue;
+  data[3] = volumValue;                 // Will be removed
 
  //  log(data);
   try {
