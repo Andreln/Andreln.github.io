@@ -330,15 +330,16 @@ function changeFreqValue(value){
 // 	sendFrequency();
 // }
 //
-// function frequencyMode(){   // On/Off
-//   if(isFreqOn==0) {
-//     isFreqOn=1;
-//   }
-//   else {
-//     isFreqOn=0;
-//   }
-//   sendFrequency();
-// }
+
+function frequencyMode(){   // On/Off
+  if(isFreqOn==0) {
+    isFreqOn=1;
+  }
+  else {
+    isFreqOn=0;
+  }
+  sendFrequency();
+}
 
 // Sends frequency value and volumevalue
 function sendFrequency(){
