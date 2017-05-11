@@ -282,44 +282,13 @@ function MPU_Data_Received(){
 }
 
 function MPU_Control_Data_Received() {
-  log('test');
+
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
-  // data[2] = value.getUint8(2);
-  // data[3] = value.getUint8(3);
-  // data[4] = value.getUint8(4);
-  // data[5] = value.getUint8(5);
-  //
-  // log(data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
-  //
-  // let x = (data[2] & 0xFF) | ((data[3] & 0xFF) << 8) | ((data[4] & 0xFF) << 16) | ((data[5] & 0xFF) << 24);
-  //
-  // log('x: '+ x);
-  //
-  // let y = value.getFloat32(0, true);
-  //
-  // log('y: '+ y);
-  //
-  // let z = value.getFloat32(0, false);
-  //
-  // log('z: '+ z);
-  data[0] = value.getUint8(0);
-  data[1] = value.getUint8(1);
-  data[2] = value.getUint8(2);
-  data[3] = value.getUint8(3);
-  data[4] = value.getUint8(4);
-  data[5] = value.getUint8(5);
+  let data = value.getFloat32(2, true);    // Get float from array, use little endian.
 
-  log(data[0] + '  ' + data[1] + '  ' + data[2] + '  ' + data[3] + '  ' + data[4] + '  ' + data[5]);
-
-  let y = value.getFloat32(0, true);
-
-  log('y: '+ y);
-
-  let z = value.getFloat32(0, false);
-
-  log('z: '+ z);
+  log('Datavalue: '+ data);
 }
 
 function changeFreqValue(value){
