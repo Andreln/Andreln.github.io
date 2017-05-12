@@ -71,9 +71,13 @@ function connectFrequencyControl() {
 		return bleDeviceFreqControl.gatt.connect();
 	})
 
-  connectingToFreqDiv
 
 	.then(gattServer => {
+
+    document.getElementById('connectingToFreqDiv').style.display ='block';
+    document.getElementById('freqControlDiv').style.display ='none';
+
+
 		bleServerFreqControl = gattServer;
 		log('Connected to Frequency Control...');
 		return bleServerFreqControl.getPrimaryService(FREQ_Service_UUID);
@@ -97,6 +101,8 @@ function connectFrequencyControl() {
   })
 
 	.catch(error => {
+    document.getElementById('freqControlDiv').style.display ='block';
+    document.getElementById('connectingToFreqDiv').style.display ='none';
 		log('> connect ' + error);
 	});
 
@@ -114,7 +120,7 @@ function connectAccelerometer() {
 	}
 
 	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}],
-                                optionalServices: [MPU_Control_Service_UUID, MPU_Control_Char_UUID]};
+                                optionalServices: [MPU_Control_Service_UUID]};
 
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -128,8 +134,8 @@ function connectAccelerometer() {
 
 	.then(gattServer => {
 
-    document.getElementById('connectingToFreqDiv').style.display ='block';
-    document.getElementById('freqControlDiv').style.display ='none';
+    document.getElementById('connectingToAccDiv').style.display ='block';
+    document.getElementById('accelerometerControlDiv').style.display ='none';
 
 		bleServerAccelerometer = gattServer;
 		log('Bluetooth Device Connected...');
@@ -175,8 +181,8 @@ function connectAccelerometer() {
   })
 
   .then(() => {
-    document.getElementById('freqControlDiv').style.display ='block';
-    document.getElementById('connectingToFreqDiv').style.display ='none';
+    document.getElementById('accelerometerControlDiv').style.display ='block';
+    document.getElementById('connectingToAccDiv').style.display ='none';
     log('Connected to Accelrometer');
     connectedToPeripheral('accelerometer');
   })
