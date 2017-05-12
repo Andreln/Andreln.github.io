@@ -90,6 +90,7 @@ function connectFrequencyControl() {
   })
 
   .then(() => {
+    log('Connected to Frequency Control');
     connectedToPeripheral('frequencycontrol');
   })
 
@@ -148,7 +149,7 @@ function connectAccelerometer() {
 
   // Getting the MPU control service.
   .then(() => {
-    log('Getting MPU Control Serivce...');
+    log('Getting MPU Control Service...');
     return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
   })
 
@@ -165,15 +166,10 @@ function connectAccelerometer() {
     log('Listening for changes in the characteristic...');
     MPU_Control_Characteristic.startNotifications();
     log('Starting Notifications...');
+  })
+
+  .then(() => {
     log('Connected to Accelrometer');
-  })
-
-  .then(() => {
-    log('Getting MPU Control Serivce...')
-    return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
-  })
-
-  .then(() => {
     connectedToPeripheral('accelerometer');
   })
 
