@@ -37,7 +37,7 @@ window.onload = function(){
   document.querySelector('#disconnectAccBtn').addEventListener('click', function() { disconnect(bleDeviceAccelerometer);},);
   document.querySelector('#disconnectFreqBtn').addEventListener('click', function() { disconnect(bleDeviceFreqControl);},);
 
-  document.querySelector('#refresh').addEventListener('click', disconnectAll);
+  document.querySelector('#refresh').addEventListener('click', Refresh);
 
   document.getElementById("MPU_Service_UUID").textContent=MPU_Service_UUID;
   document.getElementById("MPU_Char_UUID").textContent=MPU_Char_UUID;
@@ -62,7 +62,8 @@ function connectFrequencyControl() {
 
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
-	.then(device => {
+
+  .then(device => {
 		bleDeviceFreqControl = device;
 		bleDeviceFreqControl.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
 		log('Found ' + bleDeviceFreqControl.name + '...');
@@ -114,10 +115,9 @@ function connectAccelerometer() {
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 	.then(device => {
 		bleDeviceAccelerometer = device;
-		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
+		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', function(){disconnect(bleDeviceAccelerometer);},);
 		log('Found ' + bleDeviceAccelerometer.name + '...');
 		log('Connecting to GATT-server...');
-		connectLoaderToggle('connectingToAccelerometerDiv','connectBtnToAccelerometerDiv');
 		return bleDeviceAccelerometer.gatt.connect();
 	})
 
@@ -130,17 +130,16 @@ function connectAccelerometer() {
 	.then(service => {
 		MPU_Service = service;
 		log('MPU Service Retrieved...');
-		return Promise.all([
-			MPU_Service.getCharacteristic(MPU_Char_UUID)
-			.then(characteristic => {
-				MPU_Characteristic = characteristic;
-        console.dir(MPU_Characteristic);
-				log('MPU characteristic retrieved...');
-				MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
-				//MPU_Characteristic.startNotifications();
-		  }),
-	  ])
-	})
+    log('Getting MPU Characteristic');
+    return MPU_Service.getCharacteristic(MPU_Char_UUID);
+  })
+
+  .then(characteristic => {
+    MPU_Characteristic = characteristic;
+    log('MPU Characteristic Retrieved...');
+    log('Getting MPU Characteristic');
+    MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
+  })
 
   .then(() => {
 		log('Getting MPU Control Service...');
@@ -165,10 +164,10 @@ function connectAccelerometer() {
     ])
   })
 
-  .then(_ => {
-    MPU_Control_Characteristic.startNotifications();
-    log('Notifications started on MPU Control');
-  })
+  // .then(_ => {
+  //   MPU_Control_Characteristic.startNotifications();
+  //   log('Notifications started on MPU Control...');
+  // })
 
   // .then(_ => {
   //   MPU_Characteristic.startNotifications();
@@ -203,32 +202,16 @@ function disconnect(bleDevice) {
     else {
        log('> Bluetooth Device is already disconnected');
     }
-
-    isConnected = false;
 }
 
-function disconnectAll(){
-  log('Disconnecting from devices');
+function Refresh(){
+  log('Disconnecting from devices and refreshing site...');
 
   disconnect(bleDeviceFreqControl);
   disconnect(bleDeviceAccelerometer);
 
-  setTimeout(window.location.reload.bind(window.location), 2000);
+  setTimeout(window.location.reload.bind(window.location), 1000);
 }
-
-function connectedToPeripheral(){
-	View('ControlView');
-  statusBar('connected');
-  buttonToggle('disconnectDiv', 'connectDiv');
-}
-
-function disconnectedFromPeripheral () {
-    log('Something went wrong. You are now disconnected from the device');
-    View('ConnectionView');
-    statusBar('notConnected');
-    buttonToggle('connectDiv', 'disconnectDiv');
-}
-
 
 function setModeMPU(input) {
 
