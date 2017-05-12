@@ -225,6 +225,20 @@ function abrubtDisconnect(bleDevice) {
         return;
     }
    log('Something went wrong. You are now disconnected from' + bleDevice);
+
+   if(bleDevice == bleDeviceFreqControl){
+     document.getElementById('connectedFrequencyControlProgress').style.display ='none';
+     document.getElementById('notConnectedFrequencyControlProgress').style.display ='block';
+     document.getElementById('connectToFreqBtn').style.display ='block';
+     document.getElementById('disconnectFreqBtn').style.display ='none';
+   }
+
+   if(bleDevice == bleDeviceAccelerometer){
+     document.getElementById('connectedAccelerometerProgress').style.display ='none';
+     document.getElementById('notConnectedAccelerometerProgress').style.display ='block';
+     document.getElementById('disconnectAccBtn').style.display ='block';
+     document.getElementById('connectToAccBtn').style.display ='none';
+   }
 }
 
 
