@@ -96,13 +96,14 @@ function connectFrequencyControl() {
   })
 
   .then(() => {
+    document.getElementById('freqControlDiv').style.display ='block';
+    document.getElementById('connectingToFreqDiv').style.display ='none';
     log('Connected to Frequency Control');
     connectedToPeripheral('frequencycontrol');
   })
 
 	.catch(error => {
-    document.getElementById('freqControlDiv').style.display ='block';
-    document.getElementById('connectingToFreqDiv').style.display ='none';
+
 		log('> connect ' + error);
 	});
 
