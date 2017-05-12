@@ -65,10 +65,9 @@ function connectFrequencyControl() {
 
   .then(device => {
 		bleDeviceFreqControl = device;
-		bleDeviceFreqControl.addEventListener('gattserverdisconnected', disconnectedFromPeripheral);
+		bleDeviceFreqControl.addEventListener('gattserverdisconnected', function(){disconnect(bleDeviceFreqControl);},);
 		log('Found ' + bleDeviceFreqControl.name + '...');
 		log('Connecting to GATT-server...');
-		connectLoaderToggle('connectingToFreqDiv','connectBtnToFreqDiv');
 		return bleDeviceFreqControl.gatt.connect();
 	})
 
@@ -78,19 +77,21 @@ function connectFrequencyControl() {
 		return bleServerFreqControl.getPrimaryService(FREQ_Service_UUID);
 	})
 
-	.then(service => {
-	  FREQ_Service = service;
-	  log('Freq Service Retrieved...');
-	  return Promise.all([
-		  FREQ_Service.getCharacteristic(FREQ_Char_UUID)
-		  .then(characteristic => {
-				FREQ_Characteristic = characteristic;
-				log('Freq characteristic retrieved...');
-				connectLoaderToggle('connectToAccelerometerDiv','connectToFreqDiv');
-				connectLoaderToggle('connectBtnToFreqDiv','connectingToFreqDiv');
-		  }),
-	  ])
-	})
+  .then(service => {
+    FREQ_Service = service;
+    log('Freq Service Retrieved...');
+    log('Getting Freq Characteristc...');
+    return FREQ_Service.getCharacteristic(FREQ_Char_UUID);
+  })
+
+  .then(characteristic => {
+    FREQ_Characteristic = characteristic;
+    log('Freq characteristic retrieved...');
+  })
+
+  .then(() => {
+    connectedToPeripheral('frequencycontrol');
+  })
 
 	.catch(error => {
 		log('> connect ' + error);
@@ -141,11 +142,13 @@ function connectAccelerometer() {
     log('MPU Characteristic Retrieved...');
     MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
     log('Listening for changes in the characteristic...');
+    MPU_Characteristic.startNotifications();
+    log('Starting Notifications...');
   })
 
   // Getting the MPU control service.
   .then(() => {
-    log('Getting MPU Control Serivce...')
+    log('Getting MPU Control Serivce...');
     return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
   })
 
@@ -160,12 +163,24 @@ function connectAccelerometer() {
     log('MPU Control Service Retrieved...');
     MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
     log('Listening for changes in the characteristic...');
+    MPU_Control_Characteristic.startNotifications();
+    log('Starting Notifications...');
+    log('Connected to Accelrometer');
   })
+
+  .then(() => {
+    log('Getting MPU Control Serivce...')
+    return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
+  })
+
+  .then(() => {
+    connectedToPeripheral('accelerometer');
+  })
+
 
 	.catch(error => {
 		log('> connect ' + error);
 	});
-
 }
 // Function for connectng to the accelerometer - END
 
@@ -173,6 +188,24 @@ function connectAccelerometer() {
 function log(text) {
     console.log(text);
     document.querySelector('#log').textContent += text + '\n';
+}
+
+
+function connectedToPeripheral(Peripheral){
+
+  if(Peripheral == 'frequencycontrol'){
+    document.getElementById('connectedFrequencyControlProgress').style.display ='block';
+    document.getElementById('notConnectedFrequencyControlProgress').style.display ='none';
+    document.getElementById('connectToFreqBtn').style.display ='none';
+    document.getElementById('disconnectFreqBtn').style.display ='block';
+  }
+
+  if(Peripheral == 'accelerometer'){
+    document.getElementById('connectedAccelerometerProgress').style.display ='block';
+    document.getElementById('notConnectedAccelerometerProgress').style.display ='none';
+    document.getElementById('connectToAccBtn').style.display ='none';
+    document.getElementById('disconnectAccBtn').style.display ='block';
+  }
 }
 
 function disconnect(bleDevice) {
@@ -200,6 +233,9 @@ function Refresh(){
   setTimeout(window.location.reload.bind(window.location), 1000);
 }
 
+
+
+
 function setModeMPU(input) {
 
   if(input=='toggleMode'){
@@ -225,6 +261,8 @@ function setModeMPU(input) {
   }
   sendModeMPU();
 }
+
+
 
 function sendModeMPU(){
 
@@ -264,6 +302,8 @@ function MPU_Data_Received(){
     updateGraph(accValueZ);
 }
 
+
+
 function MPU_Control_Data_Received() {
 
   let value = event.target.value;
@@ -274,6 +314,8 @@ function MPU_Control_Data_Received() {
   document.getElementById("freqDivInput").innerHTML = data + " Hz";
 
 }
+
+
 
 function changeFreqValue(value){
 	let freqValue = document.getElementById("frequencyInput").value;
@@ -298,7 +340,8 @@ function changeFreqValue(value){
 // 	document.getElementById("amplitudeInput").value = newValue;
 // 	sendFrequency();
 // }
-//
+
+
 
 function frequencyMode(){   // On/Off
   if(isFreqOn==0) {
