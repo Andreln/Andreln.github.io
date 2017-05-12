@@ -71,6 +71,8 @@ function connectFrequencyControl() {
 		return bleDeviceFreqControl.gatt.connect();
 	})
 
+  connectingToFreqDiv
+
 	.then(gattServer => {
 		bleServerFreqControl = gattServer;
 		log('Connected to Frequency Control...');
@@ -125,6 +127,10 @@ function connectAccelerometer() {
 	})
 
 	.then(gattServer => {
+
+    document.getElementById('connectingToFreqDiv').style.display ='block';
+    document.getElementById('freqControlDiv').style.display ='none';
+
 		bleServerAccelerometer = gattServer;
 		log('Bluetooth Device Connected...');
     log('Getting MPU Service...')
@@ -169,6 +175,8 @@ function connectAccelerometer() {
   })
 
   .then(() => {
+    document.getElementById('freqControlDiv').style.display ='block';
+    document.getElementById('connectingToFreqDiv').style.display ='none';
     log('Connected to Accelrometer');
     connectedToPeripheral('accelerometer');
   })
