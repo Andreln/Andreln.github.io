@@ -211,7 +211,7 @@
 					  <h4><b>Accelerometer Control</b></h4>
 					</header>
 
-					<div class="w3-container w3-padding-16">
+					<div id="accelerometerControlDiv" class="w3-container w3-padding-16">
 
 							<div id="btnturnAccOnOffdiv" class="w3-center w3-container" style="display: block;" >
 								<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="setModeMPU('toggleOnOff')">
@@ -238,6 +238,12 @@
 
 							</div>
 
+						</div>
+
+						<div id="connectingToAccDiv" class="w3-container w3-center w3-padding-16" style="display:none">
+							<h4> Connecting...</h4>
+							<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="color:#337ab7"></i>
+							<span class="sr-only">Loading...</span>
 						</div>
 
 						<div id="connectToAccBtn" class="w3-container w3-center btn-primary" style="display: block;">
