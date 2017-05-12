@@ -125,6 +125,7 @@ function connectAccelerometer() {
 	.then(gattServer => {
 		bleServerAccelerometer = gattServer;
 		log('Bluetooth Device Connected...');
+    log('Getting MPU Service...')
 		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
 	})
 
@@ -143,42 +144,23 @@ function connectAccelerometer() {
   })
 
   // Getting the MPU control service.
-  .then(() => bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID))
+  .then(() => {
+    log('Getting MPU Control Serivce...')
+    bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
+  })
 
+  .then(() => {
+    MPU_Control_Service = service;
+    log('MPU Control Service Retrieved...');
+    return MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID);
+  })
 
-
-  // .then(() => {
-	// 	log('Getting MPU Control Service...');
-	// 	return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
-	// })
-  //
-  // .then(service => {
-  //   MPU_Control_Service = service;
-  //   log('MPU Control Service Retrieved...');
-  //   return Promise.all([
-  //     MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
-  //     .then(characteristic => {
-  //       MPU_Control_Characteristic = characteristic;
-  //       console.dir(MPU_Control_Characteristic);
-  //       log('MPU Control characteristic retrieved...');
-  //       MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
-  //       // MPU_Control_Characteristic.startNotifications();
-  //       View('ControlView');
-  //       connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
-  //       statusBar('connected');
-  //     }),
-  //   ])
-  // })
-
-  // .then(_ => {
-  //   MPU_Control_Characteristic.startNotifications();
-  //   log('Notifications started on MPU Control...');
-  // })
-
-  // .then(_ => {
-  //   MPU_Characteristic.startNotifications();
-  //   log('Notifications started on MPU');
-  // })
+  .then((characteristic) => {
+    MPU_Control_Characteristic = characteristic;
+    log('MPU Control Service Retrieved...');
+    MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
+    log('Listening for changes in the characteristic...');
+  })
 
 	.catch(error => {
 		log('> connect ' + error);
