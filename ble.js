@@ -154,10 +154,10 @@ function connectAccelerometer() {
   .then(characteristic => {
     MPU_Characteristic = characteristic;
     log('MPU Characteristic Retrieved...');
-    MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
-    log('Listening for changes in the characteristic...');
-    MPU_Characteristic.startNotifications();
-    log('Starting Notifications...');
+    return MPU_Characteristic.startNotifications().then(_ => {
+      log('Notifications started');
+      MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
+    });
   })
 
   // Getting the MPU control service.
@@ -175,10 +175,10 @@ function connectAccelerometer() {
   .then((characteristic) => {
     MPU_Control_Characteristic = characteristic;
     log('MPU Control Service Retrieved...');
-    MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
-    log('Listening for changes in the characteristic...');
-    MPU_Control_Characteristic.startNotifications();
-    log('Starting Notifications...');
+    return MPU_Control_Characteristic.startNotifications().then(_ => {
+      log('Notifications started');
+      MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
+    });
   })
 
   .then(() => {
