@@ -224,6 +224,7 @@ function abrubtDisconnect(bleDevice) {
        log('No Bluetooth Device connected...');
         return;
     }
+
    log('Something went wrong. You are now disconnected from' + bleDevice);
 
    if(bleDevice == bleDeviceFreqControl){
@@ -236,8 +237,8 @@ function abrubtDisconnect(bleDevice) {
    if(bleDevice == bleDeviceAccelerometer){
      document.getElementById('connectedAccelerometerProgress').style.display ='none';
      document.getElementById('notConnectedAccelerometerProgress').style.display ='block';
-     document.getElementById('disconnectAccBtn').style.display ='block';
-     document.getElementById('connectToAccBtn').style.display ='none';
+     document.getElementById('connectToAccBtn').style.display ='block';
+     document.getElementById('disconnectAccBtn').style.display ='none';
    }
 }
 
