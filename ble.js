@@ -137,32 +137,32 @@ function connectAccelerometer() {
   .then(characteristic => {
     MPU_Characteristic = characteristic;
     log('MPU Characteristic Retrieved...');
-    log('Getting MPU Characteristic');
+    log('Listening for changes in the characteristic...');
     MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
   })
 
-  .then(() => {
-		log('Getting MPU Control Service...');
-		return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
-	})
-
-  .then(service => {
-    MPU_Control_Service = service;
-    log('MPU Control Service Retrieved...');
-    return Promise.all([
-      MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
-      .then(characteristic => {
-        MPU_Control_Characteristic = characteristic;
-        console.dir(MPU_Control_Characteristic);
-        log('MPU Control characteristic retrieved...');
-        MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
-        // MPU_Control_Characteristic.startNotifications();
-        View('ControlView');
-        connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
-        statusBar('connected');
-      }),
-    ])
-  })
+  // .then(() => {
+	// 	log('Getting MPU Control Service...');
+	// 	return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
+	// })
+  //
+  // .then(service => {
+  //   MPU_Control_Service = service;
+  //   log('MPU Control Service Retrieved...');
+  //   return Promise.all([
+  //     MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID)
+  //     .then(characteristic => {
+  //       MPU_Control_Characteristic = characteristic;
+  //       console.dir(MPU_Control_Characteristic);
+  //       log('MPU Control characteristic retrieved...');
+  //       MPU_Control_Characteristic.addEventListener('characteristicvaluechanged', MPU_Control_Data_Received);
+  //       // MPU_Control_Characteristic.startNotifications();
+  //       View('ControlView');
+  //       connectLoaderToggle('connectBtnToAccelerometerDiv','connectingToAccelerometerDiv');
+  //       statusBar('connected');
+  //     }),
+  //   ])
+  // })
 
   // .then(_ => {
   //   MPU_Control_Characteristic.startNotifications();
