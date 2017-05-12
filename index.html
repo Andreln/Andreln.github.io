@@ -25,15 +25,6 @@
 
 	<div class="push">
 
-		<!-- Connection Bar -->
-		<div id="connectedProgress" class="progress" style="display: none;">
-			<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
-		</div>
-
-		<div id="notConnectedProgress" class="progress" style="display: block;">
-			<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
-		</div>
-
 		<!-- Navbar (sit on top) -->
 		<ul class="w3-navbar w3-white w3-padding-8 w3-card-2 w3-wide">
 			<li class="w3-left w3-margin-left">
@@ -157,14 +148,24 @@
 
 			</div>
 
-		<!-- Bar Frequency Control / Measure Frequency VIEW! -->
+		<!-- ControlVIEW! -->
 		<div id="ControlView" class="View" style="display: none;">
 
-				<div id="frequencyControlDiv" class="center-block w3-card-2 w3-margin-top w3-padding-bottom"style="display: block; width:95%">
+				<div id="frequencyControlDiv" class="center-block w3-card-2 w3-margin-top w3-round"style="display: block; width:95%">
+
+					<div id="connectedFrequencyControlProgress" class="progress" style="display: none;">
+						<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
+					</div>
+
+					<div id="notConnectedFrequencyControlProgress" class="progress" style="display: block;">
+						<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
+					</div>
+
 					<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
 						<h4><b>Frequency Control</b></h4>
 					</header>
-					<div>
+
+					<div class="w3-container w3-padding-24">
 						<div id="btnturnFreqOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
 							<input id="toggleFreq" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Vibration: On" data-off="Vibration: Off" data-width="65%" onchange="frequencyMode()">
 						</div>
@@ -185,14 +186,35 @@
 								</span>
 							</div>
 						</div>
+
+
+
 				  </div>
+					<div class="w3-container w3-blue w3-center w3-round">
+						<h5><b>Connect</b></h5>
+					</div>
+					<!-- <div class="w3-container w3-blue w3-center w3-round">
+						<h5>Disconnect</h5>
+					</div> -->
+
 				</div>
 
-				<div id="measureFrequencyDiv" class="center-block w3-card-2 w3-margin-top w3-padding-bottom"style="display: block; width:95%">
+
+
+				<div id="measureFrequencyDiv" class="center-block w3-card-2 w3-margin-top w3-round"style="display: block; width:95%">
+
+					<div id="connectedAccelerometerProgress" class="progress" style="display: none;">
+						<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
+					</div>
+					<div id="notConnectedAccelerometerProgress" class="progress" style="display: block;">
+						<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
+					</div>
 					<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
 					  <h4><b>Accelerometer Control</b></h4>
 					</header>
-					<div>
+
+					<div class="w3-container w3-padding-24">
+
 							<div id="btnturnAccOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
 								<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="setModeMPU('toggleOnOff')">
 							</div>
@@ -212,13 +234,21 @@
 								</div>
 
 								<div class="panel panel-primary center-block w3-margin-top " style="width:70%">
-									<div class="panel-heading"> <h3 class="panel-title"> Frequency[Hz] </h3>
-									</div>
-									<div id="freqDivInput" class="panel-body w3-center"> Nothing measured yet
-									</div>
+									<div class="panel-heading"> <h3 class="panel-title"> Frequency[Hz] </h3> </div>
+									<div id="freqDivInput" class="panel-body w3-center"> Nothing measured yet </div>
 								</div>
+
 							</div>
+
 						</div>
+
+						<div class="w3-container w3-blue w3-center w3-round">
+							<h5><b>Connect</b></h5>
+						</div>
+						<!-- <div class="w3-container w3-blue w3-center w3-round">
+							<h5>Disconnect</h5>
+						</div> -->
+
 					</div>
 
 			</div>
