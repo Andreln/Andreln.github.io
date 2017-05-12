@@ -103,7 +103,7 @@ function connectFrequencyControl() {
   })
 
 	.catch(error => {
-
+    abrubtDisconnect(bleDeviceFreqControl);
 		log('> connect ' + error);
 	});
 
@@ -190,6 +190,7 @@ function connectAccelerometer() {
 
 
 	.catch(error => {
+    abrubtDisconnect(bleDeviceAccelerometer);
 		log('> connect ' + error);
 	});
 }
@@ -220,26 +221,26 @@ function connectedToPeripheral(Peripheral){
 }
 
 function abrubtDisconnect(bleDevice) {
-    if (!bleDevice) {
-       log('No Bluetooth Device connected...');
-        return;
-    }
+  if (!bleDevice) {
+    log('No Bluetooth Device connected...');
+    return;
+  }
 
-   log('Something went wrong. You are now disconnected from' + bleDevice);
+  if(bleDevice == bleDeviceFreqControl){
+    log('Something went wrong. Disconnected from Freq Device');
+    document.getElementById('connectedFrequencyControlProgress').style.display ='none';
+    document.getElementById('notConnectedFrequencyControlProgress').style.display ='block';
+    document.getElementById('connectToFreqBtn').style.display ='block';
+    document.getElementById('disconnectFreqBtn').style.display ='none';
+  }
 
-   if(bleDevice == bleDeviceFreqControl){
-     document.getElementById('connectedFrequencyControlProgress').style.display ='none';
-     document.getElementById('notConnectedFrequencyControlProgress').style.display ='block';
-     document.getElementById('connectToFreqBtn').style.display ='block';
-     document.getElementById('disconnectFreqBtn').style.display ='none';
-   }
-
-   if(bleDevice == bleDeviceAccelerometer){
-     document.getElementById('connectedAccelerometerProgress').style.display ='none';
-     document.getElementById('notConnectedAccelerometerProgress').style.display ='block';
-     document.getElementById('connectToAccBtn').style.display ='block';
-     document.getElementById('disconnectAccBtn').style.display ='none';
-   }
+  if(bleDevice == bleDeviceAccelerometer){
+    log('Something went wrong. Disconnected from Acc Device');
+    document.getElementById('connectedAccelerometerProgress').style.display ='none';
+    document.getElementById('notConnectedAccelerometerProgress').style.display ='block';
+    document.getElementById('connectToAccBtn').style.display ='block';
+    document.getElementById('disconnectAccBtn').style.display ='none';
+  }
 }
 
 
