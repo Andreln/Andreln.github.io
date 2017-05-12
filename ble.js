@@ -146,10 +146,10 @@ function connectAccelerometer() {
   // Getting the MPU control service.
   .then(() => {
     log('Getting MPU Control Serivce...')
-    bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
+    return bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID);
   })
 
-  .then(() => {
+  .then((service) => {
     MPU_Control_Service = service;
     log('MPU Control Service Retrieved...');
     return MPU_Control_Service.getCharacteristic(MPU_Control_Char_UUID);
