@@ -8,23 +8,22 @@ var myLineChart;
 var data = {
     labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     datasets: [{
-      title: "Z-data",
       label: "Frequency",
-      data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      data: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
+      borderColor: "#337AB3",
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: "rgba(75,192,192,1)",
+      pointBorderColor: "#337AB3",
       pointBackgroundColor: "#fff",
       pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverRadius: 1,
+      pointHoverBackgroundColor: "#337AB3",
+      pointHoverBorderColor: "#337AB3",
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
@@ -37,6 +36,8 @@ var data = {
 
   ctx = document.getElementById("chart").getContext("2d");
 
+  Chart.defaults.global.tooltips.enabled = false;
+
   var myLineChart = new Chart(ctx, {
   type: 'line',
   data: data,
@@ -44,11 +45,17 @@ var data = {
     scales: {
         yAxes: [{
             ticks: {
-                max: 5,
-                min: -5,
-                stepSize: 1
+                max: 2,
+                min: -2,
+                stepSize: 0.5
             }
         }]
+    },
+    legend: {
+      display: false,
+    },
+    hover: {
+      mode: null,
     },
     animation: {
       duration: 0

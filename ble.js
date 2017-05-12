@@ -31,10 +31,13 @@ var setAccMode = 1;
 var isFreqOn = 0;
 
 window.onload = function(){
-  document.querySelector('#connectToAccBtn').addEventListener('click', connectAccelerometer);
-  document.querySelector('#connectToFreqBtn').addEventListener('click', connectFrequencyControl);
-  document.querySelector('#disconnectBtn').addEventListener('click', disconnect);
-  document.querySelector('#refresh').addEventListener('click', disconnect);
+  document.querySelector('#connectToFreqBtn').addEventListener('click', function() { connectFrequencyControl();},);
+  document.querySelector('#connectToAccBtn').addEventListener('click', function() { connectAccelerometer();},);
+
+  document.querySelector('#disconnectAccBtn').addEventListener('click', function() { disconnect(bleDeviceAccelerometer);},);
+  document.querySelector('#disconnectFreqBtn').addEventListener('click', function() { disconnect(bleDeviceFreqControl);},);
+
+  document.querySelector('#refresh').addEventListener('click', disconnectAll);
 
   document.getElementById("MPU_Service_UUID").textContent=MPU_Service_UUID;
   document.getElementById("MPU_Char_UUID").textContent=MPU_Char_UUID;
@@ -186,7 +189,7 @@ function log(text) {
     document.querySelector('#log').textContent += text + '\n';
 }
 
-function disconnect() {
+function disconnect(bleDevice) {
     if (!bleDevice) {
        log('No Bluetooth Device connected...');
         return;
@@ -200,7 +203,17 @@ function disconnect() {
     else {
        log('> Bluetooth Device is already disconnected');
     }
+
     isConnected = false;
+}
+
+function disconnectAll(){
+  log('Disconnecting from devices');
+
+  disconnect(bleDeviceFreqControl);
+  disconnect(bleDeviceAccelerometer);
+
+  setTimeout(window.location.reload.bind(window.location), 2000);
 }
 
 function connectedToPeripheral(){

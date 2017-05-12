@@ -33,7 +33,6 @@
 				<li class="w3-right w3-margin-right w3-dropdown-hover">
 					<a> <i class="fa fa-bars"></i></a>
 					<div id="Dropdown" class="w3-dropdown-content w3-white w3-card-4" style="right:0">
-						<a onclick="View('ConnectionView');">Connection</a>
 						<a onclick="View('ControlView');">Control</a>
 						<a onclick="View('appView');">App <i class="fa fa-info-circle"></i></a>
 						<a onclick="View('aboutView');"> About <i class="fa fa-info-circle"></i></a>
@@ -43,7 +42,7 @@
 					<a data-toggle="modal" data-target="#configureModal"><i class="fa fa-cog"></i></a>
 				</li>
 			<li class="w3-right">
-				<a id="refresh" href="#" onclick="location.reload(true);"> <i class="fa fa-refresh"></i> </a>
+				<a id="refresh" href="#"> <i class="fa fa-refresh"></i> </a>
 			</li>
 		</ul>
 
@@ -115,7 +114,7 @@
 
 
 		<!-- Connection VIEW!-->
-			<div id="ConnectionView" class="View w3-container w3-content w3-center w3-padding-top" style="display: block;">
+			<!-- <div id="ConnectionView" class="View w3-container w3-content w3-center w3-padding-top" style="display: block;">
 				<div id ="connectToFreqDiv" style="display: block;">
 					<div id="connectBtnToFreqDiv" style="display: block;">
 						<h4> Connect to Frequency Control </h4>
@@ -146,62 +145,54 @@
 					<button id="disconnectBtn" type="button" class="btn btn-primary btn-lg">DISCONNECT</button>
 				</div>
 
-			</div>
+			</div> -->
 
 		<!-- ControlVIEW! -->
-		<div id="ControlView" class="View" style="display: none;">
+		<div id="ControlView" class="View" style="display: block;">
 
-				<div id="frequencyControlDiv" class="center-block w3-card-2 w3-margin-top w3-round"style="display: block; width:95%">
-
-					<div id="connectedFrequencyControlProgress" class="progress" style="display: none;">
-						<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
-					</div>
-
-					<div id="notConnectedFrequencyControlProgress" class="progress" style="display: block;">
-						<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
-					</div>
-
-					<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
-						<h4><b>Frequency Control</b></h4>
-					</header>
-
-					<div class="w3-container w3-padding-24">
-						<div id="btnturnFreqOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
-							<input id="toggleFreq" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Vibration: On" data-off="Vibration: Off" data-width="65%" onchange="frequencyMode()">
-						</div>
-						<div class="w3-container w3-content w3-center w3-padding-top w3-padding-bottom" style="width:70%">
-							<div class="input-group">
-								<div class="input-group-btn">
-									<div class="btn-group">
-										<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
-										<span class="glyphicon glyphicon-minus"></span>
-										</button>
-									</div>
-								</div>
-								<input type="number" min="25" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control text-center" onChange="changeFreqValue(0)"/>
-								<span class="input-group-btn">
-									<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
-									<span class="glyphicon glyphicon-plus"></span>
-									</button>
-								</span>
-							</div>
-						</div>
-
-
-
-				  </div>
-					<div class="w3-container w3-blue w3-center w3-round">
-						<h5><b>Connect</b></h5>
-					</div>
-					<!-- <div class="w3-container w3-blue w3-center w3-round">
-						<h5>Disconnect</h5>
-					</div> -->
-
+			<div id="frequencyControlDiv" class="center-block w3-card-4 w3-margin-top"style="display: block; width:95%">
+				<div id="connectedFrequencyControlProgress" class="progress" style="display: none;">
+					<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
 				</div>
+				<div id="notConnectedFrequencyControlProgress" class="progress" style="display: block;">
+					<div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%"> </div>
+				</div>
+				<header class="w3-container w3-center w3-padding-top" style="color: #337ab7">
+					<h4><b>Frequency Control</b></h4>
+				</header>
+				<div class="w3-container w3-padding-16">
+					<div id="btnturnFreqOnOffdiv" class="w3-center w3-container" style="display: block;" >
+						<input id="toggleFreq" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Vibration: On" data-off="Vibration: Off" data-width="65%" onchange="frequencyMode()">
+					</div>
+					<div class="w3-container w3-content w3-center w3-padding-16" style="width:70%">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<div class="btn-group">
+									<button id="decrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('-1');">
+										<span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</div>
+							</div>
+							<input type="number" min="25" max="800" name="Frequency" id="frequencyInput" placeholder="Frequency[Hz]" class="form-control text-center" onChange="changeFreqValue(0)"/>
+							<span class="input-group-btn">
+								<button id="incrementFreq" class="btn btn-primary btn-block" onclick="changeFreqValue('1');">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div id="connectToFreqBtn" class="w3-container w3-center btn-primary">
+					<h5><b>Connect</b></h5>
+				</div>
+				<div id="disconnectFreqBtn" class="w3-container w3-center btn-primary" style="display: block;">
+					<h5><b>Disconnect</b></h5>
+				</div>
+			</div>
 
 
 
-				<div id="measureFrequencyDiv" class="center-block w3-card-2 w3-margin-top w3-round"style="display: block; width:95%">
+				<div id="measureFrequencyDiv" class="center-block w3-card-4 w3-margin-top"style="display: block; width:95%">
 
 					<div id="connectedAccelerometerProgress" class="progress" style="display: none;">
 						<div class="progress-bar progress-bar-success" role="progressbar" style="width:100%"> </div>
@@ -213,13 +204,13 @@
 					  <h4><b>Accelerometer Control</b></h4>
 					</header>
 
-					<div class="w3-container w3-padding-24">
+					<div class="w3-container w3-padding-16">
 
-							<div id="btnturnAccOnOffdiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
+							<div id="btnturnAccOnOffdiv" class="w3-center w3-container" style="display: block;" >
 								<input id="toggleAccelerometer" type="checkbox" data-toggle="toggle" data-offstyle="danger" data-on="Accelerometer: On" data-off="Accelerometer: Off" data-width="60%" onchange="setModeMPU('toggleOnOff')">
 							</div>
 
-							<div id="btnToggleModeSetDiv" class="w3-center w3-container w3-padding-top w3-padding-bottom" style="display: block;" >
+							<div id="btnToggleModeSetDiv" class="w3-center w3-container w3-padding-16" style="display: block;" >
 								<input id="btnToggleModeSet" type="checkbox" checked data-toggle="toggle" data-on="Real-Time" data-off="Measure" data-offstyle="primary" data-width="60%" onchange="setModeMPU('toggleMode')">
 							</div>
 
@@ -242,12 +233,13 @@
 
 						</div>
 
-						<div class="w3-container w3-blue w3-center w3-round">
+						<div id="connectToAccBtn" class="w3-container w3-center btn-primary">
 							<h5><b>Connect</b></h5>
 						</div>
-						<!-- <div class="w3-container w3-blue w3-center w3-round">
-							<h5>Disconnect</h5>
-						</div> -->
+						<div id="disconnectAccBtn" class="w3-container w3-center btn-primary" style="display: block;">
+							<h5><b>Disconnect</b></h5>
+						</div>
+
 
 					</div>
 
@@ -326,7 +318,7 @@
 </div>
 
 		<footer class=w3-margin-top>
-			<div class="w3-center w3-padding-12">
+			<div class="w3-center w3-padding-16 w3-margin-bottom">
 				<a href="https://github.com/Andreln/andreln.github.io" target=_blank title="Github Repository" class="w3-margin" style="text-decoration:none">
 				<img src="logos/logo_github.png" style="width:10%" > </img> </a>
 
