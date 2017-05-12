@@ -99,6 +99,7 @@ function connectFrequencyControl() {
 
 }
 
+// Function for connectng to the accelerometer - START
 function connectAccelerometer() {
   'use strict'
 
@@ -137,9 +138,14 @@ function connectAccelerometer() {
   .then(characteristic => {
     MPU_Characteristic = characteristic;
     log('MPU Characteristic Retrieved...');
-    log('Listening for changes in the characteristic...');
     MPU_Characteristic.addEventListener('characteristicvaluechanged', MPU_Data_Received);
+    log('Listening for changes in the characteristic...');
   })
+
+  // Getting the MPU control service.
+  .then(() => bleServerAccelerometer.getPrimaryService(MPU_Control_Service_UUID))
+
+
 
   // .then(() => {
 	// 	log('Getting MPU Control Service...');
@@ -178,9 +184,8 @@ function connectAccelerometer() {
 		log('> connect ' + error);
 	});
 
-
 }
-// BLE-Connection End
+// Function for connectng to the accelerometer - END
 
 
 function log(text) {
