@@ -65,7 +65,7 @@ function connectFrequencyControl() {
 
   .then(device => {
 		bleDeviceFreqControl = device;
-		bleDeviceFreqControl.addEventListener('gattserverdisconnected', function(){disconnect(bleDeviceFreqControl);},);
+		bleDeviceFreqControl.addEventListener('gattserverdisconnected', function(){abrubtDisconnect(bleDeviceFreqControl);},);
 		log('Found ' + bleDeviceFreqControl.name + '...');
 		log('Connecting to GATT-server...');
 		return bleDeviceFreqControl.gatt.connect();
@@ -127,7 +127,7 @@ function connectAccelerometer() {
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 	.then(device => {
 		bleDeviceAccelerometer = device;
-		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', function(){disconnect(bleDeviceAccelerometer);},);
+		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', function(){abrubtDisconnect(bleDeviceAccelerometer);},);
 		log('Found ' + bleDeviceAccelerometer.name + '...');
 		log('Connecting to GATT-server...');
 		return bleDeviceAccelerometer.gatt.connect();
@@ -219,6 +219,15 @@ function connectedToPeripheral(Peripheral){
   }
 }
 
+function abrubtDisconnect(bleDevice) {
+    if (!bleDevice) {
+       log('No Bluetooth Device connected...');
+        return;
+    }
+   log('Something went wrong. You are now disconnected from' + bleDevice);
+}
+
+
 function disconnect(bleDevice) {
     if (!bleDevice) {
        log('No Bluetooth Device connected...');
@@ -226,6 +235,7 @@ function disconnect(bleDevice) {
     }
 
     log('Disconnecting from Bluetooth Device...');
+
     if (bleDevice.gatt.connected) {
        bleDevice.gatt.disconnect();
         log('> Bluetooth Device connected: ' + bleDevice.gatt.connected);
@@ -233,6 +243,8 @@ function disconnect(bleDevice) {
     else {
        log('> Bluetooth Device is already disconnected');
     }
+
+
 }
 
 function Refresh(){
