@@ -48,6 +48,9 @@ var myLineChart = new Chart(ctx, {
                 min: -3,
                 stepSize: 1
             }
+        }],
+        xAxes : [{
+          display: false
         }]
     },
     legend: {
