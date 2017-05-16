@@ -6,51 +6,50 @@ var myLineChart;
 //------------- Set data in chart------------- //
 
 var data = {
-    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    datasets: [{
-      label: "Frequency",
-      data: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "#337AB3",
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "#337AB3",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 1,
-      pointHoverBackgroundColor: "#337AB3",
-      pointHoverBorderColor: "#337AB3",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      duration: 10,
+  labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  datasets: [{
+    label: "Frequency",
+    data: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    fill: false,
+    lineTension: 0.1,
+    backgroundColor: "rgba(75,192,192,0.4)",
+    borderColor: "#337AB3",
+    borderCapStyle: 'butt',
+    borderDash: [],
+    borderDashOffset: 0.0,
+    borderJoinStyle: 'miter',
+    pointBorderColor: "#337AB3",
+    pointBackgroundColor: "#fff",
+    pointBorderWidth: 1,
+    pointHoverRadius: 1,
+    pointHoverBackgroundColor: "#337AB3",
+    pointHoverBorderColor: "#337AB3",
+    pointHoverBorderWidth: 2,
+    pointRadius: 1,
+    pointHitRadius: 10,
+    duration: 10,
 
-      spanGaps: false,
-    }]
-  };
-  log('Chart data set');
+    spanGaps: false,
+  }]
+};
 
-  ctx = document.getElementById("chart").getContext("2d");
+ctx = document.getElementById("chart").getContext("2d");
 
-  Chart.defaults.global.tooltips.enabled = false;
+Chart.defaults.global.tooltips.enabled = false;
 
-  var myLineChart = new Chart(ctx, {
+var myLineChart = new Chart(ctx, {
   type: 'line',
   data: data,
   options: {
-    scales: {
-        yAxes: [{
-            ticks: {
-                max: 2,
-                min: -2,
-                stepSize: 0.5
-            }
-        }]
-    },
+    // scales: {
+    //     yAxes: [{
+    //         ticks: {
+    //             max: 2,
+    //             min: -2,
+    //             stepSize: 0.5
+    //         }
+    //     }]
+    // },
     legend: {
       display: false,
     },
@@ -64,7 +63,7 @@ var data = {
   }
 });
 
-  log('Chart Initialized');
+log('Chart Initialized');
 
 function updateGraph(y) {
     let d = new Date();
