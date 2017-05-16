@@ -41,15 +41,15 @@ var myLineChart = new Chart(ctx, {
   type: 'line',
   data: data,
   options: {
-    // scales: {
-    //     yAxes: [{
-    //         ticks: {
-    //             max: 2,
-    //             min: -2,
-    //             stepSize: 0.5
-    //         }
-    //     }]
-    // },
+    scales: {
+        yAxes: [{
+            ticks: {
+                max: 3,
+                min: -3,
+                stepSize: 1
+            }
+        }]
+    },
     legend: {
       display: false,
     },
