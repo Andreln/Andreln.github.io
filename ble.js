@@ -1,5 +1,6 @@
 
 const FREQ_Service_UUID         = '49f89999-edd1-4c81-8702-585449ba92a8';
+                                  '49F89999-EDD1-4C81-8702-585449BA92A8'
 const FREQ_Char_UUID            = '49f88888-edd1-4c81-8702-585449ba92a8';
 
 const MPU_Service_UUID          = '00000004-1212-efde-1523-785fef13d123';
@@ -120,8 +121,7 @@ function connectAccelerometer() {
 	  return;
 	}
 
-	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}],
-                                optionalServices: [MPU_Control_Service_UUID]};
+	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}]};
 
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
@@ -134,7 +134,6 @@ function connectAccelerometer() {
 	})
 
 	.then(gattServer => {
-
     document.getElementById('connectingToAccDiv').style.display ='block';
     document.getElementById('accelerometerControlDiv').style.display ='none';
 
@@ -334,9 +333,6 @@ function MPU_Data_Received(){
 
     accValueZ = (accValueZ / 16384) - 1;
     accValueZ = accValueZ.toFixed(2);
-
-    // document.getElementById('accelerometerValue').value = accValueZ;
-    // document.getElementById('timeGet').value = timeY;
 
     updateGraph(accValueZ);
 }
