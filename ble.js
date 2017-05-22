@@ -121,7 +121,8 @@ function connectAccelerometer() {
 	  return;
 	}
 
-	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}]};
+	let deviceUUIDS = { filters:[{ services: [MPU_Service_UUID]}],
+                                optionalServices: [MPU_Control_Service_UUID]};
 
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
