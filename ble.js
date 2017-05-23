@@ -1,6 +1,5 @@
 
 const FREQ_Service_UUID         = '49f89999-edd1-4c81-8702-585449ba92a8';
-                                  '49F89999-EDD1-4C81-8702-585449BA92A8'
 const FREQ_Char_UUID            = '49f88888-edd1-4c81-8702-585449ba92a8';
 
 const MPU_Service_UUID          = '00000004-1212-efde-1523-785fef13d123';
