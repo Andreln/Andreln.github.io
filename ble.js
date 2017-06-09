@@ -64,6 +64,8 @@ function connectFrequencyControl() {
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 
   .then(device => {
+		document.getElementById('connectingToFreqDiv').style.display ='block';
+		document.getElementById('freqControlDiv').style.display ='none';
 		bleDeviceFreqControl = device;
 		bleDeviceFreqControl.addEventListener('gattserverdisconnected', function(){abrubtDisconnect(bleDeviceFreqControl);},);
 		log('Found ' + bleDeviceFreqControl.name + '...');
@@ -73,11 +75,6 @@ function connectFrequencyControl() {
 
 
 	.then(gattServer => {
-
-    document.getElementById('connectingToFreqDiv').style.display ='block';
-    document.getElementById('freqControlDiv').style.display ='none';
-
-
 		bleServerFreqControl = gattServer;
 		log('Connected to Frequency Control...');
 		return bleServerFreqControl.getPrimaryService(FREQ_Service_UUID);
@@ -126,6 +123,8 @@ function connectAccelerometer() {
 	log('Requesting Bluetooth Device...');
 	navigator.bluetooth.requestDevice(deviceUUIDS)
 	.then(device => {
+		document.getElementById('connectingToAccDiv').style.display ='block';
+		document.getElementById('accelerometerControlDiv').style.display ='none';
 		bleDeviceAccelerometer = device;
 		bleDeviceAccelerometer.addEventListener('gattserverdisconnected', function(){abrubtDisconnect(bleDeviceAccelerometer);},);
 		log('Found ' + bleDeviceAccelerometer.name + '...');
@@ -134,19 +133,16 @@ function connectAccelerometer() {
 	})
 
 	.then(gattServer => {
-    document.getElementById('connectingToAccDiv').style.display ='block';
-    document.getElementById('accelerometerControlDiv').style.display ='none';
-
 		bleServerAccelerometer = gattServer;
 		log('Bluetooth Device Connected...');
-    log('Getting MPU Service...')
+		log('Getting MPU Service...')
 		return bleServerAccelerometer.getPrimaryService(MPU_Service_UUID);
 	})
 
 	.then(service => {
 		MPU_Service = service;
 		log('MPU Service Retrieved...');
-    log('Getting MPU Characteristic');
+		log('Getting MPU Characteristic');
     return MPU_Service.getCharacteristic(MPU_Char_UUID);
   })
 
@@ -303,7 +299,6 @@ function setModeMPU(input) {
 
 
 function sendModeMPU(){
-
   onOff = parseInt(isAccOn);
   Mode = parseInt(setAccMode);
 
@@ -314,6 +309,7 @@ function sendModeMPU(){
 
     try {
       log(data);
+	  document.getElementById("freqDivInput").innerHTML = "Measuring..." ;
       MPU_Control_Characteristic.writeValue(data);
     } catch (error) {
       log(error);
@@ -340,14 +336,12 @@ function MPU_Data_Received(){
 
 
 function MPU_Control_Data_Received() {
-
   let value = event.target.value;
   value = value.buffer ? value: new DataView(value);
 
   let data = value.getFloat32(2, true);    // Get float from array, use little endian.
 
   document.getElementById("freqDivInput").innerHTML = data + " Hz";
-
 }
 
 
