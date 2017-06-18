@@ -2,7 +2,8 @@
 -------------------------------------------------- */
 html {
   position: relative;
-  min-height: 100%;
+  min-height: 97%;
+  background-color; #3e4444;
 }
 body {
   /* Margin bottom by footer height */
@@ -18,7 +19,6 @@ body {
   border-color: #cecece;
 }
 
-
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
@@ -28,8 +28,8 @@ body {
 }
 
 .footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 code {
