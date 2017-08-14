@@ -1,4 +1,4 @@
-﻿@import url('https://getbootstrap.com/dist/css/bootstrap.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 @media (max-width: 768px){
     .nav-justified > li {
         display: table-cell;
